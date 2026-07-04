@@ -378,11 +378,11 @@ uv run pytest
 3. ✅ Implement the first real ONS time-series pull for GDP per head.
 4. ✅ Populate the national comparison table for one indicator end to end.
 5. ✅ Generate one chart from real data.
-6. ✅ Add a simple QA check script (`src/qa_checks.py`, 68 checks, all pass).
-7. Add real earnings / household disposable income indicator (Workstream 4).
+6. ✅ Add a simple QA check script (`src/qa_checks.py`, now 72 checks, all pass).
+7. ✅ Add real earnings / household disposable income indicator (Workstream 4).
 8. Update indicator register with expanded fields per Workstream 1.
 9. Build the long-format analytical dataset per Workstream 3.
-10. Add housing affordability indicator.
+10. Add housing affordability indicator (Workstream 4).
 
 ## 16. Definition of Done for Finished Project
 

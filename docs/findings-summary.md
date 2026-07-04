@@ -39,7 +39,20 @@ Output per hour worked — the central measure of labour productivity — rose o
 
 ---
 
-## 4. Regional productivity inequality is narrowing — slowly
+## 4. Real earnings have barely grown — living standards diverged from GDP
+
+Real average weekly earnings (CPI-deflated) rose only **2.3%** since 2007, compared with **7.7%** for GDP per head. In 2025 prices, the average worker earned the equivalent of **£711 per week** in 2007 and **£727 per week** in 2025 — a gain of just £16 per week over 18 years.
+
+| Measure | 2007 | 2025 | Change |
+|---------|------|------|--------|
+| Real AWE (2025 prices) | £711/wk | £727/wk | +2.3% |
+| GDP per head | £37,625 | £40,537 | +7.7% |
+
+This gap between output growth and pay growth is the central disconnect in the post-2007 economy. The economy produces more per person, but the average worker's real pay has barely moved.
+
+---
+
+## 5. Regional productivity inequality is narrowing — slowly
 
 The standard deviation of regional output per hour fell from 15.1 to 12.2, suggesting modest convergence. But the story is mixed:
 
@@ -63,7 +76,7 @@ London remains the clear outlier at 28.5% above the UK average, but its advantag
 
 ---
 
-## 5. What we still don't know (not yet in this POC)
+## 6. What we still don't know (not yet in this POC)
 
 - **Real earnings and living standards** — GDP per head may not reflect household experience.
 - **Housing affordability** — widely cited as worsened since 2007 but not yet measured here.

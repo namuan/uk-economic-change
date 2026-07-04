@@ -88,8 +88,8 @@ def test_processed_data() -> None:
     national = pd.read_csv(PROCESSED_DIR / "national_comparison_skeleton.csv")
     regional = pd.read_csv(PROCESSED_DIR / "regional_productivity_skeleton.csv")
 
-    check("National table has 3 rows",
-          len(national) == 3,
+    check("National table has 4 rows",
+          len(national) == 4,
           f"Got {len(national)}")
 
     check("Regional table has 12 rows",
@@ -186,7 +186,7 @@ def test_output_tables() -> None:
     rated = claims[~claims["evidence_strength"].str.contains("TBD", na=False)]
     tbd_claims = claims[claims["evidence_strength"].str.contains("TBD", na=False)]
     check(f"Claims matrix: {len(rated)}/{len(claims)} claims rated (non-TBD)",
-          len(rated) >= 5,
+          len(rated) >= 6,
           f"Only {len(rated)} rated, {len(tbd_claims)} TBD")
 
 
@@ -279,6 +279,8 @@ def test_raw_data() -> None:
         "mwb6.csv": "NDP per head",
         "prdy.csv": "Labour productivity",
         "prodbyreg.xlsx": "Regional productivity",
+        "kab9_awe.csv": "Nominal AWE",
+        "d7bt_cpi.csv": "CPI index",
     }
 
     for filename, label in raw_files.items():

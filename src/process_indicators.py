@@ -56,10 +56,11 @@ def _read_ons_generator_csv(path: Path) -> pd.DataFrame:
 def _latest_annual(df: pd.DataFrame, after: int = 2006) -> tuple[str, float]:
     """Return (year, value) for the latest annual observation after *after*.
 
-    Annual rows are those without 'Q' in the period label.
+    Annual rows are those whose period label is a plain 4-digit year
+    (no 'Q', no month abbreviation, no space).
     """
-    annual = df[~df["period"].str.contains("Q", na=False)]
-    annual = annual[annual["value"].notna()]
+    is_annual = df["period"].str.match(r"^\d{4}$", na=False)
+    annual = df[is_annual & df["value"].notna()].copy()
     annual = annual[annual["period"].astype(int) > after]
     if annual.empty:
         raise ValueError("No annual observations found")
@@ -157,12 +158,43 @@ def process_labour_productivity() -> dict:
     }
 
 
+def process_real_earnings() -> dict:
+    """Compute real Average Weekly Earnings (CPI-deflated) for 2007 vs 2025.
+
+    Uses nominal AWE (KAB9) deflated by CPI all-items index (D7BT).
+    Both series are expressed in 2025 prices for comparability.
+    """
+    # Nominal AWE
+    awe = _read_ons_generator_csv(RAW_DIR / "kab9_awe.csv")
+    awe_nominal_2007 = _annual_value(awe, 2007)
+    awe_latest_year, awe_nominal_latest = _latest_annual(awe)
+
+    # CPI index
+    cpi = _read_ons_generator_csv(RAW_DIR / "d7bt_cpi.csv")
+    cpi_2007 = _annual_value(cpi, 2007)
+    _, cpi_latest = _latest_annual(cpi)
+
+    # Deflate to latest-year prices
+    real_2007 = awe_nominal_2007 * (cpi_latest / cpi_2007)
+    real_latest = awe_nominal_latest  # already in latest-year prices
+
+    return {
+        "indicator_id": "real_earnings",
+        "geography": "UK",
+        "baseline_year": 2007,
+        "baseline_value": round(real_2007, 0),
+        "latest_year": int(awe_latest_year),
+        "latest_value": round(real_latest, 0),
+    }
+
+
 def build_national_table() -> pd.DataFrame:
     """Build the populated national comparison table."""
     rows = [
         process_gdp_per_head(),
         process_ndp_per_head(),
         process_labour_productivity(),
+        process_real_earnings(),
     ]
     df = pd.DataFrame(rows)
     # Add remaining columns with empty placeholders
@@ -174,6 +206,7 @@ def build_national_table() -> pd.DataFrame:
         "CVM 2023 prices, seasonally adjusted. 2025 is latest full year.",
         "CVM 2023 prices, seasonally adjusted. NDP = GDP minus capital consumption.",
         "Index 2023=100, seasonally adjusted, whole economy. Quarterly data available.",
+        "Nominal AWE (KAB9) deflated by CPI (D7BT) to 2025 prices. Whole economy, total pay, seasonally adjusted. Monthly data available.",
     ]
     return df[PROCESSED_COLS]
 
@@ -280,7 +313,7 @@ def write_processed() -> tuple[pd.DataFrame, pd.DataFrame]:
 def main() -> None:
     national, regional = write_processed()
 
-    print("National comparison table (3 indicators):")
+    print("National comparison table (4 indicators):")
     print(national[["indicator_id", "baseline_value", "latest_value"]].to_string(index=False))
 
     print(f"\nRegional productivity table ({len(regional)} regions):")

@@ -196,6 +196,29 @@ def fetch_regional_productivity(*, force: bool = False) -> FetchResult:
     )
 
 
+def fetch_awe_nominal(*, force: bool = False) -> FetchResult:
+    """Download nominal Average Weekly Earnings (KAB9) from ONS.
+
+    Used as the base for computing real earnings (CPI-deflated).
+    """
+    return _fetch(
+        indicator_id="real_earnings",
+        url=f"{ONS_GENERATOR_BASE}?uri=/employmentandlabourmarket/peopleinwork/earningsandworkinghours/timeseries/kab9/lms&format=csv",
+        filename="kab9_awe.csv",
+        force=force,
+    )
+
+
+def fetch_cpi(*, force: bool = False) -> FetchResult:
+    """Download CPI all-items index (D7BT) for deflating nominal earnings."""
+    return _fetch(
+        indicator_id="real_earnings",
+        url=f"{ONS_GENERATOR_BASE}?uri=/economy/inflationandpriceindices/timeseries/d7bt/mm23&format=csv",
+        filename="d7bt_cpi.csv",
+        force=force,
+    )
+
+
 # ---------------------------------------------------------------------------
 # Bulk fetch
 # ---------------------------------------------------------------------------
@@ -213,6 +236,8 @@ def fetch_all(*, force: bool = False) -> FetchReport:
         fetch_ndp_per_head,
         fetch_labour_productivity,
         fetch_regional_productivity,
+        fetch_awe_nominal,
+        fetch_cpi,
     ]
 
     for fn in fetchers:

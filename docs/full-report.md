@@ -14,6 +14,7 @@ This report compares Britain's economic position in 2007 — the peak before the
 - **GDP per head** rose from £37,625 in 2007 to £40,537 in 2025 — a gain of just **7.7% over 18 years**, or 0.4% per year. Before the crisis, growth averaged 2.3% per year.
 - **Net domestic product per head** grew at less than half that rate (+3.7%), suggesting that capital consumption — depreciation, obsolescence — absorbed an increasing share of output.
 - **Output per hour worked** — the standard measure of labour productivity — rose only 6.9% over the same period. Before 2007, productivity grew at 2.1% per year.
+- **Real earnings** grew just **2.3%** — £16 per week in 2025 prices — compared with GDP per head growth of 7.7%. The economy produces more per person, but the average worker's real pay has barely moved.
 - **Regional inequality is narrowing**, but slowly. Scotland and Northern Ireland recorded the strongest convergence gains, while London's relative advantage shrank. Yet London remains nearly 29% above the UK average.
 
 The evidence confirms that Britain's post-2007 economic performance represents a structural break from the pre-crisis trend — not a temporary deviation.
@@ -102,7 +103,44 @@ The claim that "productivity growth has been weak since 2007" is supported by cl
 
 ---
 
-## 4. Regional Productivity
+## 4. Real Earnings: The Living Standards Disconnect
+
+### The headline
+
+Real average weekly earnings — nominal pay deflated by the Consumer Prices Index — rose from the equivalent of **£711 per week** in 2007 to **£727 per week** in 2025 (both in 2025 prices). That is a gain of just **£16 per week**, or **2.3%**, over 18 years.
+
+| | 2007 | 2025 | Change |
+|---|---|---|---|
+| Real AWE (2025 prices) | £711/wk | £727/wk | +£16 (+2.3%) |
+| Nominal AWE | £420/wk | £727/wk | +£307 (+73.1%) |
+| CPI (2015=100) | 81.8 | 138.4 | +69.2% |
+
+### Why this matters
+
+The comparison with GDP per head is stark:
+
+| Measure | Change since 2007 |
+|---------|-------------------|
+| GDP per head | **+7.7%** |
+| Output per hour | +6.9% |
+| NDP per head | +3.7% |
+| **Real earnings (AWE)** | **+2.3%** |
+
+Real earnings grew at **less than one-third the rate of GDP per head**. The economy produces 7.7% more per person than it did in 2007, but the average worker's real pay has risen only 2.3%. This is the central disconnect in the post-2007 British economy.
+
+### Methodology note
+
+Real earnings are computed by deflating nominal Average Weekly Earnings (ONS series KAB9, whole economy, total pay, seasonally adjusted) by the Consumer Prices Index all-items index (ONS series D7BT, 2015=100). Both series are annual observations. The 2007 nominal value is converted to 2025 prices using the ratio of CPI indices.
+
+This approach is standard in economic analysis and produces results consistent with ONS-published real AWE series, but gives the project full control over the reference year and computation.
+
+### Evidence rating: Strong
+
+The claim that "living standards changed differently from GDP per head" (C006) is now rated **Strong**. Real earnings grew only 2.3% while GDP per head grew 7.7%. The data is sourced from ONS official series with transparent methodology.
+
+---
+
+## 5. Regional Productivity
 
 ### The picture across Britain
 
@@ -147,7 +185,7 @@ The claim that "regional productivity inequality persists" is rated **Partial**.
 
 ---
 
-## 5. Claims-Evidence Matrix
+## 6. Claims-Evidence Matrix
 
 The claims-evidence matrix links broad policy and media claims to specific indicators and assesses whether the data supports them.
 
@@ -158,12 +196,12 @@ The claims-evidence matrix links broad policy and media claims to specific indic
 | **C003:** Productivity growth has been weak since 2007 | **Strong** | Output per hour rose 6.9% over 18 years (~0.4% pa), compared with ~2% pa before the crisis. The weakness is structural, not cyclical. |
 | **C004:** Regional productivity inequality persists | **Partial** | Seven regions improved their relative position; five declined. The overall spread narrowed (std dev 15.1 → 12.2), but London remains a clear outlier and middle-ranked regions show signs of relative decline. |
 | **C005:** London remains a productivity outlier | **Strong** | London output per hour is 28.5% above the UK average, down from 38.7% in 2007. The gap is narrowing but London is still unmistakably the outlier. |
-| **C006:** Living standards changed differently from GDP per head | **TBD** | Real earnings / household income indicator not yet populated. |
+| **C006:** Living standards changed differently from GDP per head | **Strong** | Real earnings (CPI-deflated AWE) rose only 2.3% since 2007, compared with GDP per head growth of 7.7%. The average worker's real pay has barely improved while output per person has grown.
 | **C007:** Housing pressure has worsened since 2007 | **TBD** | Housing affordability indicator not yet populated. |
 
 ---
 
-## 6. What This Evidence Framework Does Not Cover
+## 7. What This Evidence Framework Does Not Cover
 
 This proof of concept has deliberately narrow scope. Several important dimensions of economic change since 2007 are not captured here:
 
@@ -178,7 +216,7 @@ These gaps are documented in `docs/future-plan.md`, which sets out a 10-workstre
 
 ---
 
-## 7. Methodology
+## 8. Methodology
 
 ### Data sources
 
@@ -189,6 +227,7 @@ All data is sourced from the Office for National Statistics via programmatic dow
 | Real GDP per head | IHXW | UK Economic Accounts (UKEA) | 2025 |
 | Real NDP per head | MWB6 | UK Economic Accounts (UKEA) | 2025 |
 | Output per hour worked | LZVB | Labour productivity (PRDY) | 2025 |
+| Real average weekly earnings | KAB9 + D7BT | Labour Market Statistics (LMS) + CPI (MM23) | 2025 |
 | Regional output per hour | — | Regional labour productivity (PRODBYREG) | 2023 |
 
 All national values are Chained Volume Measures (CVM) at 2023 reference prices, seasonally adjusted. Regional values are expressed as an index relative to the UK average (UK = 100).

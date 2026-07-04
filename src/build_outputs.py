@@ -76,6 +76,7 @@ def build_claims_matrix(national: pd.DataFrame, regional: pd.DataFrame) -> pd.Da
     gdp_change = national[national["indicator_id"] == "gdp_per_head"]["percentage_change"].iloc[0]
     ndp_change = national[national["indicator_id"] == "real_ndp_per_head"]["percentage_change"].iloc[0]
     prod_change = national[national["indicator_id"] == "labour_productivity_output_per_hour"]["percentage_change"].iloc[0]
+    earnings_change = national[national["indicator_id"] == "real_earnings"]["percentage_change"].iloc[0]
     london_now = regional[regional["geography"] == "London"]["latest_value"].iloc[0]
     london_2007 = regional[regional["geography"] == "London"]["baseline_value"].iloc[0]
     scotland_change = regional[regional["geography"] == "Scotland"]["percentage_change"].iloc[0]
@@ -86,7 +87,7 @@ def build_claims_matrix(national: pd.DataFrame, regional: pd.DataFrame) -> pd.Da
         "C003": ("Strong", f"Output per hour rose {prod_change:.1f}% over 18 years (~0.4% pa), compared with ~2% pa pre-2007. Clear evidence of productivity stagnation."),
         "C004": ("Partial", f"Mixed picture: 7 regions gained relative to UK average, 5 declined. Scotland (+{scotland_change:.1f}%) and NI (+8.1%) converged; London (−7.3%) and East of England (−2.8%) saw the largest relative falls."),
         "C005": ("Strong", f"London output per hour: {london_now:.0f} (UK=100) vs {london_2007:.0f} in 2007. Remains the clear outlier but the gap has narrowed."),
-        "C006": ("TBD", "Real earnings/household income indicator not yet populated in this POC."),
+        "C006": ("Strong", f"Real earnings (CPI-deflated AWE) rose only {earnings_change:.1f}% since 2007, compared with GDP per head growth of {gdp_change:.1f}%. Living standards, as measured by real pay, have barely improved."),
         "C007": ("TBD", "Housing affordability indicator not yet populated in this POC."),
     }
 
@@ -112,6 +113,7 @@ def build_national_indicators_chart(national: pd.DataFrame) -> None:
         "gdp_per_head": "GDP per head",
         "real_ndp_per_head": "NDP per head",
         "labour_productivity_output_per_hour": "Output per hour",
+        "real_earnings": "Real earnings (AWE)",
     }
     df["label"] = df["indicator_id"].map(label_map)
     df = df.sort_values("percentage_change")

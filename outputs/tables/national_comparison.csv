@@ -2,3 +2,4 @@ indicator_id,geography,baseline_year,baseline_value,latest_year,latest_value,abs
 gdp_per_head,UK,2007,37625.0,2025,40537.0,2912.0,7.73953488372093,Strong candidate,"CVM 2023 prices, seasonally adjusted. 2025 is latest full year."
 real_ndp_per_head,UK,2007,33070.0,2025,34300.0,1230.0,3.719383126700938,Strong candidate,"CVM 2023 prices, seasonally adjusted. NDP = GDP minus capital consumption."
 labour_productivity_output_per_hour,UK,2007,93.0,2025,99.4,6.400000000000006,6.881720430107532,Strong candidate,"Index 2023=100, seasonally adjusted, whole economy. Quarterly data available."
+real_earnings,UK,2007,711.0,2025,727.0,16.0,2.250351617440225,Strong candidate,"Nominal AWE (KAB9) deflated by CPI (D7BT) to 2025 prices. Whole economy, total pay, seasonally adjusted. Monthly data available."
