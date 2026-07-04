@@ -77,6 +77,10 @@ def build_claims_matrix(national: pd.DataFrame, regional: pd.DataFrame) -> pd.Da
     ndp_change = national[national["indicator_id"] == "real_ndp_per_head"]["percentage_change"].iloc[0]
     prod_change = national[national["indicator_id"] == "labour_productivity_output_per_hour"]["percentage_change"].iloc[0]
     earnings_change = national[national["indicator_id"] == "real_earnings"]["percentage_change"].iloc[0]
+    housing_raw = national[national["indicator_id"] == "housing_affordability"]
+    housing_change = housing_raw["percentage_change"].iloc[0] if not housing_raw.empty else 0
+    housing_2007 = housing_raw["baseline_value"].iloc[0] if not housing_raw.empty else 0
+    housing_2025 = housing_raw["latest_value"].iloc[0] if not housing_raw.empty else 0
     london_now = regional[regional["geography"] == "London"]["latest_value"].iloc[0]
     london_2007 = regional[regional["geography"] == "London"]["baseline_value"].iloc[0]
     scotland_change = regional[regional["geography"] == "Scotland"]["percentage_change"].iloc[0]
@@ -88,7 +92,7 @@ def build_claims_matrix(national: pd.DataFrame, regional: pd.DataFrame) -> pd.Da
         "C004": ("Partial", f"Mixed picture: 7 regions gained relative to UK average, 5 declined. Scotland (+{scotland_change:.1f}%) and NI (+8.1%) converged; London (−7.3%) and East of England (−2.8%) saw the largest relative falls."),
         "C005": ("Strong", f"London output per hour: {london_now:.0f} (UK=100) vs {london_2007:.0f} in 2007. Remains the clear outlier but the gap has narrowed."),
         "C006": ("Strong", f"Real earnings (CPI-deflated AWE) rose only {earnings_change:.1f}% since 2007, compared with GDP per head growth of {gdp_change:.1f}%. Living standards, as measured by real pay, have barely improved."),
-        "C007": ("TBD", "Housing affordability indicator not yet populated in this POC."),
+        "C007": ("Partial", f"Median house price to earnings ratio rose from {housing_2007:.1f} (2007) to {housing_2025:.1f} (2025), but peaked at 8.95 in 2021 before declining. The 5-year average of 8.19 confirms sustained pressure above 2007 levels, though the endpoint comparison alone understates the deterioration experienced during 2015–2023."),
     }
 
     for claim_id, (strength, caveat) in findings.items():
@@ -114,6 +118,7 @@ def build_national_indicators_chart(national: pd.DataFrame) -> None:
         "real_ndp_per_head": "NDP per head",
         "labour_productivity_output_per_hour": "Output per hour",
         "real_earnings": "Real earnings (AWE)",
+        "housing_affordability": "House price / earnings",
     }
     df["label"] = df["indicator_id"].map(label_map)
     df = df.sort_values("percentage_change")

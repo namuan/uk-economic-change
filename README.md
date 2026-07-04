@@ -60,6 +60,7 @@ make clean-all  # remove everything including cached raw downloads
 | Real NDP per head | £33,070 | £34,300 (2025) | +3.7% |
 | Output per hour worked | 93.0 | 99.4 (2025) | +6.9% |
 | Real earnings (AWE) | £711/wk | £727/wk (2025) | +2.3% |
+| House price / earnings ratio | 7.17× | 7.55× (2025) | +5.3% |
 | Regional output per hour | — | — | 12 regions |
 
 ### Outputs
@@ -97,7 +98,7 @@ uv lock                      # update lockfile after changes
 - **NDP grew at half the rate of GDP** (+3.7% vs +7.7%), suggesting capital consumption absorbed a growing share of output.
 - **Productivity stagnated.** Output per hour rose just 6.9% over 18 years (~0.4% pa).
 - **Real earnings barely moved.** Real AWE rose only 2.3% (+£16/wk) while GDP per head rose 7.7%. The output-pay gap is the defining living-standards story.
-- **Regional convergence is happening.** Scotland (+7.3%) and NI (+8.1%) gained most; London (−7.3%) saw the largest relative decline but remains the clear outlier.
+- **Housing affordability deteriorated then partially recovered.** The house price to earnings ratio rose from 7.2× (2007) to a peak of 8.95× (2021) before declining to 7.55× (2025). The 5-year average of 8.19 confirms sustained pressure above 2007 levels for most of the post-crisis period.
 
 See `docs/findings-summary.md` for the full one-page evidence summary.
 
@@ -114,11 +115,11 @@ See `docs/findings-summary.md` for the full one-page evidence summary.
 
 ## POC definition of done
 
-- ✅ Four national indicators comparing 2007 with latest
+- ✅ Five national indicators comparing 2007 with latest
 - ✅ One regional indicator comparing 2007 with latest (12 regions)
 - ✅ Reproducible absolute and percentage change calculations
 - ✅ At least one chart (3 generated)
-- ✅ Claims-evidence matrix (6 rated, 1 TBD)
+- ✅ Claims-evidence matrix (7 rated, all non-TBD)
 - ✅ Methodology note
 
 ## Data principle

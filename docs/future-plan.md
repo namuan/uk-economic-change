@@ -369,7 +369,7 @@ uv run pytest
 7. ✅ Add real earnings / household disposable income indicator (Workstream 4).
 8. ✅ Update indicator register with expanded fields per Workstream 1.
 9. ✅ Build the long-format analytical dataset per Workstream 3.
-10. Add housing affordability indicator (Workstream 4).
+10. ✅ Add housing affordability indicator (Workstream 4).
 
 ## 16. Definition of Done for Finished Project
 

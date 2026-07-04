@@ -219,6 +219,20 @@ def fetch_cpi(*, force: bool = False) -> FetchResult:
     )
 
 
+def fetch_housing_affordability(*, force: bool = False) -> FetchResult:
+    """Download housing affordability ratios (house price to earnings).
+
+    ONS dataset: Ratio of median house price to median gross annual
+    workplace-based earnings, England and Wales, 1997–2025.
+    """
+    return _fetch(
+        indicator_id="housing_affordability",
+        url=f"{ONS_FILE_BASE}?uri=/peoplepopulationandcommunity/housing/datasets/ratioofhousepricetoworkplacebasedearningslowerquartileandmedian/current/aff1ratioofhousepricetoworkplacebasedearnings.xlsx",
+        filename="housing_affordability.xlsx",
+        force=force,
+    )
+
+
 # ---------------------------------------------------------------------------
 # Bulk fetch
 # ---------------------------------------------------------------------------
@@ -238,6 +252,7 @@ def fetch_all(*, force: bool = False) -> FetchReport:
         fetch_regional_productivity,
         fetch_awe_nominal,
         fetch_cpi,
+        fetch_housing_affordability,
     ]
 
     for fn in fetchers:

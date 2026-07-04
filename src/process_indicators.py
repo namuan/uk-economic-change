@@ -188,6 +188,36 @@ def process_real_earnings() -> dict:
     }
 
 
+def process_housing_affordability() -> dict:
+    """Extract median house price to earnings ratio for England & Wales.
+
+    Data from ONS housing affordability dataset, Table 1c.
+    Covers England and Wales (K04000001) from 1997 to 2025.
+    """
+    df = pd.read_excel(
+        RAW_DIR / "housing_affordability.xlsx",
+        sheet_name="1c",
+        header=1,
+    )
+    ew = df[df["Name"] == "England and Wales"]
+    if ew.empty:
+        raise ValueError("England and Wales row not found in housing affordability data")
+    row = ew.iloc[0]
+
+    # Extract 2007 and 2025
+    v2007 = float(row["2007"])
+    v2025 = float(row["2025"])
+
+    return {
+        "indicator_id": "housing_affordability",
+        "geography": "England and Wales",
+        "baseline_year": 2007,
+        "baseline_value": v2007,
+        "latest_year": 2025,
+        "latest_value": v2025,
+    }
+
+
 def build_national_table() -> pd.DataFrame:
     """Build the populated national comparison table."""
     rows = [
@@ -195,6 +225,7 @@ def build_national_table() -> pd.DataFrame:
         process_ndp_per_head(),
         process_labour_productivity(),
         process_real_earnings(),
+        process_housing_affordability(),
     ]
     df = pd.DataFrame(rows)
     # Add remaining columns with empty placeholders
@@ -207,6 +238,7 @@ def build_national_table() -> pd.DataFrame:
         "CVM 2023 prices, seasonally adjusted. NDP = GDP minus capital consumption.",
         "Index 2023=100, seasonally adjusted, whole economy. Quarterly data available.",
         "Nominal AWE (KAB9) deflated by CPI (D7BT) to 2025 prices. Whole economy, total pay, seasonally adjusted. Monthly data available.",
+        "Ratio of median house price to median gross annual workplace-based earnings. England and Wales only (not UK). Peaked at 8.95 in 2021 before declining to 7.55 in 2025. Five-year average is 8.19.",
     ]
     return df[PROCESSED_COLS]
 

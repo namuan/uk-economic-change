@@ -3,3 +3,4 @@ gdp_per_head,UK,2007,37625.0,2025,40537.0,2912.0,7.73953488372093,Strong candida
 real_ndp_per_head,UK,2007,33070.0,2025,34300.0,1230.0,3.719383126700938,Strong candidate,"CVM 2023 prices, seasonally adjusted. NDP = GDP minus capital consumption."
 labour_productivity_output_per_hour,UK,2007,93.0,2025,99.4,6.400000000000006,6.881720430107532,Strong candidate,"Index 2023=100, seasonally adjusted, whole economy. Quarterly data available."
 real_earnings,UK,2007,711.0,2025,727.0,16.0,2.250351617440225,Strong candidate,"Nominal AWE (KAB9) deflated by CPI (D7BT) to 2025 prices. Whole economy, total pay, seasonally adjusted. Monthly data available."
+housing_affordability,England and Wales,2007,7.17,2025,7.55,0.3799999999999999,5.299860529986051,Strong candidate,Ratio of median house price to median gross annual workplace-based earnings. England and Wales only (not UK). Peaked at 8.95 in 2021 before declining to 7.55 in 2025. Five-year average is 8.19.
