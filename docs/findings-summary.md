@@ -76,7 +76,25 @@ London remains the clear outlier at 28.5% above the UK average, but its advantag
 
 ---
 
-## 6. What we still don't know (not yet in this POC)
+## 6. Housing affordability: worse than 2007 for most of the post-crisis period
+
+The ratio of median house prices to median earnings stood at **7.17×** in 2007 and **7.55×** in 2025 — a modest increase of 5.3%. But this endpoint comparison severely understates the deterioration:
+
+| Year | Ratio |
+|------|-------|
+| 2007 | 7.17× |
+| 2015 | 7.37× |
+| 2021 (peak) | **8.95×** |
+| 2025 | 7.55× |
+| 5-year avg | **8.19×** |
+
+The ratio peaked nearly 25% above 2007 levels before declining. The five-year average of 8.19× confirms that housing affordability was substantially worse than 2007 for most of the recent period. The partial recovery since 2021 reflects both cooling prices and earnings growth, but the long-run picture is one of structural deterioration.
+
+**Caveat:** This data covers England and Wales only.
+
+---
+
+## 7. What we still don't know
 
 - **Real earnings and living standards** — GDP per head may not reflect household experience.
 - **Housing affordability** — widely cited as worsened since 2007 but not yet measured here.

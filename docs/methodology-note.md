@@ -39,6 +39,7 @@ National GDP and productivity have more recent data than regional productivity, 
 | Real NDP per head | MWB6 | UK Economic Accounts (UKEA) | Generator CSV | mwb6.csv |
 | Output per hour worked | LZVB | Labour productivity (PRDY) | Direct file CSV | prdy.csv |
 | Real average weekly earnings | KAB9 + D7BT | Labour Market Stats (LMS) + CPI (MM23) | Generator CSV | kab9_awe.csv, d7bt_cpi.csv |
+| House price to earnings ratio | — | Housing affordability (England & Wales) | Direct file XLSX | housing_affordability.xlsx |
 | Regional output per hour | — | Regional labour productivity (PRODBYREG) | Direct file XLSX | prodbyreg.xlsx |
 
 All values are Chained Volume Measures (CVM) at 2023 reference prices, seasonally adjusted, unless otherwise noted.

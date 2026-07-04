@@ -15,6 +15,7 @@ This report compares Britain's economic position in 2007 — the peak before the
 - **Net domestic product per head** grew at less than half that rate (+3.7%), suggesting that capital consumption — depreciation, obsolescence — absorbed an increasing share of output.
 - **Output per hour worked** — the standard measure of labour productivity — rose only 6.9% over the same period. Before 2007, productivity grew at 2.1% per year.
 - **Real earnings** grew just **2.3%** — £16 per week in 2025 prices — compared with GDP per head growth of 7.7%. The economy produces more per person, but the average worker's real pay has barely moved.
+- **Housing affordability** has been under sustained pressure. The house price to earnings ratio rose from 7.2× (2007) to a peak of 8.95× (2021) before declining to 7.55× (2025). The five-year average of 8.19× confirms that affordability was substantially worse than 2007 for most of the post-crisis period.
 - **Regional inequality is narrowing**, but slowly. Scotland and Northern Ireland recorded the strongest convergence gains, while London's relative advantage shrank. Yet London remains nearly 29% above the UK average.
 
 The evidence confirms that Britain's post-2007 economic performance represents a structural break from the pre-crisis trend — not a temporary deviation.
@@ -140,7 +141,49 @@ The claim that "living standards changed differently from GDP per head" (C006) i
 
 ---
 
-## 5. Regional Productivity
+## 5. Housing Affordability
+
+### The headline
+
+The ratio of median house prices to median gross annual workplace-based earnings in England and Wales stood at **7.17** in 2007. By 2025 it had risen to **7.55** — an increase of **5.3%**.
+
+| | 2007 | 2025 | Change |
+|---|---|---|---|
+| House price to earnings ratio | 7.17× | 7.55× | +0.38 (+5.3%) |
+
+### The endpoint understates the problem
+
+The simple 2007-to-2025 comparison masks a far more painful trajectory:
+
+| Period | Ratio |
+|--------|-------|
+| 2007 (pre-crisis peak) | 7.17× |
+| 2009 (post-crisis trough) | 6.35× |
+| 2015 | 7.37× |
+| 2021 (peak) | **8.95×** |
+| 2023 | 8.28× |
+| 2025 | 7.55× |
+| **5-year average (2021–2025)** | **8.19×** |
+
+Housing affordability deteriorated steadily from 2014 onwards, peaking in 2021 at a ratio nearly 25% worse than 2007. The subsequent decline to 7.55× by 2025 reflects both cooling house prices and earnings growth, but the five-year average of **8.19×** confirms that for most of the recent period, affordability was substantially worse than in 2007.
+
+### Interpretation
+
+A ratio of 7.55 means the median house costs 7.55 times the median annual salary — far above traditional lending multiples and historic norms. At the 2021 peak of 8.95, it would take a median earner nearly nine years of gross salary to buy a median-priced home, before any other living costs.
+
+The partial recovery since 2021 should not be mistaken for a return to pre-crisis affordability. The 2007 ratio itself was already considered elevated at the time. The fact that it has remained above 7.0 for most of the past decade — and above 8.0 for 2021–2023 — represents a structural deterioration in housing access for median earners.
+
+### Evidence rating: Partial
+
+The claim that "housing pressure has worsened since 2007" (C007) is rated **Partial**. The endpoint comparison alone (+5.3%) modestly supports the claim. But the full time series — with a peak at 8.95× and a five-year average of 8.19× — provides much stronger evidence. The rating is Partial because the endpoint understates the severity of the deterioration experienced during the intervening years.
+
+### Data note
+
+This indicator covers **England and Wales only**, not the whole UK. Scotland and Northern Ireland have separate land registries and housing market data not included in this ONS dataset. The ratio uses median (not mean) values for both house prices and earnings, making it robust to outliers.
+
+---
+
+## 6. Regional Productivity
 
 ### The picture across Britain
 
@@ -185,7 +228,7 @@ The claim that "regional productivity inequality persists" is rated **Partial**.
 
 ---
 
-## 6. Claims-Evidence Matrix
+## 7. Claims-Evidence Matrix
 
 The claims-evidence matrix links broad policy and media claims to specific indicators and assesses whether the data supports them.
 
@@ -197,16 +240,16 @@ The claims-evidence matrix links broad policy and media claims to specific indic
 | **C004:** Regional productivity inequality persists | **Partial** | Seven regions improved their relative position; five declined. The overall spread narrowed (std dev 15.1 → 12.2), but London remains a clear outlier and middle-ranked regions show signs of relative decline. |
 | **C005:** London remains a productivity outlier | **Strong** | London output per hour is 28.5% above the UK average, down from 38.7% in 2007. The gap is narrowing but London is still unmistakably the outlier. |
 | **C006:** Living standards changed differently from GDP per head | **Strong** | Real earnings (CPI-deflated AWE) rose only 2.3% since 2007, compared with GDP per head growth of 7.7%. The average worker's real pay has barely improved while output per person has grown.
-| **C007:** Housing pressure has worsened since 2007 | **TBD** | Housing affordability indicator not yet populated. |
+| **C007:** Housing pressure has worsened since 2007 | **Partial** | Median house price to earnings ratio rose from 7.2× (2007) to 7.55× (2025), but peaked at 8.95× in 2021 before declining. The 5-year average of 8.19× confirms sustained pressure above 2007 levels, though the endpoint comparison alone understates the deterioration experienced during 2015–2023. |
 
 ---
 
-## 7. What This Evidence Framework Does Not Cover
+## 8. What This Evidence Framework Does Not Cover
 
 This proof of concept has deliberately narrow scope. Several important dimensions of economic change since 2007 are not captured here:
 
 - **Real earnings and living standards.** GDP per head is an average; it does not show how gains (or losses) are distributed across households. Median real earnings and household disposable income are needed to complete the picture.
-- **Housing costs and affordability.** Widely cited as a major pressure on living standards since 2007, but not yet measured in this framework.
+- **Housing costs and affordability.** Now measured via the house price to earnings ratio (England and Wales). Scotland and Northern Ireland not yet covered; local authority breakdowns would add granularity.
 - **Public services.** NHS waiting times, local authority spending power, and other pressure indicators are outside the current scope.
 - **International comparisons.** While the domestic productivity trend is clear, placing it in an international context would strengthen the analysis.
 - **Sub-regional variation.** City-region and local authority breakdowns would reveal variation masked by ITL1 regional averages.
@@ -216,7 +259,7 @@ These gaps are documented in `docs/future-plan.md`, which sets out a 10-workstre
 
 ---
 
-## 8. Methodology
+## 9. Methodology
 
 ### Data sources
 
@@ -228,6 +271,7 @@ All data is sourced from the Office for National Statistics via programmatic dow
 | Real NDP per head | MWB6 | UK Economic Accounts (UKEA) | 2025 |
 | Output per hour worked | LZVB | Labour productivity (PRDY) | 2025 |
 | Real average weekly earnings | KAB9 + D7BT | Labour Market Statistics (LMS) + CPI (MM23) | 2025 |
+| House price to earnings ratio | — | Housing affordability (England & Wales) | 2025 |
 | Regional output per hour | — | Regional labour productivity (PRODBYREG) | 2023 |
 
 All national values are Chained Volume Measures (CVM) at 2023 reference prices, seasonally adjusted. Regional values are expressed as an index relative to the UK average (UK = 100).
