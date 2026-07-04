@@ -38,6 +38,7 @@ National GDP and productivity have more recent data than regional productivity, 
 | Real GDP per head | IHXW | UK Economic Accounts (UKEA) | Generator CSV | ihxw.csv |
 | Real NDP per head | MWB6 | UK Economic Accounts (UKEA) | Generator CSV | mwb6.csv |
 | Output per hour worked | LZVB | Labour productivity (PRDY) | Direct file CSV | prdy.csv |
+| Real average weekly earnings | KAB9 + D7BT | Labour Market Stats (LMS) + CPI (MM23) | Generator CSV | kab9_awe.csv, d7bt_cpi.csv |
 | Regional output per hour | — | Regional labour productivity (PRODBYREG) | Direct file XLSX | prodbyreg.xlsx |
 
 All values are Chained Volume Measures (CVM) at 2023 reference prices, seasonally adjusted, unless otherwise noted.
@@ -50,10 +51,12 @@ All values are Chained Volume Measures (CVM) at 2023 reference prices, seasonall
 2. **Real net domestic product per head** — GBP, CVM 2023 prices, seasonally adjusted.
 3. **Output per hour worked** — Index 2023=100, whole economy, seasonally adjusted.
 4. **Regional output per hour worked** — Index UK=100, 12 ITL1 regions.
+5. **Real average weekly earnings** — GBP per week, CPI-deflated to 2025 prices, seasonally adjusted. Computed from nominal AWE (KAB9) and CPI (D7BT).
+
+See `data/indicator_register.csv` for the full validated register with 15 metadata fields per indicator.
 
 ### Optional (not yet populated)
 
-- Real earnings / household disposable income.
 - Housing affordability / housing supply.
 - NHS waiting times.
 - Local authority finance.

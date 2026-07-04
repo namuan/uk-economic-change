@@ -49,8 +49,11 @@ def test_indicator_register() -> None:
           df["indicator_id"].is_unique,
           f"Duplicates: {df['indicator_id'][df['indicator_id'].duplicated()].tolist()}")
 
-    required_cols = ["indicator_id", "indicator_name", "source_type",
-                     "source_url", "baseline_year", "geography_level", "priority"]
+    required_cols = ["indicator_id", "indicator_name", "domain",
+                     "source_owner", "source_url", "dataset_id",
+                     "series_code", "geography_level", "unit",
+                     "baseline_year_available", "latest_year_available",
+                     "update_frequency", "comparability_status", "priority"]
     missing_cols = [c for c in required_cols if c not in df.columns]
     check("Required columns present",
           len(missing_cols) == 0,
@@ -60,12 +63,12 @@ def test_indicator_register() -> None:
           df["indicator_id"].notna().all(),
           f"Missing in rows: {df[df['indicator_id'].isna()].index.tolist()}")
 
-    check("No missing baseline_year values",
-          df["baseline_year"].notna().all())
+    check("No missing baseline_year_available values",
+          df["baseline_year_available"].notna().all())
 
-    check("All baseline years are 2007",
-          (df["baseline_year"].astype(str).str.strip() == "2007").all(),
-          f"Non-2007: {df[df['baseline_year'].astype(str).str.strip() != '2007']['indicator_id'].tolist()}")
+    check("All available baseline years are 2007",
+          (df["baseline_year_available"].astype(str).str.strip() == "2007").all(),
+          f"Non-2007: {df[df['baseline_year_available'].astype(str).str.strip() != '2007']['indicator_id'].tolist()}")
 
     check("Priority indicators are 1, 2, or 3",
           df["priority"].dropna().astype(str).isin(["1", "2", "3"]).all(),
@@ -73,10 +76,27 @@ def test_indicator_register() -> None:
 
     # Source URLs for priority indicators must be valid (non-TBD)
     priority = df[df["priority"].isin([1, 2])]
-    tbd_urls = priority[priority["source_url"].str.contains("TBD", na=False)]
+    tbd_urls = priority[priority["source_url"].astype(str).str.contains("TBD", na=False)]
     check("Priority indicators have confirmed source URLs",
           len(tbd_urls) == 0,
           f"TBD sources: {tbd_urls['indicator_id'].tolist()}")
+
+    # Expanded fields
+    valid_domains = {"Economy", "Productivity", "Wages", "Housing", "Public Services", ""}
+    check("Domain values are valid",
+          df["domain"].isin(valid_domains).all(),
+          f"Invalid: {df[~df['domain'].isin(valid_domains)]['domain'].tolist()}")
+
+    check("Series codes populated for priority indicators",
+          priority["series_code"].notna().all())
+
+    valid_comparability = {"OK", "OK (methodology note)", "partial", "methodology break", "TBD"}
+    check("Comparability status values are valid",
+          df["comparability_status"].astype(str).isin(valid_comparability).all())
+
+    valid_frequency = {"Monthly", "Quarterly", "Annual", "TBD"}
+    check("Update frequency values are valid",
+          df["update_frequency"].astype(str).isin(valid_frequency).all())
 
 
 # ---------------------------------------------------------------------------

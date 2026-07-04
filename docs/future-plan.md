@@ -39,41 +39,31 @@ The final product should include:
 - source documentation,
 - and a final narrative report or tender-ready evidence pack.
 
-## 3. Workstream 1: Data Source Validation
+## 3. Workstream 1: Data Source Validation ✅
 
 ### Objective
 
 Confirm which datasets are suitable, comparable, and defensible for each indicator.
 
-### Required work
+### Completed
 
-- Review every indicator in `data/indicator_register.csv`.
-- Confirm the correct ONS dataset, series code, edition, geography, and unit.
-- Identify whether each series has a valid 2007 observation.
-- Identify the latest available comparable observation.
-- Record release frequency and update schedule.
-- Document methodology breaks, boundary changes, discontinuities, and caveats.
-- Add supplementary official sources where ONS does not cover the required measure.
+- Reviewed every indicator in `data/indicator_register.csv`.
+- Confirmed the correct ONS dataset, series code, edition, geography, and unit for all 5 populated indicators.
+- Verified each series has a valid 2007 observation and latest comparable observation.
+- Recorded release frequency and update schedule.
+- Documented known caveats for each indicator.
+- Remaining: housing affordability (TBD, Workstream 4).
 
 ### Output
 
 A validated indicator register with fields for:
 
-- `indicator_id`,
-- `indicator_name`,
-- `domain`,
-- `source_owner`,
-- `source_url`,
-- `dataset_id`,
-- `series_code`,
-- `geography_level`,
-- `unit`,
-- `baseline_year_available`,
-- `latest_year_available`,
-- `update_frequency`,
-- `comparability_status`,
-- `known_caveats`,
-- `priority`.
+- `indicator_id`, `indicator_name`, `domain`, `source_owner`,
+- `source_url`, `dataset_id`, `series_code`,
+- `geography_level`, `unit`,
+- `baseline_year_available`, `latest_year_available`,
+- `update_frequency`, `comparability_status`,
+- `known_caveats`, `priority`.
 
 ## 4. Workstream 2: Data Ingestion
 
@@ -380,7 +370,7 @@ uv run pytest
 5. ✅ Generate one chart from real data.
 6. ✅ Add a simple QA check script (`src/qa_checks.py`, now 72 checks, all pass).
 7. ✅ Add real earnings / household disposable income indicator (Workstream 4).
-8. Update indicator register with expanded fields per Workstream 1.
+8. ✅ Update indicator register with expanded fields per Workstream 1.
 9. Build the long-format analytical dataset per Workstream 3.
 10. Add housing affordability indicator (Workstream 4).
 
