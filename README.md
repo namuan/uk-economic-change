@@ -24,6 +24,7 @@ make fetch-force  # force re-download all ONS source files
 make process    # normalise raw data into processed tables
 make build      # generate output tables and charts
 make all        # fetch → process → build (full pipeline)
+make test       # run QA checks (68 checks)
 make validate   # run data validation checks
 ```
 

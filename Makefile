@@ -58,6 +58,9 @@ clean-all: clean clean-raw ## Remove everything including cached raw downloads
 
 # ── Quick validation ────────────────────────────────────────────────────
 
+test: ## Run QA checks on indicator register, data, calculations and outputs
+	uv run python src/qa_checks.py
+
 validate: ## Run data validation checks
 	uv run python -c "\
 import pandas as pd, numpy as np; \

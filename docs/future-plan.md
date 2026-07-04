@@ -318,7 +318,7 @@ uv run pytest
 
 ## 13. Proposed Milestones
 
-### Milestone 1: POC Complete
+### Milestone 1: POC Complete ✅
 
 - Skeleton project exists.
 - Indicator register exists.
@@ -326,20 +326,21 @@ uv run pytest
 - Placeholder tables are generated.
 - uv project management is configured.
 
-### Milestone 2: First Real Data Pull
+### Milestone 2: First Real Data Pull ✅
 
 - National GDP per head is fetched and processed.
 - Labour productivity is fetched and processed.
 - At least one regional productivity table is populated.
 - First real charts are generated.
 
-### Milestone 3: Validated Core Indicator Set
+### Milestone 3: Validated Core Indicator Set ✅
 
 - Core indicators are confirmed.
 - Data caveats are documented.
 - National 2007 vs latest table is populated.
 - Regional productivity table is populated.
 - Claims-evidence matrix is partially completed.
+- QA check script added (`src/qa_checks.py`). All 68 checks pass.
 
 ### Milestone 4: Expanded Evidence Pack
 
@@ -372,13 +373,16 @@ uv run pytest
 
 ## 15. Immediate Next Actions
 
-1. Add `.gitignore` to exclude `.venv/`, `__pycache__/`, and temporary files.
-2. Validate the ONS source links in `data/indicator_register.csv`.
-3. Implement the first real ONS time-series pull for GDP per head.
-4. Populate the national comparison table for one indicator end to end.
-5. Generate one chart from real data.
-6. Add a simple QA check script.
-7. Decide the final core indicator list for version 1.
+1. ✅ Add `.gitignore` to exclude `.venv/`, `__pycache__/`, and temporary files.
+2. ✅ Validate the ONS source links in `data/indicator_register.csv`.
+3. ✅ Implement the first real ONS time-series pull for GDP per head.
+4. ✅ Populate the national comparison table for one indicator end to end.
+5. ✅ Generate one chart from real data.
+6. ✅ Add a simple QA check script (`src/qa_checks.py`, 68 checks, all pass).
+7. Add real earnings / household disposable income indicator (Workstream 4).
+8. Update indicator register with expanded fields per Workstream 1.
+9. Build the long-format analytical dataset per Workstream 3.
+10. Add housing affordability indicator.
 
 ## 16. Definition of Done for Finished Project
 
