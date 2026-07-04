@@ -16,6 +16,7 @@ This report compares Britain's economic position in 2007 — the peak before the
 - **Output per hour worked** — the standard measure of labour productivity — rose only 6.9% over the same period. Before 2007, productivity grew at 2.1% per year.
 - **Real earnings** grew just **2.3%** — £16 per week in 2025 prices — compared with GDP per head growth of 7.7%. The economy produces more per person, but the average worker's real pay has barely moved.
 - **Housing affordability** has been under sustained pressure. The house price to earnings ratio rose from 7.2× (2007) to a peak of 8.95× (2021) before declining to 7.55× (2025). The five-year average of 8.19× confirms that affordability was substantially worse than 2007 for most of the post-crisis period.
+- **NHS waiting list pressure** has intensified dramatically. The total incomplete pathways rose from 4.19 million (August 2007) to 7.01 million (March 2026) — a 67.5% increase. The post-COVID backlog accounts for much of the increase, but the pre-COVID trend was already upward.
 - **Regional inequality is narrowing**, but slowly. Scotland and Northern Ireland recorded the strongest convergence gains, while London's relative advantage shrank. Yet London remains nearly 29% above the UK average.
 
 The evidence confirms that Britain's post-2007 economic performance represents a structural break from the pre-crisis trend — not a temporary deviation.
@@ -183,7 +184,51 @@ This indicator covers **England and Wales only**, not the whole UK. Scotland and
 
 ---
 
-## 6. Regional Productivity
+## 6. NHS Waiting Times
+
+### The headline
+
+The NHS England total waiting list for consultant-led referral to treatment (RTT) — measured as total incomplete pathways — stood at **4.19 million** in August 2007, the first month of RTT data collection. By March 2026 it had risen to **7.01 million** — an increase of **67.5%**.
+
+| | Aug 2007 | Mar 2026 | Change |
+|---|---|---|---|
+| Total incomplete pathways | 4,186,974 | 7,014,879 | +2,827,905 (+67.5%) |
+
+### The trajectory
+
+The waiting list followed a distinct pattern over the period:
+
+| Period | Waiting list | Context |
+|--------|-------------|---------|
+| Aug 2007 | 4.19M | First month of RTT data; pre-18-week target |
+| Mar 2010 | 2.42M | Post-target low point |
+| Mar 2015 | 3.01M | Gradual increase |
+| Mar 2020 | 4.24M | Pre-COVID level |
+| Mar 2026 | 7.01M | Post-COVID backlog peak |
+
+The waiting list fell sharply after the 18-week referral-to-treatment target was introduced in 2008, reaching a low of 2.36 million in 2009. It then rose gradually through the 2010s, returning to roughly 2007 levels by 2019. The COVID-19 pandemic drove an unprecedented surge — from 4.24 million in March 2020 to over 7 million by 2026 — as elective procedures were cancelled and new referrals accumulated.
+
+### Interpretation
+
+A 67.5% increase in the waiting list over 19 years represents a fundamental deterioration in NHS access. However, the interpretation requires care:
+
+- **The 2007 baseline is the first month of RTT data**, not a "normal" pre-crisis level. The waiting list was already considered high in 2007, which is why the 18-week target was introduced.
+- **The post-2020 surge is largely COVID-driven**, reflecting a systemic shock rather than steady deterioration. The pre-COVID trend (2.4M in 2010 to 4.2M in 2020) was upward but much more gradual.
+- **The data covers England only** (not Scotland, Wales, or Northern Ireland, which have separate NHS systems).
+
+Despite these caveats, the direction of travel is unambiguous: NHS waiting list pressure has increased substantially since 2007, and the post-COVID backlog represents an unprecedented level of unmet need.
+
+### Evidence rating: Strong
+
+The claim that "public service pressure (NHS waiting list) has increased substantially since 2007" (C008) is rated **Strong**. The data is sourced from NHS England official statistics, has a clear baseline, and shows a large and sustained increase.
+
+### Data note
+
+Data compiled from two NHS England sources: the annual RTT time series (April 2007 – March 2020) and the monthly RTT Commissioner file (March 2026 release). The combined time series is stored in `data/raw/nhs_waiting_list.csv` (153 monthly observations). NHS England is an official UK statistical authority; the data principle permits supplementary official sources where ONS does not cover the required measure.
+
+---
+
+## 7. Regional Productivity
 
 ### The picture across Britain
 
@@ -228,7 +273,7 @@ The claim that "regional productivity inequality persists" is rated **Partial**.
 
 ---
 
-## 7. Claims-Evidence Matrix
+## 8. Claims-Evidence Matrix
 
 The claims-evidence matrix links broad policy and media claims to specific indicators and assesses whether the data supports them.
 
@@ -241,16 +286,17 @@ The claims-evidence matrix links broad policy and media claims to specific indic
 | **C005:** London remains a productivity outlier | **Strong** | London output per hour is 28.5% above the UK average, down from 38.7% in 2007. The gap is narrowing but London is still unmistakably the outlier. |
 | **C006:** Living standards changed differently from GDP per head | **Strong** | Real earnings (CPI-deflated AWE) rose only 2.3% since 2007, compared with GDP per head growth of 7.7%. The average worker's real pay has barely improved while output per person has grown.
 | **C007:** Housing pressure has worsened since 2007 | **Partial** | Median house price to earnings ratio rose from 7.2× (2007) to 7.55× (2025), but peaked at 8.95× in 2021 before declining. The 5-year average of 8.19× confirms sustained pressure above 2007 levels, though the endpoint comparison alone understates the deterioration experienced during 2015–2023. |
+| **C008:** Public service pressure (NHS waiting list) has increased substantially since 2007 | **Strong** | NHS England waiting list rose from 4.19M (Aug 2007) to 7.01M (Mar 2026), a 67.5% increase. Post-COVID backlog accounts for much of the increase, but the pre-COVID trend was already upward (2.4M in 2010 to 4.2M in 2020). Data covers England only. |
 
 ---
 
-## 8. What This Evidence Framework Does Not Cover
+## 9. What This Evidence Framework Does Not Cover
 
 This proof of concept has deliberately narrow scope. Several important dimensions of economic change since 2007 are not captured here:
 
 - **Real earnings and living standards.** Now measured via CPI-deflated Average Weekly Earnings (+2.3% since 2007). However, GDP per head is an average that does not show how gains or losses are distributed across households. Household disposable income, income inequality measures, and distributional analysis would complete this picture.
 - **Housing costs and affordability.** Now measured via the house price to earnings ratio (England and Wales). Scotland and Northern Ireland not yet covered; local authority breakdowns would add granularity.
-- **Public services.** NHS waiting times, local authority spending power, and other pressure indicators are outside the current scope.
+- **Public services.** NHS waiting times are now measured via the RTT incomplete pathways indicator (England only). Other public-service pressure indicators — A&E waiting times, local authority spending power, social care — are outside the current scope.
 - **International comparisons.** While the domestic productivity trend is clear, placing it in an international context would strengthen the analysis.
 - **Sub-regional variation.** City-region and local authority breakdowns would reveal variation masked by ITL1 regional averages.
 - **Policy attribution.** This framework measures what happened, not why. Attributing changes to specific policies, external shocks, or structural shifts requires a different analytical approach.
@@ -259,7 +305,7 @@ These gaps are documented in `docs/future-plan.md`, which sets out a 10-workstre
 
 ---
 
-## 9. Methodology
+## 10. Methodology
 
 ### Data sources
 
@@ -272,6 +318,7 @@ All data is sourced from the Office for National Statistics via programmatic dow
 | Output per hour worked | LZVB | Labour productivity (PRDY) | 2025 |
 | Real average weekly earnings | KAB9 + D7BT | Labour Market Statistics (LMS) + CPI (MM23) | 2025 |
 | House price to earnings ratio | — | Housing affordability (England & Wales) | 2025 |
+| NHS waiting list (incomplete pathways) | — | NHS England RTT data | 2026 |
 | Regional output per hour | — | Regional labour productivity (PRODBYREG) | 2023 |
 
 All national values are Chained Volume Measures (CVM) at 2023 reference prices, seasonally adjusted. Regional values are expressed as an index relative to the UK average (UK = 100).
@@ -304,7 +351,7 @@ All source code is in `src/`; raw data is cached in `data/raw/`; methodology is 
 - Labour productivity is measured as an index (2023=100), not in GBP per hour, limiting direct comparison with GDP per head figures.
 - The ONS v0 API was retired in November 2024; this project uses the generator CSV and direct file endpoints instead. These endpoints may change without notice.
 - NDP per head data (MWB6) starts from 1998; earlier comparisons are not possible.
-- All five national indicators are published with revisions; the values in this report reflect the latest available vintage as of July 2026.
+- NHS waiting list data is compiled from NHS England sources which use different formats; the 2007 baseline is the first month of RTT data collection (August 2007), not necessarily a "normal" pre-crisis level.
 
 ---
 
