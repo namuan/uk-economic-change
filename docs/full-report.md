@@ -7,7 +7,7 @@ July 2026 | Data source: Office for National Statistics
 
 ## Executive Summary
 
-This report compares Britain's economic position in 2007 — the peak before the global financial crisis — with the latest available data. It draws on three national indicators and twelve regional productivity measures, all sourced directly from the Office for National Statistics and processed through a reproducible pipeline.
+This report compares Britain's economic position in 2007 — the peak before the global financial crisis — with the latest available data. It draws on six national indicators and twelve regional productivity measures, sourced from the Office for National Statistics and NHS England and processed through a reproducible pipeline.
 
 ### Headlines
 
@@ -74,7 +74,7 @@ Whatever the cause, the divergence means GDP per head **overstates** the improve
 
 ![National indicators: percentage change since 2007](../outputs/charts/national_indicators_change.png)
 
-**Figure 2:** Percentage change in the three national indicators since 2007. GDP per head leads at +7.7%, followed by output per hour at +6.9%. NDP per head trails at +3.7%, highlighting the growing wedge between gross and net measures of national income.
+**Figure 2:** Percentage change in the six national indicators since 2007. The NHS waiting list (+67.5%) dominates the scale; GDP per head (+7.7%), output per hour (+6.9%), and house price/earnings (+5.3%) show moderate increases. NDP per head (+3.7%) and real earnings (+2.3%) show the weakest growth, highlighting the gap between output and living standards.
 
 ---
 
@@ -251,7 +251,7 @@ Regional productivity — measured as output per hour relative to the UK average
 
 ![Regional productivity change: 2007 to 2023](../outputs/charts/regional_productivity_change.png)
 
-**Figure 3:** Percentage change in regional output per hour relative to the UK average (UK = 100), 2007 to 2023. Green bars indicate regions that improved their position; red bars indicate regions that declined. The overall pattern shows convergence — the regions that were furthest behind in 2007 gained the most, while the leading region (London) saw the largest relative decline.
+**Figure 3:** Percentage change in regional output per hour relative to the UK average (UK = 100), 2007 to 2023.
 
 ### Convergence is happening — but slowly
 
@@ -266,6 +266,10 @@ Three findings stand out from the regional data:
 ### Measuring convergence
 
 The standard deviation of regional output per hour fell from **15.1 in 2007 to 12.2 in 2023** — a reduction of about 19%. This confirms that the spread of productivity outcomes across regions has narrowed, even as the absolute level of productivity growth has been weak nationally.
+
+![Regional productivity ranking: 2007 vs 2023](../outputs/charts/regional_ranking.png)
+
+**Figure 4:** Regional output per hour relative to the UK average (UK = 100), comparing 2007 and 2023 positions. Regions sorted by 2023 value. The pattern shows convergence at both ends — the lowest-ranked regions in 2007 gained ground, while London's advantage narrowed.
 
 ### Evidence rating: Partial
 
@@ -309,7 +313,7 @@ These gaps are documented in `docs/future-plan.md`, which sets out a 10-workstre
 
 ### Data sources
 
-All data is sourced from the Office for National Statistics via programmatic download. No manual data entry was used.
+All data is sourced from the Office for National Statistics and NHS England via programmatic download. No manual data entry was used.
 
 | Indicator | ONS code | Dataset | Latest |
 |-----------|----------|---------|--------|
@@ -347,11 +351,13 @@ All source code is in `src/`; raw data is cached in `data/raw/`; methodology is 
 
 ### Limitations
 
-- Regional productivity data lags national data by 1–2 years (latest: 2023 vs 2025).
+- Regional productivity data lags national data by 1–2 years (latest: 2023 vs 2025/2026).
 - Labour productivity is measured as an index (2023=100), not in GBP per hour, limiting direct comparison with GDP per head figures.
 - The ONS v0 API was retired in November 2024; this project uses the generator CSV and direct file endpoints instead. These endpoints may change without notice.
 - NDP per head data (MWB6) starts from 1998; earlier comparisons are not possible.
-- NHS waiting list data is compiled from NHS England sources which use different formats; the 2007 baseline is the first month of RTT data collection (August 2007), not necessarily a "normal" pre-crisis level.
+- Housing affordability data covers England and Wales only, not Scotland or Northern Ireland.
+- NHS waiting list data covers England only and is compiled from NHS England sources; the 2007 baseline is the first month of RTT data collection (August 2007), not necessarily a "normal" pre-crisis level.
+- All six national indicators are published with revisions; the values in this report reflect the latest available vintage as of July 2026.
 
 ---
 
