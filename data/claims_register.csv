@@ -6,3 +6,4 @@ C004,Regional productivity inequality persists,regional_productivity_output_per_
 C005,London remains a productivity outlier,regional_productivity_output_per_hour,London vs UK average and regions,TBD,Needs both 2007 and latest regional comparison
 C006,Living standards changed differently from GDP per head,real_earnings,Comparison with earnings or income measure,TBD,Indicator not yet selected
 C007,Housing pressure has worsened since 2007,housing_affordability,Affordability or supply comparison,TBD,Indicator not yet selected
+C008,"Public service pressure (NHS waiting list) has increased substantially since 2007",nhs_waiting_list,2007 vs latest comparison,TBD,"RTT data started August 2007. Post-2020 COVID backlog is a confounding factor."

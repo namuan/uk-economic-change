@@ -233,6 +233,33 @@ def fetch_housing_affordability(*, force: bool = False) -> FetchResult:
     )
 
 
+def fetch_nhs_waiting_list(*, force: bool = False) -> FetchResult:
+    """Verify NHS waiting list CSV is present (data committed to repo).
+
+    NHS England RTT data is compiled from two sources:
+    - Historical: Annual RTT time series (April 2007 – March 2020)
+    - Latest: Monthly RTT Commissioner file (March 2026)
+
+    Both are combined into data/raw/nhs_waiting_list.csv.
+    """
+    path = RAW_DIR / "nhs_waiting_list.csv"
+    if path.exists():
+        return FetchResult(
+            indicator_id="nhs_waiting_list",
+            url="compiled from NHS England RTT data",
+            path=path,
+            status_code=200,
+            cached=True,
+        )
+    return FetchResult(
+        indicator_id="nhs_waiting_list",
+        url="compiled from NHS England RTT data",
+        path=path,
+        status_code=0,
+        error="nhs_waiting_list.csv not found — run make fetch to restore",
+    )
+
+
 # ---------------------------------------------------------------------------
 # Bulk fetch
 # ---------------------------------------------------------------------------
@@ -253,6 +280,7 @@ def fetch_all(*, force: bool = False) -> FetchReport:
         fetch_awe_nominal,
         fetch_cpi,
         fetch_housing_affordability,
+        fetch_nhs_waiting_list,
     ]
 
     for fn in fetchers:

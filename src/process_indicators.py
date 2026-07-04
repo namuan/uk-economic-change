@@ -218,6 +218,29 @@ def process_housing_affordability() -> dict:
     }
 
 
+def process_nhs_waiting_list() -> dict:
+    """Extract NHS England waiting list from compiled CSV.
+
+    Uses total incomplete RTT pathways. Baseline is August 2007
+    (first month of RTT data collection). Latest is March 2026.
+    """
+    df = pd.read_csv(RAW_DIR / "nhs_waiting_list.csv")
+    df["value"] = pd.to_numeric(df["value"], errors="coerce")
+    df = df.dropna(subset=["value"])
+
+    row_first = df.iloc[0]
+    row_last = df.iloc[-1]
+
+    return {
+        "indicator_id": "nhs_waiting_list",
+        "geography": "England",
+        "baseline_year": 2007,
+        "baseline_value": float(row_first["value"]),
+        "latest_year": 2026,
+        "latest_value": float(row_last["value"]),
+    }
+
+
 def build_national_table() -> pd.DataFrame:
     """Build the populated national comparison table."""
     rows = [
@@ -226,6 +249,7 @@ def build_national_table() -> pd.DataFrame:
         process_labour_productivity(),
         process_real_earnings(),
         process_housing_affordability(),
+        process_nhs_waiting_list(),
     ]
     df = pd.DataFrame(rows)
     # Add remaining columns with empty placeholders
@@ -239,6 +263,7 @@ def build_national_table() -> pd.DataFrame:
         "Index 2023=100, seasonally adjusted, whole economy. Quarterly data available.",
         "Nominal AWE (KAB9) deflated by CPI (D7BT) to 2025 prices. Whole economy, total pay, seasonally adjusted. Monthly data available.",
         "Ratio of median house price to median gross annual workplace-based earnings. England and Wales only (not UK). Peaked at 8.95 in 2021 before declining to 7.55 in 2025. Five-year average is 8.19.",
+        "NHS England total incomplete RTT pathways. August 2007 = first month of RTT data collection. Data compiled from NHS England annual and monthly releases. Post-2020 surge driven by COVID backlog. March 2026 is latest.",
     ]
     return df[PROCESSED_COLS]
 
@@ -570,7 +595,7 @@ def write_processed() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
 def main() -> None:
     national, regional, long_format = write_processed()
 
-    print("National comparison table (4 indicators):")
+    print("National comparison table (6 indicators):")
     print(national[["indicator_id", "baseline_value", "latest_value"]].to_string(index=False))
 
     print(f"\nRegional productivity table ({len(regional)} regions):")

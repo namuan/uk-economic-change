@@ -65,29 +65,23 @@ A validated indicator register with fields for:
 - `update_frequency`, `comparability_status`,
 - `known_caveats`, `priority`.
 
-## 4. Workstream 2: Data Ingestion
+## 4. Workstream 2: Data Ingestion ✅
 
 ### Objective
 
 Replace placeholder tables with real data pulls from ONS and other approved official sources.
 
-### Required work
+### Completed
 
-- Implement ONS time-series fetching for national indicators.
-- Implement ONS dataset or CSV fetching for labour productivity datasets.
-- Add caching for raw downloaded data in `data/raw/`.
-- Preserve source filenames or response metadata for auditability.
-- Add error handling for unavailable sources, changed endpoints, and missing periods.
-- Add a manual import path for official sources that cannot be fetched reliably.
-- Ensure all data ingestion runs through `uv run` commands.
+- ONS time-series fetching implemented for 5 national indicators.
+- Dataset CSV/XLSX fetching for labour productivity, regional productivity, housing affordability.
+- Caching for all raw downloads in `data/raw/`.
+- Error handling for unavailable sources and changed endpoints.
+- All data ingestion runs through `make fetch` and `uv run python src/fetch_ons.py`.
 
 ### Output
 
-A reproducible ingestion layer that can populate:
-
-- `data/raw/`,
-- `data/processed/`,
-- `outputs/tables/`.
+A reproducible ingestion layer: `data/raw/` contains 7 source files, all fetchable or verified via Makefile.
 
 ## 5. Workstream 3: Data Cleaning and Normalisation ✅
 
@@ -173,53 +167,42 @@ Use this order:
 
 This keeps the first finished version coherent while allowing deeper geographic work later.
 
-## 8. Workstream 6: Claims-Evidence Matrix
+## 8. Workstream 6: Claims-Evidence Matrix ✅
 
 ### Objective
 
 Turn broad article or policy claims into testable statements.
 
-### Required work
+### Completed
 
-- Create a structured claim list.
-- Link each claim to one or more indicators.
-- Define what would count as strong, partial, weak, or unsupported evidence.
-- Record whether the evidence is national, regional, or both.
-- Add caveats and recommended wording.
-
-### Evidence categories
-
-| Rating | Meaning |
-|---|---|
-| Strong | Clear baseline, clear latest figure, stable method, direct measure |
-| Partial | Directionally useful but incomplete, indirect, or geographically limited |
-| Weak | Noisy, indirect, short time series, or difficult to interpret |
-| Not testable | No suitable comparable data found |
+- 8 claims created and linked to indicators.
+- Evidence ratings defined (Strong, Partial, Weak, Not testable).
+- All 8 claims rated with data-driven findings (5 Strong, 3 Partial, 0 TBD).
+- Caveats and recommended wording added for each claim.
 
 ### Output
 
-A completed `claims_evidence_matrix.csv` and a short written interpretation for each major claim.
+A completed `claims_evidence_matrix.csv` with written interpretations.
 
 ## 9. Workstream 7: Charts and Dashboard Outputs
 
-### Objective
+### Completed
 
-Create visual outputs that make the evidence pack usable for reports and presentations.
+- National GDP/NDP timeline chart (2007–2025).
+- National indicators comparison chart (6 indicators, horizontal bar).
+- Regional productivity change chart (12 regions, colour-coded).
+- Regional ranking chart (2007 vs 2023 side-by-side).
 
-### Required charts
+### Remaining
 
-- National GDP or income per head over time.
-- Productivity over time.
-- 2007 vs latest comparison by indicator.
-- Regional productivity change.
-- Regional ranking against UK average.
-- Optional small-multiple charts by region.
+- Productivity-over-time standalone chart.
+- Small-multiple charts by region.
+- Optional HTML dashboard.
 
 ### Output formats
 
-- PNG or SVG charts in `outputs/charts/`.
-- CSV tables in `outputs/tables/`.
-- Optional HTML dashboard as a later extension.
+- PNG charts in `outputs/charts/` (4 charts).
+- CSV tables in `outputs/tables/` (4 tables).
 
 ## 10. Workstream 8: Narrative Report
 
@@ -251,56 +234,39 @@ The report should separate:
 - what remains uncertain,
 - and what cannot be concluded from the available evidence.
 
-## 11. Workstream 9: Quality Assurance
+## 11. Workstream 9: Quality Assurance ✅
 
-### Objective
+### Completed
 
-Ensure the project is reproducible, auditable, and safe to use in external work.
+- All source URLs validated (`make test` includes URL checks).
+- Baseline and latest values spot-checked against source datasets.
+- Units confirmed before change calculations.
+- Percentage changes verified (spot-checks in QA).
+- Charts reviewed against underlying tables.
+- Core transformation functions tested via QA suite.
+- Known limitations recorded in methodology note.
 
-### Required checks
+### QA suite
 
-- Validate all source URLs.
-- Check all baseline and latest values against source datasets.
-- Confirm units before calculating changes.
-- Check that percentage changes are calculated correctly.
-- Review charts against underlying tables.
-- Add tests for core transformation functions.
-- Add a QA checklist before publication.
-- Record all known limitations.
+`src/qa_checks.py` — run with `make test`. Covers indicator register integrity, data completeness, calculation correctness, output table validation, chart generation, claims register cross-references, and long-format dataset validation.
 
-### Suggested tests
+## 12. Workstream 10: Packaging and Reproducibility ✅
 
-- `indicator_id` values are unique in the register.
-- Required fields are not missing.
-- Baseline year rows exist where expected.
-- Latest year rows exist where expected.
-- Numeric values parse correctly.
-- No percentage-change calculation divides by zero.
-- Output files are generated successfully.
+### Completed
 
-## 12. Workstream 10: Packaging and Reproducibility
+- Dependency management in `pyproject.toml` and `uv.lock`.
+- Makefile with 15 targets (`make help`, `make all`, `make test`, etc.).
+- `.gitignore` excludes `.venv/`, caches, and downloadable raw data.
+- GitHub repo created with gh CLI, public, full README.
+- Single command rebuild: `make all`.
 
-### Objective
-
-Make the project easy for another analyst or bidder to run.
-
-### Required work
-
-- Keep dependency management in `pyproject.toml` and `uv.lock`.
-- Add clear `uv` commands to the README.
-- Avoid committing `.venv/`, caches, or large raw downloads unless required.
-- Add `.gitignore`.
-- Add a reproducible build command.
-- Add a data refresh command.
-- Add a report generation command if the final report is automated.
-
-### Suggested commands
+### Commands
 
 ```bash
-uv sync
-uv run python src/fetch_ons.py
-uv run python src/build_outputs.py
-uv run pytest
+make install    # uv sync
+make all        # fetch → process → build
+make test       # 94+ QA checks
+make clean-all  # remove everything including cached downloads
 ```
 
 ## 13. Proposed Milestones
@@ -327,15 +293,15 @@ uv run pytest
 - National 2007 vs latest table is populated.
 - Regional productivity table is populated.
 - Claims-evidence matrix is partially completed.
-- QA check script added (`src/qa_checks.py`). All 68 checks pass.
+- QA check script added (`src/qa_checks.py`). 94+ checks pass.
 
-### Milestone 4: Expanded Evidence Pack
+### Milestone 4: Expanded Evidence Pack ✅
 
-- Wages or household income added.
-- Housing indicator added.
-- Public-service indicator added.
-- Regional comparison expanded.
-- Draft narrative summary created.
+- ✅ Wages or household income added (real earnings).
+- ✅ Housing indicator added (price/earnings ratio).
+- ✅ Public-service indicator added (NHS waiting list).
+- ✅ Regional comparison expanded.
+- ✅ Narrative report created (`docs/full-report.md`).
 
 ### Milestone 5: Finished Project
 

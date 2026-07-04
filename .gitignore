@@ -11,6 +11,7 @@ __pycache__/
 # ONS source data — downloadable on demand via make fetch
 data/raw/*
 !data/raw/.gitkeep
+!data/raw/nhs_waiting_list.csv
 
 # Processed data — regeneratable via make process
 data/processed/
