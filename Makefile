@@ -37,7 +37,7 @@ charts: process ## Regenerate charts only (skips fetch if processed data exists)
 	uv run python -c "\
 from src.process_indicators import write_processed; \
 from src.build_outputs import build_all_charts; \
-n, r = write_processed(); \
+n, r, _ = write_processed(); \
 build_all_charts(n, r); \
 print('Charts regenerated.')"
 

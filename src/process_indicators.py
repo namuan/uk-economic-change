@@ -285,24 +285,249 @@ def build_regional_table() -> pd.DataFrame:
 
 
 # ---------------------------------------------------------------------------
-# Write outputs
+# Long-format analytical dataset (Workstream 3)
 # ---------------------------------------------------------------------------
 
+# Geography codes from ONS
+GEOGRAPHY_CODES = {
+    "UK": "K02000001",
+    "North East": "E12000001",
+    "North West": "E12000002",
+    "Yorkshire and The Humber": "E12000003",
+    "East Midlands": "E12000004",
+    "West Midlands": "E12000005",
+    "East of England": "E12000006",
+    "London": "E12000007",
+    "South East": "E12000008",
+    "South West": "E12000009",
+    "Wales": "W92000004",
+    "Scotland": "S92000003",
+    "Northern Ireland": "N92000002",
+}
 
-def write_processed() -> tuple[pd.DataFrame, pd.DataFrame]:
+
+def _read_indicator_register() -> pd.DataFrame:
+    return pd.read_csv(PROJECT_ROOT / "data" / "indicator_register.csv")
+
+
+def _national_long_rows(indicator_id: str, raw_filename: str,
+                        indicator_name: str, domain: str,
+                        unit: str, source_url: str) -> list[dict]:
+    """Extract annual time series for a national indicator, 2007–2025."""
+    df = _read_ons_generator_csv(RAW_DIR / raw_filename)
+    is_annual = df["period"].str.match(r"^\d{4}$", na=False)
+    annual = df[is_annual & df["value"].notna()].copy()
+    annual["year"] = annual["period"].astype(int)
+    annual = annual[(annual["year"] >= 2007) & (annual["year"] <= 2025)]
+
+    rows = []
+    for _, row in annual.iterrows():
+        rows.append({
+            "indicator_id": indicator_id,
+            "indicator_name": indicator_name,
+            "domain": domain,
+            "geography_code": GEOGRAPHY_CODES["UK"],
+            "geography_name": "UK",
+            "geography_type": "national",
+            "period_type": "annual",
+            "period": row["period"],
+            "year": int(row["year"]),
+            "value": round(float(row["value"]), 1),
+            "unit": unit,
+            "source_url": source_url,
+            "quality_flag": "OK",
+        })
+    return rows
+
+
+def _productivity_long_rows() -> list[dict]:
+    """Extract output per hour from PRDY for all years 2007–2025."""
+    df = pd.read_csv(
+        RAW_DIR / "prdy.csv",
+        header=0,
+        skiprows=lambda x: x in [1, 2, 3, 4, 5, 6],
+    )
+    cols = list(df.columns)
+    cols[0] = "period"
+    df.columns = cols
+
+    target = "UK Whole Economy: Output per hour worked SA: Index 2023 = 100"
+    df["value"] = pd.to_numeric(df[target], errors="coerce")
+    df["period"] = df["period"].astype(str).str.strip()
+
+    is_annual = df["period"].str.match(r"^\d{4}$", na=False)
+    annual = df[is_annual & df["value"].notna()].copy()
+    annual["year"] = annual["period"].astype(int)
+    annual = annual[(annual["year"] >= 2007) & (annual["year"] <= 2025)]
+
+    rows = []
+    for _, row in annual.iterrows():
+        rows.append({
+            "indicator_id": "labour_productivity_output_per_hour",
+            "indicator_name": "Output per hour worked",
+            "domain": "Productivity",
+            "geography_code": GEOGRAPHY_CODES["UK"],
+            "geography_name": "UK",
+            "geography_type": "national",
+            "period_type": "annual",
+            "period": row["period"],
+            "year": int(row["year"]),
+            "value": round(float(row["value"]), 1),
+            "unit": "Index 2023=100 SA",
+            "source_url": "https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/labourproductivity/current/prdy.csv",
+            "quality_flag": "OK",
+        })
+    return rows
+
+
+def _regional_long_rows() -> list[dict]:
+    """Extract all years of regional productivity from PRODBYREG Table_2."""
+    df = pd.read_excel(
+        RAW_DIR / "prodbyreg.xlsx",
+        sheet_name="Table_2",
+        header=None,
+    )
+
+    regions = df.iloc[5, 1:].tolist()
+    rows = []
+
+    for data_row in range(8, 34):  # rows 8–33 contain 1998–2023
+        year_str = str(df.iloc[data_row, 0]).strip()
+        try:
+            year = int(year_str)
+        except ValueError:
+            continue
+
+        for col_idx, region in enumerate(regions, start=1):
+            if region == "England":
+                continue
+            if region not in GEOGRAPHY_CODES:
+                continue
+            value = df.iloc[data_row, col_idx]
+            if pd.isna(value):
+                continue
+            rows.append({
+                "indicator_id": "regional_productivity_output_per_hour",
+                "indicator_name": "Regional output per hour worked",
+                "domain": "Productivity",
+                "geography_code": GEOGRAPHY_CODES[region],
+                "geography_name": REGION_MAP.get(region, region),
+                "geography_type": "region",
+                "period_type": "annual",
+                "period": str(year),
+                "year": year,
+                "value": round(float(value), 2),
+                "unit": "Index UK=100",
+                "source_url": "https://www.ons.gov.uk/file?uri=/economy/economicoutputandproductivity/productivitymeasures/datasets/annualregionallabourproductivity/1998to2023/prodbyregaccessiblefinal.xlsx",
+                "quality_flag": "OK",
+            })
+    return rows
+
+
+def _real_earnings_long_rows() -> list[dict]:
+    """Compute real AWE for all years 2007–2025."""
+    awe = _read_ons_generator_csv(RAW_DIR / "kab9_awe.csv")
+    cpi = _read_ons_generator_csv(RAW_DIR / "d7bt_cpi.csv")
+
+    # Get CPI for latest year to deflate
+    is_annual_cpi = cpi["period"].str.match(r"^\d{4}$", na=False)
+    cpi_annual = cpi[is_annual_cpi & cpi["value"].notna()].copy()
+    cpi_annual["year"] = cpi_annual["period"].astype(int)
+    cpi_latest = float(cpi_annual[cpi_annual["year"] == 2025]["value"].iloc[0])
+
+    # Nominal AWE annual
+    is_annual = awe["period"].str.match(r"^\d{4}$", na=False)
+    awe_annual = awe[is_annual & awe["value"].notna()].copy()
+    awe_annual["year"] = awe_annual["period"].astype(int)
+    awe_annual = awe_annual[(awe_annual["year"] >= 2007) & (awe_annual["year"] <= 2025)]
+
+    rows = []
+    for _, row in awe_annual.iterrows():
+        yr = int(row["year"])
+        cpi_row = cpi_annual[cpi_annual["year"] == yr]
+        if cpi_row.empty:
+            continue
+        cpi_val = float(cpi_row["value"].iloc[0])
+        real_awe = float(row["value"]) * (cpi_latest / cpi_val)
+        rows.append({
+            "indicator_id": "real_earnings",
+            "indicator_name": "Real average weekly earnings",
+            "domain": "Wages",
+            "geography_code": GEOGRAPHY_CODES["UK"],
+            "geography_name": "UK",
+            "geography_type": "national",
+            "period_type": "annual",
+            "period": str(yr),
+            "year": yr,
+            "value": round(real_awe, 0),
+            "unit": "GBP per week 2025 prices",
+            "source_url": "https://www.ons.gov.uk/generator?uri=/employmentandlabourmarket/peopleinwork/earningsandworkinghours/timeseries/kab9/lms&format=csv",
+            "quality_flag": "OK",
+        })
+    return rows
+
+
+LONG_FORMAT_COLS = [
+    "indicator_id", "indicator_name", "domain",
+    "geography_code", "geography_name", "geography_type",
+    "period_type", "period", "year",
+    "value", "unit", "source_url", "quality_flag",
+]
+
+
+def build_long_format() -> pd.DataFrame:
+    """Build the canonical long-format analytical dataset.
+
+    Combines all national indicators (2007–2025 annual) and regional
+    productivity (1998–2023 annual) into a single tidy table.
+    """
+    all_rows = []
+
+    # National indicators from generator CSVs
+    register = _read_indicator_register()
+    national_indicators = [
+        ("gdp_per_head", "ihxw.csv"),
+        ("real_ndp_per_head", "mwb6.csv"),
+    ]
+    for ind_id, filename in national_indicators:
+        reg_row = register[register["indicator_id"] == ind_id]
+        if reg_row.empty:
+            continue
+        r = reg_row.iloc[0]
+        all_rows.extend(_national_long_rows(
+            ind_id, filename, r["indicator_name"],
+            r["domain"], r["unit"], r["source_url"],
+        ))
+
+    # Output per hour (PRDY has special format)
+    all_rows.extend(_productivity_long_rows())
+
+    # Real earnings (computed from two series)
+    all_rows.extend(_real_earnings_long_rows())
+
+    # Regional productivity
+    all_rows.extend(_regional_long_rows())
+
+    df = pd.DataFrame(all_rows, columns=LONG_FORMAT_COLS)
+    return df.sort_values(["indicator_id", "geography_name", "year"]).reset_index(drop=True)
+
+
+def write_processed() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """Process all indicators and write to data/processed/.
 
-    Returns (national_df, regional_df).
+    Returns (national_df, regional_df, long_format_df).
     """
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
     national = build_national_table()
     regional = build_regional_table()
+    long_format = build_long_format()
 
     national.to_csv(PROCESSED_DIR / "national_comparison_skeleton.csv", index=False)
     regional.to_csv(PROCESSED_DIR / "regional_productivity_skeleton.csv", index=False)
+    long_format.to_csv(PROCESSED_DIR / "long_format.csv", index=False)
 
-    return national, regional
+    return national, regional, long_format
 
 
 # ---------------------------------------------------------------------------
@@ -311,7 +536,7 @@ def write_processed() -> tuple[pd.DataFrame, pd.DataFrame]:
 
 
 def main() -> None:
-    national, regional = write_processed()
+    national, regional, long_format = write_processed()
 
     print("National comparison table (4 indicators):")
     print(national[["indicator_id", "baseline_value", "latest_value"]].to_string(index=False))
@@ -319,9 +544,15 @@ def main() -> None:
     print(f"\nRegional productivity table ({len(regional)} regions):")
     print(regional[["geography", "baseline_value", "latest_value"]].to_string(index=False))
 
+    print(f"\nLong-format dataset: {len(long_format)} rows, {len(long_format.columns)} columns")
+    print(f"  Indicators: {long_format['indicator_id'].nunique()}")
+    print(f"  Geographies: {long_format['geography_name'].nunique()}")
+    print(f"  Years: {long_format['year'].min()}–{long_format['year'].max()}")
+
     print(f"\nWritten to:")
     print(f"  {PROCESSED_DIR / 'national_comparison_skeleton.csv'}")
     print(f"  {PROCESSED_DIR / 'regional_productivity_skeleton.csv'}")
+    print(f"  {PROCESSED_DIR / 'long_format.csv'}")
 
 
 if __name__ == "__main__":

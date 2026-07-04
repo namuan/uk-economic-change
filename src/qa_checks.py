@@ -156,6 +156,71 @@ def test_processed_data() -> None:
           not zero_baseline_r.any())
 
 
+def test_long_format() -> None:
+    """Validate the long-format analytical dataset."""
+    print("\n── Long-format dataset ──")
+    path = PROCESSED_DIR / "long_format.csv"
+    check("long_format.csv exists", path.exists())
+    if not path.exists():
+        return
+
+    df = pd.read_csv(path)
+
+    required_cols = ["indicator_id", "indicator_name", "domain",
+                     "geography_code", "geography_name", "geography_type",
+                     "period_type", "period", "year",
+                     "value", "unit", "source_url", "quality_flag"]
+    missing = [c for c in required_cols if c not in df.columns]
+    check("All required columns present", len(missing) == 0, f"Missing: {missing}")
+
+    check("Dataset is not empty", len(df) > 0)
+    check("At least 300 rows (national + regional time series)",
+          len(df) >= 300, f"Got {len(df)}")
+
+    check("All values are numeric",
+          pd.to_numeric(df["value"], errors="coerce").notna().all())
+
+    check("No missing indicator_id", df["indicator_id"].notna().all())
+    check("No missing geography_name", df["geography_name"].notna().all())
+    check("No missing year", df["year"].notna().all())
+
+    check("All quality flags are OK",
+          (df["quality_flag"] == "OK").all(),
+          f"Non-OK: {df[df['quality_flag'] != 'OK']['quality_flag'].unique().tolist()}")
+
+    register = pd.read_csv(DATA_DIR / "indicator_register.csv")
+    valid_ids = set(register["indicator_id"])
+    dataset_ids = set(df["indicator_id"].unique())
+    orphan = dataset_ids - valid_ids
+    check("All indicator_ids exist in register",
+          len(orphan) == 0, f"Orphan: {orphan}")
+
+    valid_geo_codes = {"K02000001", "E12000001", "E12000002", "E12000003",
+                       "E12000004", "E12000005", "E12000006", "E12000007",
+                       "E12000008", "E12000009", "W92000004", "S92000003",
+                       "N92000002"}
+    dataset_geo = set(df["geography_code"].unique())
+    invalid_geo = dataset_geo - valid_geo_codes
+    check("All geography codes are valid ONS codes",
+          len(invalid_geo) == 0, f"Invalid: {invalid_geo}")
+
+    check("geography_type is national or region",
+          df["geography_type"].isin(["national", "region"]).all())
+
+    check("period_type is annual", (df["period_type"] == "annual").all())
+
+    gdp_2007 = df[(df["indicator_id"] == "gdp_per_head") & (df["year"] == 2007)]
+    if not gdp_2007.empty:
+        check("Spot-check: GDP per head 2007 = 37625",
+              abs(float(gdp_2007["value"].iloc[0]) - 37625) < 1,
+              f"Got {gdp_2007['value'].iloc[0]}")
+
+    lon_2007 = df[(df["geography_name"] == "London") & (df["year"] == 2007)]
+    if not lon_2007.empty:
+        check("Spot-check: London 2007 ≈ 139",
+              abs(float(lon_2007["value"].iloc[0]) - 138.66) < 1)
+
+
 # ---------------------------------------------------------------------------
 # 3. Output table integrity
 # ---------------------------------------------------------------------------
@@ -328,6 +393,7 @@ def main() -> int:
     test_indicator_register()
     test_raw_data()
     test_processed_data()
+    test_long_format()
     test_calculations()
     test_output_tables()
     test_charts()

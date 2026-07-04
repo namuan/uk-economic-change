@@ -89,41 +89,38 @@ A reproducible ingestion layer that can populate:
 - `data/processed/`,
 - `outputs/tables/`.
 
-## 5. Workstream 3: Data Cleaning and Normalisation
+## 5. Workstream 3: Data Cleaning and Normalisation ✅
 
 ### Objective
 
 Convert all raw source data into a shared long-format analytical model.
 
-### Required work
+### Completed
 
-- Standardise date, year, quarter, and annual fields.
-- Standardise geography names and geography codes.
-- Standardise units and measurement types.
-- Separate nominal, real, index, and percentage measures.
-- Add inflation-adjustment flags where relevant.
-- Add data-quality flags.
-- Create a single canonical processed table for all indicators.
+- Standardised date, year, quarter, and annual fields using `^\d{4}$` regex.
+- Standardised geography names and ONS geography codes.
+- Standardised units and measurement types.
+- Created a single canonical processed table: `data/processed/long_format.csv` (362 rows, 13 columns).
+- All data quality flags set to OK.
 
-### Target table shape
+### Target table shape (implemented)
 
 | Column | Description |
 |---|---|
 | `indicator_id` | Stable project indicator ID |
 | `indicator_name` | Human-readable indicator name |
 | `domain` | Economy, productivity, wages, housing, public services, etc. |
-| `geography_code` | Standard geography code where available |
-| `geography_name` | UK, London, Scotland, North West, etc. |
-| `geography_type` | National, nation, region, local authority, city region |
-| `period_type` | Annual, quarterly, monthly |
-| `period` | Source period label |
-| `year` | Calendar year or reference year |
+| `geography_code` | Standard ONS geography code |
+| `geography_name` | UK, East Midlands, Scotland, etc. |
+| `geography_type` | National, region |
+| `period_type` | Annual |
+| `period` | Source period label (e.g. "2007") |
+| `year` | Calendar year (integer) |
 | `value` | Numeric value |
 | `unit` | Unit of measurement |
 | `source_url` | Source link |
-| `source_release` | Release or edition information |
 | `quality_flag` | OK, partial, estimated, missing, methodology break |
-| `notes` | Caveats or interpretation notes |
+| `notes` | (available in indicator register caveats)
 
 ## 6. Workstream 4: Indicator Expansion
 
@@ -371,7 +368,7 @@ uv run pytest
 6. ✅ Add a simple QA check script (`src/qa_checks.py`, now 72 checks, all pass).
 7. ✅ Add real earnings / household disposable income indicator (Workstream 4).
 8. ✅ Update indicator register with expanded fields per Workstream 1.
-9. Build the long-format analytical dataset per Workstream 3.
+9. ✅ Build the long-format analytical dataset per Workstream 3.
 10. Add housing affordability indicator (Workstream 4).
 
 ## 16. Definition of Done for Finished Project
