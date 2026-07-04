@@ -1,0 +1,23 @@
+project:
+  name: UK Economic Change POC
+  working_title: "Britain Since 2007: Proof of Concept Evidence Framework"
+  status: proof_of_concept
+  baseline_year: 2007
+  source_policy: ONS first
+
+outputs:
+  tables_dir: outputs/tables
+  charts_dir: outputs/charts
+  docs_dir: docs
+
+indicators:
+  register: data/indicator_register.csv
+  claims_register: data/claims_register.csv
+
+poc_definition_of_done:
+  - Three national indicators comparing 2007 with the latest available figure
+  - One regional indicator comparing 2007 with the latest available figure
+  - Reproducible absolute and percentage change calculations
+  - At least one chart
+  - Claims-evidence matrix
+  - Short methodology note

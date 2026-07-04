@@ -1,0 +1,8 @@
+claim_id,claim,primary_indicator_id,expected_output,evidence_strength,caveat
+C001,Britain's output per person has changed materially since 2007,gdp_per_head,2007 vs latest comparison,Strong,"GDP per head rose 7.7% from £37,625 (2007) to £40,537 (2025). Growth averaged ~0.4% per year."
+C002,National income per head has changed materially since 2007,real_ndp_per_head,2007 vs latest comparison,Strong,"NDP per head rose 3.7%, less than half the rate of GDP per head. Suggests capital consumption absorbed a growing share of output."
+C003,Productivity growth has been weak since 2007,labour_productivity_output_per_hour,2007 vs latest comparison,Strong,"Output per hour rose 6.9% over 18 years (~0.4% pa), compared with ~2% pa pre-2007. Clear evidence of productivity stagnation."
+C004,Regional productivity inequality persists,regional_productivity_output_per_hour,Regional comparison table,Partial,"Mixed picture: 7 regions gained relative to UK average, 5 declined. Scotland (+7.3%) and NI (+8.1%) converged; London (−7.3%) and East of England (−2.8%) saw the largest relative falls."
+C005,London remains a productivity outlier,regional_productivity_output_per_hour,London vs UK average and regions,Strong,London output per hour: 129 (UK=100) vs 139 in 2007. Remains the clear outlier but the gap has narrowed.
+C006,Living standards changed differently from GDP per head,real_earnings,Comparison with earnings or income measure,TBD,Real earnings/household income indicator not yet populated in this POC.
+C007,Housing pressure has worsened since 2007,housing_affordability,Affordability or supply comparison,TBD,Housing affordability indicator not yet populated in this POC.

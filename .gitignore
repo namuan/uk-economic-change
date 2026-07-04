@@ -1,0 +1,20 @@
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+.env
+.env.*
+
+# ONS source data — downloadable on demand via make fetch
+data/raw/*
+!data/raw/.gitkeep
+
+# Processed data — regeneratable via make process
+data/processed/
+
+# IDE and editor
+.vscode/
+.idea/

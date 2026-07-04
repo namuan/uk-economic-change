@@ -1,0 +1,8 @@
+claim_id,claim,primary_indicator_id,expected_output,evidence_strength,caveat
+C001,Britain's output per person has changed materially since 2007,gdp_per_head,2007 vs latest comparison,TBD,Requires consistent real-terms comparison
+C002,National income per head has changed materially since 2007,real_ndp_per_head,2007 vs latest comparison,TBD,Measure differs from GDP per head and may tell a different story
+C003,Productivity growth has been weak since 2007,labour_productivity_output_per_hour,2007 vs latest comparison,TBD,Recent labour-market data may have survey and revision issues
+C004,Regional productivity inequality persists,regional_productivity_output_per_hour,Regional comparison table,TBD,Latest regional productivity data may lag national data
+C005,London remains a productivity outlier,regional_productivity_output_per_hour,London vs UK average and regions,TBD,Needs both 2007 and latest regional comparison
+C006,Living standards changed differently from GDP per head,real_earnings,Comparison with earnings or income measure,TBD,Indicator not yet selected
+C007,Housing pressure has worsened since 2007,housing_affordability,Affordability or supply comparison,TBD,Indicator not yet selected
