@@ -248,7 +248,7 @@ The claims-evidence matrix links broad policy and media claims to specific indic
 
 This proof of concept has deliberately narrow scope. Several important dimensions of economic change since 2007 are not captured here:
 
-- **Real earnings and living standards.** GDP per head is an average; it does not show how gains (or losses) are distributed across households. Median real earnings and household disposable income are needed to complete the picture.
+- **Real earnings and living standards.** Now measured via CPI-deflated Average Weekly Earnings (+2.3% since 2007). However, GDP per head is an average that does not show how gains or losses are distributed across households. Household disposable income, income inequality measures, and distributional analysis would complete this picture.
 - **Housing costs and affordability.** Now measured via the house price to earnings ratio (England and Wales). Scotland and Northern Ireland not yet covered; local authority breakdowns would add granularity.
 - **Public services.** NHS waiting times, local authority spending power, and other pressure indicators are outside the current scope.
 - **International comparisons.** While the domestic productivity trend is clear, placing it in an international context would strengthen the analysis.
@@ -304,7 +304,7 @@ All source code is in `src/`; raw data is cached in `data/raw/`; methodology is 
 - Labour productivity is measured as an index (2023=100), not in GBP per hour, limiting direct comparison with GDP per head figures.
 - The ONS v0 API was retired in November 2024; this project uses the generator CSV and direct file endpoints instead. These endpoints may change without notice.
 - NDP per head data (MWB6) starts from 1998; earlier comparisons are not possible.
-- All three national indicators are published with revisions; the values in this report reflect the latest available vintage as of July 2026.
+- All five national indicators are published with revisions; the values in this report reflect the latest available vintage as of July 2026.
 
 ---
 
@@ -314,7 +314,7 @@ This proof of concept was built in five phases:
 
 | Phase | Description | Document |
 |-------|-------------|----------|
-| 1 | Data source discovery — confirmed working ONS endpoints for all 4 indicators | `docs/phase-1-2-summary.md` |
+| 1 | Data source discovery — confirmed working ONS endpoints for all indicators | `docs/phase-1-2-summary.md` |
 | 2 | Fetch layer — caching-aware download module | `docs/phase-1-2-summary.md` |
 | 3 | Data processing — raw-to-canonical normalisation | `docs/phase-3-summary.md` |
 | 4 | Charts, claims matrix & validation | `docs/phase-4-summary.md` |
