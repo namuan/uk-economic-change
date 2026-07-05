@@ -266,9 +266,11 @@ The phases below are ordered so that each one can be tackled independently. Late
 
 ---
 
-## Phase 7: International Context
+## Phase 7: International Context ✅ Complete
 
 **Goal:** Put the UK's post-2007 productivity and GDP performance in peer-country context.
+
+**Completed:** 2026-07-05
 
 ### Candidate sources
 
@@ -279,15 +281,23 @@ The phases below are ordered so that each one can be tackled independently. Late
 
 ### Tasks
 
-1. Choose a small peer group, e.g. US, Germany, France, Italy, Canada.
-2. Select comparable measures: GDP per head, GDP per hour worked, productivity index, or real wages.
-3. Confirm 2007 and latest comparability.
-4. Add one concise international comparison section or appendix.
+1. ✅ Choose a small peer group: US, Germany, France, Italy and Canada.
+2. ✅ Select comparable measure: GDP per capita in constant 2015 US dollars.
+3. ✅ Confirm 2007 and latest comparability.
+4. ✅ Add one concise international comparison section.
 
 ### Acceptance criteria
 
-- International comparison is clearly caveated and does not dilute the ONS-first domestic evidence base.
-- Data source and methodology are transparent.
+- ✅ International comparison is clearly caveated and does not dilute the ONS-first domestic evidence base.
+- ✅ Data source and methodology are transparent.
+
+### Verification notes
+
+- Added World Bank indicator NY.GDP.PCAP.KD for the UK, US, Germany, France, Italy and Canada.
+- Added `outputs/tables/international_gdp_per_capita_comparison.csv` and `outputs/charts/international_gdp_per_capita_comparison.png`.
+- Updated the public report, claims register, methodology note and QA checks.
+- `make pages` completed successfully.
+- `make test` passed.
 
 ---
 

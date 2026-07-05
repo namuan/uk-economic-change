@@ -287,6 +287,21 @@ def fetch_ae_monthly_timeseries(*, force: bool = False) -> FetchResult:
     )
 
 
+def fetch_world_bank_gdp_per_capita(*, force: bool = False) -> FetchResult:
+    """Download World Bank GDP per capita data for the Phase 7 peer group.
+
+    Indicator: NY.GDP.PCAP.KD, GDP per capita in constant 2015 US dollars.
+    Countries: UK, US, Germany, France, Italy and Canada.
+    """
+    return _fetch(
+        indicator_id="international_gdp_per_capita",
+        url="https://api.worldbank.org/v2/en/indicator/NY.GDP.PCAP.KD?downloadformat=csv",
+        filename="world_bank_gdp_per_capita.zip",
+        force=force,
+        timeout=120,
+    )
+
+
 # ---------------------------------------------------------------------------
 # Bulk fetch
 # ---------------------------------------------------------------------------
@@ -310,6 +325,7 @@ def fetch_all(*, force: bool = False) -> FetchReport:
         fetch_public_sector_employment,
         fetch_nhs_waiting_list,
         fetch_ae_monthly_timeseries,
+        fetch_world_bank_gdp_per_capita,
     ]
 
     for fn in fetchers:

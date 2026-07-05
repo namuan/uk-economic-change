@@ -39,6 +39,8 @@ from src.build_outputs import build_growth_rate_table; \
 build_growth_rate_table(); \
 from src.build_outputs import build_public_service_extension_table; \
 build_public_service_extension_table(); \
+from src.build_outputs import build_international_gdp_per_capita_table; \
+build_international_gdp_per_capita_table(); \
 print('Tables regenerated.')"
 
 charts: process ## Regenerate charts only (skips fetch if processed data exists)

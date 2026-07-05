@@ -6,6 +6,7 @@ and generates publication-ready charts.
 
 from __future__ import annotations
 
+import zipfile
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -221,6 +222,78 @@ def build_public_service_extension_table() -> pd.DataFrame:
     df = pd.DataFrame(rows)
     df.to_csv(OUTPUT_TABLES / "public_service_extension.csv", index=False)
     return df
+
+
+def read_world_bank_gdp_per_capita() -> pd.DataFrame:
+    """Read World Bank GDP per capita data for the Phase 7 peer group."""
+    path = RAW_DIR / "world_bank_gdp_per_capita.zip"
+    with zipfile.ZipFile(path) as zf:
+        data_name = next(name for name in zf.namelist() if name.startswith("API_NY.GDP.PCAP.KD") and name.endswith(".csv"))
+        with zf.open(data_name) as f:
+            wide = pd.read_csv(f, skiprows=4)
+
+    peer_order = {
+        "GBR": "United Kingdom",
+        "USA": "United States",
+        "DEU": "Germany",
+        "FRA": "France",
+        "ITA": "Italy",
+        "CAN": "Canada",
+    }
+    wide = wide[wide["Country Code"].isin(peer_order)].copy()
+    year_cols = [col for col in wide.columns if str(col).isdigit()]
+    df = wide.melt(
+        id_vars=["Country Code"],
+        value_vars=year_cols,
+        var_name="year",
+        value_name="value",
+    ).rename(columns={"Country Code": "country_code"})
+    df = df.dropna(subset=["value"])
+    df["year"] = df["year"].astype(int)
+    df["value"] = pd.to_numeric(df["value"], errors="coerce")
+    df["country"] = df["country_code"].map(peer_order)
+    return df.sort_values(["country", "year"])
+
+
+def build_international_gdp_per_capita_table() -> pd.DataFrame:
+    """Build Phase 7 international GDP per capita comparison table."""
+    OUTPUT_TABLES.mkdir(parents=True, exist_ok=True)
+    df = read_world_bank_gdp_per_capita()
+    baseline_year = 2007
+    latest_year = int(
+        df[df["year"] > baseline_year]
+        .dropna(subset=["value"])
+        .groupby("year")["country_code"]
+        .nunique()
+        .loc[lambda s: s == 6]
+        .index.max()
+    )
+
+    rows = []
+    for country_code, group in df.groupby("country_code"):
+        baseline = float(group.loc[group["year"] == baseline_year, "value"].iloc[0])
+        latest = float(group.loc[group["year"] == latest_year, "value"].iloc[0])
+        absolute = latest - baseline
+        percentage = (absolute / baseline) * 100
+        cagr = ((latest / baseline) ** (1 / (latest_year - baseline_year)) - 1) * 100
+        rows.append({
+            "indicator_id": "international_gdp_per_capita",
+            "country": group["country"].iloc[0],
+            "country_code": country_code,
+            "baseline_year": baseline_year,
+            "baseline_value": round(baseline, 0),
+            "latest_year": latest_year,
+            "latest_value": round(latest, 0),
+            "absolute_change": round(absolute, 0),
+            "percentage_change": round(percentage, 1),
+            "cagr_pct": round(cagr, 2),
+            "unit": "constant 2015 US dollars per person",
+            "source": "World Bank NY.GDP.PCAP.KD",
+        })
+
+    out = pd.DataFrame(rows).sort_values("percentage_change", ascending=False)
+    out.to_csv(OUTPUT_TABLES / "international_gdp_per_capita_comparison.csv", index=False)
+    return out
 
 
 def build_national_indicators_chart(national: pd.DataFrame) -> None:
@@ -543,6 +616,32 @@ def build_growth_rate_comparison_chart(growth_rates: pd.DataFrame) -> None:
     plt.close(fig)
 
 
+def build_international_gdp_per_capita_chart(international: pd.DataFrame) -> None:
+    """Bar chart: peer-country GDP per capita growth since 2007."""
+    OUTPUT_CHARTS.mkdir(parents=True, exist_ok=True)
+    if international.empty:
+        return
+
+    df = international.sort_values("percentage_change").copy()
+    colors = [BLUE if country == "United Kingdom" else LIGHT_GREY for country in df["country"]]
+
+    fig, ax = plt.subplots(figsize=(10, 5.5))
+    bars = ax.barh(df["country"], df["percentage_change"], color=colors, height=0.55)
+    for bar, value in zip(bars, df["percentage_change"]):
+        ax.text(bar.get_width() + 0.3, bar.get_y() + bar.get_height() / 2,
+                f"{value:+.1f}%", va="center", fontsize=10)
+
+    ax.axvline(0, color=GREY, linewidth=0.8)
+    ax.set_xlabel("Percentage change since 2007")
+    ax.set_title("GDP per Capita Growth in Peer Countries")
+    ax.xaxis.set_major_formatter(mticker.FormatStrFormatter("%+d%%"))
+    ax.set_xlim(right=max(df["percentage_change"]) * 1.18)
+
+    fig.tight_layout()
+    fig.savefig(OUTPUT_CHARTS / "international_gdp_per_capita_comparison.png")
+    plt.close(fig)
+
+
 def build_regional_ranking_chart(regional: pd.DataFrame) -> None:
     """Side-by-side bar chart: regional productivity ranking, 2007 vs 2023."""
     OUTPUT_CHARTS.mkdir(parents=True, exist_ok=True)
@@ -594,6 +693,9 @@ def build_all_charts(national: pd.DataFrame, regional: pd.DataFrame, growth_rate
     build_nhs_waiting_list_timeline_chart()
     build_ae_four_hour_performance_chart()
     build_growth_rate_comparison_chart(growth_rates)
+    international_path = OUTPUT_TABLES / "international_gdp_per_capita_comparison.csv"
+    if international_path.exists():
+        build_international_gdp_per_capita_chart(pd.read_csv(international_path))
 
 
 def main() -> None:
@@ -601,6 +703,7 @@ def main() -> None:
     claims = build_claims_matrix(national, regional)
     growth_rates = build_growth_rate_table()
     public_service = build_public_service_extension_table()
+    international = build_international_gdp_per_capita_table()
     build_all_charts(national, regional, growth_rates)
 
     print("Built evidence-pack outputs:")
@@ -610,6 +713,7 @@ def main() -> None:
     print(f"- {OUTPUT_TABLES / 'claims_evidence_matrix.csv'}")
     print(f"- {OUTPUT_TABLES / 'growth_rate_comparison.csv'}")
     print(f"- {OUTPUT_TABLES / 'public_service_extension.csv'}")
+    print(f"- {OUTPUT_TABLES / 'international_gdp_per_capita_comparison.csv'}")
     print(f"- {OUTPUT_CHARTS / 'national_indicators_change.png'}")
     print(f"- {OUTPUT_CHARTS / 'regional_productivity_change.png'}")
     print(f"- {OUTPUT_CHARTS / 'gdp_per_head_timeline.png'}")
@@ -620,6 +724,7 @@ def main() -> None:
     print(f"- {OUTPUT_CHARTS / 'nhs_waiting_list_timeline.png'}")
     print(f"- {OUTPUT_CHARTS / 'ae_four_hour_performance_timeline.png'}")
     print(f"- {OUTPUT_CHARTS / 'growth_rate_comparison.png'}")
+    print(f"- {OUTPUT_CHARTS / 'international_gdp_per_capita_comparison.png'}")
 
 
 if __name__ == "__main__":

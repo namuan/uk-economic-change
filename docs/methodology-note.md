@@ -4,7 +4,7 @@
 
 This evidence framework compares Britain in 2007 with the latest available data using an ONS-first source policy, supplemented by other official sources where ONS does not cover the required indicator.
 
-**Status:** Core evidence pack complete. The initial validation criteria have been met and the indicator set has been expanded to include earnings, housing affordability, and NHS waiting-list pressure.
+**Status:** Core evidence pack complete. The initial validation criteria have been met and the indicator set has been expanded to include earnings, housing affordability, NHS waiting-list pressure, public sector employment and international context.
 
 ## Baseline
 
@@ -20,6 +20,9 @@ The baseline year is **2007**. This provides a pre-financial-crisis comparison p
 | Real average weekly earnings | 2025 (annual) | 2026 |
 | House price to earnings ratio | 2025 | 2026 |
 | NHS RTT incomplete pathways | March 2026 | 2026 |
+| A&E attendances within 4 hours | 2025 | 2026 |
+| Public sector employment | 2025 | June 2026 |
+| International GDP per capita | 2025 | 2026 |
 | Regional output per hour | 2023 | June 2025 |
 
 National GDP and productivity have more recent data than regional productivity, which typically lags by 1–2 years.
@@ -28,7 +31,7 @@ National GDP and productivity have more recent data than regional productivity, 
 
 1. Office for National Statistics datasets and time series.
 2. Other official UK statistical sources where ONS coverage is insufficient.
-3. Supplementary non-official sources only for context, not primary measurement.
+3. International official statistical sources for context only, not primary domestic measurement.
 
 **Important:** The ONS v0 API (`api.ons.gov.uk`) was retired on 25 November 2024. All data is fetched via:
 - **Time series:** `ons.gov.uk/generator?uri=...&format=csv` (CSV generator endpoint)
@@ -44,6 +47,9 @@ National GDP and productivity have more recent data than regional productivity, 
 | Real average weekly earnings | KAB9 + D7BT | Labour Market Stats (LMS) + CPI (MM23) | Generator CSV | kab9_awe.csv, d7bt_cpi.csv |
 | House price to earnings ratio | — | Housing affordability (England & Wales) | Direct file XLSX | housing_affordability.xlsx |
 | NHS waiting list (incomplete pathways) | — | NHS England RTT statistics | Monthly Incomplete Commissioner files plus historical RTT time series for older periods | nhs_waiting_list.csv |
+| A&E attendances within 4 hours | — | NHS England A&E Attendances and Emergency Admissions | Direct file XLS | ae_monthly_timeseries.xls |
+| Public sector employment | G7AU | Public sector employment (PSE) | Direct file CSV | pse.csv |
+| International GDP per capita | — | World Bank NY.GDP.PCAP.KD | World Bank CSV ZIP | world_bank_gdp_per_capita.zip |
 | Regional output per hour | — | Regional labour productivity (PRODBYREG) | Direct file XLSX | prodbyreg.xlsx |
 
 All values are Chained Volume Measures (CVM) at 2023 reference prices, seasonally adjusted, unless otherwise noted.
@@ -59,6 +65,9 @@ All values are Chained Volume Measures (CVM) at 2023 reference prices, seasonall
 5. **Real average weekly earnings** — GBP per week, CPI-deflated to 2025 prices, seasonally adjusted. Computed from nominal AWE (KAB9) and CPI (D7BT).
 6. **House price to earnings ratio** — median house price to median workplace-based earnings, England and Wales.
 7. **NHS waiting list** — total incomplete RTT pathways, England.
+8. **A&E waiting times** — attendances completed within 4 hours, England.
+9. **Public sector employment** — total public sector employment, UK, headcount, seasonally adjusted.
+10. **International GDP per capita** — World Bank constant 2015 US dollars per person for a small peer group.
 
 See `data/indicator_register.csv` for the full validated register with 15 metadata fields per indicator.
 
@@ -66,8 +75,9 @@ See `data/indicator_register.csv` for the full validated register with 15 metada
 
 - Household disposable income, inequality, poverty, and wealth.
 - Housing supply and full-UK housing affordability.
-- A&E waiting times, social care, local authority finance, courts, schools, and other public-service indicators.
+- Social care, local authority finance, courts, schools, and other public-service indicators.
 - Local authority finance.
+- International productivity, real wages and wider peer-country comparisons.
 
 ## Calculation method
 
@@ -99,6 +109,7 @@ For time-series sources, the latest **annual** value is used (quarterly rows are
 - NDP per head starts from 1998 in the source data (MWB6 series).
 - The framework does not attempt policy attribution.
 - Not all social or public-service indicators are best measured by ONS.
+- International context uses World Bank data and does not replace ONS as the source of record for UK domestic GDP per head.
 
 ## Reproducibility
 
@@ -106,7 +117,7 @@ The full pipeline runs with three commands:
 
 ```bash
 uv sync                                # install dependencies
-uv run python src/fetch_ons.py         # download raw ONS data (cached)
+uv run python src/fetch_ons.py         # download raw source data (cached)
 uv run python src/process_indicators.py  # normalise into processed tables
 uv run python src/build_outputs.py     # compute changes, generate outputs & charts
 ```
@@ -117,10 +128,10 @@ All output files are generated programmatically with no manual data entry.
 
 | Criterion | Status |
 |-----------|--------|
-| National/core indicators comparing 2007 with latest | ✅ GDP per head, NDP per head, output per hour, real earnings, housing affordability, NHS waiting list |
+| National/core indicators comparing 2007 with latest | ✅ GDP per head, NDP per head, output per hour, real earnings, housing affordability, NHS waiting list, public sector employment |
 | One regional indicator comparing 2007 with latest | ✅ Output per hour, 12 regions |
 | Reproducible absolute and percentage change calculations | ✅ `calculate_change()` in clean_indicators.py |
-| At least one chart | ✅ 9 charts (national, GDP/NDP timeline, productivity timeline, growth-rate comparison, housing, NHS, and regional views) |
-| Claims-evidence matrix | ✅ 8 claims rated, 0 TBD |
+| At least one chart | ✅ 11 charts, including national, GDP/NDP timeline, productivity timeline, growth-rate comparison, housing, NHS, A&E, international and regional views |
+| Claims-evidence matrix | ✅ 11 claims rated, 0 TBD |
 | Short methodology note | ✅ This document |
 | QA checks | ✅ Passing |

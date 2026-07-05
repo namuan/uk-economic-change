@@ -5,13 +5,13 @@ title: Britain Since 2007 Evidence Report
 # Britain Since 2007: Evidence Report
 
 UK Economic Change Comparison Framework — Evidence Pack  
-July 2026 | Data sources: Office for National Statistics and NHS England
+July 2026 | Data sources: Office for National Statistics, NHS England and World Bank
 
 ---
 
 ## Executive summary
 
-This report compares Britain's economy in 2007, the peak before the global financial crisis, with the latest data available. It draws on 7 national indicators, one A&E extension and 12 regional productivity measures, taken from the Office for National Statistics and NHS England and processed through a reproducible pipeline.
+This report compares Britain's economy in 2007, the peak before the global financial crisis, with the latest data available. It draws on 7 national indicators, one A&E extension, one international comparison and 12 regional productivity measures, taken from the Office for National Statistics, NHS England and World Bank and processed through a reproducible pipeline.
 
 ### Main findings
 
@@ -23,6 +23,7 @@ This report compares Britain's economy in 2007, the peak before the global finan
 - NHS waiting lists have grown sharply. Total incomplete pathways rose from 4.19 million (August 2007) to 7.01 million (March 2026) — an increase of 67.5%. The list peaked at 7.75 million in August 2023 before falling, but it remains far above its pre-COVID level.
 - A&E performance has worsened. The share of attendances completed within 4 hours fell from 96.8% in 2011 to 74.7% in 2025. There is no 2007 baseline in the current monthly A&E series, so this evidence is partial.
 - Public sector employment has grown slightly in headcount terms. Total UK public sector employment rose from 6.03 million in 2007 to 6.18 million in 2025, an increase of 149,000 or 2.5%. But public sector employment fell as a share of all employment, from 20.5% to 18.0%.
+- International context confirms that the UK has lagged the US. World Bank GDP per capita rose 7.9% in the UK from 2007 to 2025, compared with 25.5% in the US. UK growth was similar to Canada, below Germany and France, and above Italy.
 - Regional inequality is narrowing, but slowly. Scotland and Northern Ireland recorded the strongest convergence gains, while London's relative advantage shrank. But London is still nearly 29% above the UK average.
 
 Britain's post-2007 economic performance is not a dip that will revert. It is a break from the pre-crisis trend. After 18 years, the data is unambiguous: the old growth trajectory has not returned.
@@ -312,7 +313,42 @@ We use the ONS Public sector employment time series, dataset PSE. The headline m
 
 ---
 
-## 9. Regional productivity
+## 9. International context
+
+### The main finding
+
+The UK's weak post-2007 GDP per head growth is not just a domestic accounting issue. On the World Bank's comparable GDP per capita measure, the UK grew by 7.9% from 2007 to 2025. The US grew by 25.5% over the same period.
+
+| Country | 2007 | 2025 | Change | Annual growth |
+| --- | --- | --- | --- | --- |
+| United States | $54,153 | $67,946 | +25.5% | +1.27% |
+| Germany | $38,593 | $44,147 | +14.4% | +0.75% |
+| France | $36,322 | $39,919 | +9.9% | +0.53% |
+| Canada | $42,107 | $45,418 | +7.9% | +0.42% |
+| United Kingdom | $44,882 | $48,422 | +7.9% | +0.42% |
+| Italy | $34,160 | $34,716 | +1.6% | +0.09% |
+
+![International GDP per capita comparison: 2007 to 2025](assets/charts/international_gdp_per_capita_comparison.png)
+
+Figure 8: GDP per capita growth in selected peer countries, 2007 to 2025. Values use World Bank NY.GDP.PCAP.KD, constant 2015 US dollars per person. The UK is highlighted.
+
+### Interpretation
+
+The comparison strengthens the domestic finding. UK GDP per head growth has been weak in absolute terms and weak relative to the US. The UK did not perform uniquely badly among all peers: it was close to Canada and ahead of Italy. But it lagged the US by a wide margin and also lagged Germany and France.
+
+This section is context, not a replacement for the domestic ONS evidence. The World Bank series uses a different price base and method from the ONS chained-volume GDP per head series used elsewhere in this report. It is useful for comparing countries, not for replacing the UK source-of-record numbers.
+
+### Evidence rating: strong
+
+The claim that UK GDP per capita growth has lagged the US since 2007 is rated strong. The source is comparable across countries, the peer group is small and transparent, and the gap is large.
+
+### Data note
+
+We use World Bank GDP per capita in constant 2015 US dollars, indicator NY.GDP.PCAP.KD. The peer group is the UK, US, Germany, France, Italy and Canada. We use 2007 as the baseline and 2025 as the latest common year in the downloaded dataset.
+
+---
+
+## 10. Regional productivity
 
 ### The picture across Britain
 
@@ -335,7 +371,7 @@ Regional productivity — measured as output per hour relative to the UK average
 
 ![Regional productivity change: 2007 to 2023](assets/charts/regional_productivity_change.png)
 
-Figure 8: Percentage change in regional output per hour relative to the UK average (UK = 100), 2007 to 2023.
+Figure 9: Percentage change in regional output per hour relative to the UK average (UK = 100), 2007 to 2023.
 
 ### Convergence is happening, but slowly
 
@@ -351,11 +387,11 @@ The standard deviation of regional output per hour fell from 15.1 in 2007 to 12.
 
 ![Regional productivity small multiples: 2007–2023](assets/charts/regional_productivity_small_multiples.png)
 
-Figure 9: Regional output per hour paths, 2007 to 2023, UK = 100. The small multiples show how convergence happened: some lower-productivity regions gained ground, while London remained far ahead but moved closer to the UK average.
+Figure 10: Regional output per hour paths, 2007 to 2023, UK = 100. The small multiples show how convergence happened: some lower-productivity regions gained ground, while London remained far ahead but moved closer to the UK average.
 
 ![Regional productivity ranking: 2007 vs 2023](assets/charts/regional_ranking.png)
 
-Figure 10: Regional output per hour relative to the UK average (UK = 100), comparing 2007 and 2023 positions. Regions sorted by 2023 value. The pattern shows convergence at both ends — the lowest-ranked regions in 2007 gained ground, while London's advantage narrowed.
+Figure 11: Regional output per hour relative to the UK average (UK = 100), comparing 2007 and 2023 positions. Regions sorted by 2023 value. The pattern shows convergence at both ends — the lowest-ranked regions in 2007 gained ground, while London's advantage narrowed.
 
 ### Evidence rating: partial
 
@@ -363,7 +399,7 @@ The claim that "regional productivity inequality persists" is rated partial. The
 
 ---
 
-## 10. Claims-evidence matrix
+## 11. Claims-evidence matrix
 
 The claims-evidence matrix links broad policy and media claims to specific indicators and assesses whether the data supports them.
 
@@ -379,18 +415,19 @@ The claims-evidence matrix links broad policy and media claims to specific indic
 | C008: Public service pressure (NHS waiting list) has increased substantially since 2007 | Strong          | NHS England waiting list rose from 4.19M (Aug 2007) to 7.01M (Mar 2026), a 67.5% increase. Post-COVID backlog accounts for much of the increase, but the pre-COVID trend was already upward (2.4M in 2010 to 4.2M in 2020). Data covers England only.                                                       |
 | C009: A&E performance has worsened since the early 2010s                                | Partial         | A&E attendances completed within 4 hours fell from an annual average of 96.8% in 2011 to 74.7% in 2025, a fall of 22.1 percentage points. Evidence is partial because there is no 2007 baseline and comparability caveats apply before June 2015 and during the 2019 to 2023 clinical standards field test. |
 | C010: Public sector employment has grown since 2007                                     | Partial         | Public sector employment rose from 6.03M in 2007 to 6.18M in 2025, an increase of 149,000 or 2.5%. But public sector employment fell as a share of total employment, from 20.5% to 18.0%. Reclassifications affect the headline series.                                         |
+| C011: UK GDP per capita growth has lagged the US since 2007                             | Strong          | World Bank GDP per capita rose 7.9% in the UK from 2007 to 2025, compared with 25.5% in the US. UK growth was similar to Canada, below Germany and France, and above Italy.                                                                                                         |
 
 ---
 
-## 11. What is still left
+## 12. What is still left
 
-The framework now covers real earnings, housing affordability, NHS waiting-list pressure, A&E performance and public sector employment alongside output, income, productivity and regional productivity. The remaining gaps are narrower — mostly about coverage, detail and the question of why things changed.
+The framework now covers real earnings, housing affordability, NHS waiting-list pressure, A&E performance, public sector employment and international GDP per capita context alongside output, income, productivity and regional productivity. The remaining gaps are narrower — mostly about coverage, detail and the question of why things changed.
 
 - Distributional living standards. We now measure real earnings through CPI-deflated Average Weekly Earnings (+2.3% since 2007), but GDP per head and AWE are averages. Household disposable income, income inequality, poverty, and wealth measures would show how gains and losses were distributed.
 - Full UK housing coverage. We now measure housing affordability through the house price to earnings ratio, but the ONS series covers England and Wales only. Scotland and Northern Ireland remain outside the housing indicator. Phase 5 reviewed official sources and did not find a directly comparable four-nation price-to-earnings ratio.
 - Broader public-service pressure. We now measure NHS waiting times and A&E four-hour performance for England. Phase 5 reviewed social care, local authority spending power, courts and schools, but did not add them because the available official series do not support a clean 2007-to-latest comparison for this pack.
 - Public sector scale. We now measure public sector employment. Public spending, public service output and public service productivity remain outside the current scope.
-- International comparisons. The domestic productivity trend is clear, but placing it in an international context would strengthen the analysis.
+- International productivity comparisons. We now compare GDP per capita with a small peer group. GDP per hour worked, real wages and broader OECD comparisons remain outside the current scope.
 - Sub-regional variation. City-region and local authority breakdowns would reveal variation hidden by ITL1 regional averages.
 - Policy attribution. This framework measures what happened, not why. To explain changes with reference to specific policies, external shocks, or structural shifts would need a different analytical approach.
 
@@ -398,11 +435,11 @@ We document these gaps in `docs/future-plan.md`. Most of the original roadmap is
 
 ---
 
-## 12. Methodology
+## 13. Methodology
 
 ### Data sources
 
-We took data from the Office for National Statistics and NHS England. Most source files are downloaded automatically. The NHS waiting-list CSV is tracked in the repository because it combines current monthly releases with older historical time-series values.
+We took data from the Office for National Statistics, NHS England and World Bank. Most source files are downloaded automatically. The NHS waiting-list CSV is tracked in the repository because it combines current monthly releases with older historical time-series values.
 
 | Indicator                              | ONS code    | Dataset                                     | Latest |
 | -------------------------------------- | ----------- | ------------------------------------------- | ------ |
@@ -414,6 +451,7 @@ We took data from the Office for National Statistics and NHS England. Most sourc
 | NHS waiting list (incomplete pathways) | —           | NHS England RTT data                        | 2026   |
 | A&E attendances within 4 hours         | —           | NHS England A&E data                        | 2025   |
 | Public sector employment               | G7AU        | Public sector employment (PSE)              | 2025   |
+| International GDP per capita           | —           | World Bank NY.GDP.PCAP.KD                   | 2025   |
 | Regional output per hour               | —           | Regional labour productivity (PRODBYREG)    | 2023   |
 
 All national values are Chained Volume Measures (CVM) at 2023 reference prices, seasonally adjusted. Regional values are expressed as an index relative to the UK average (UK = 100).
@@ -433,7 +471,7 @@ compound_annual_growth_rate = (latest_value / baseline_value)^(1/years) − 1
 You can rebuild the entire evidence base from source with 3 commands:
 
 ```bash
-make fetch     # download ONS data
+make fetch     # download source data
 make process   # standardise into processed tables
 make build     # generate tables, charts, and claims matrix
 ```
@@ -450,7 +488,8 @@ All source code is in `src/`. Raw data is cached in `data/raw/`. Methodology is 
 - NHS waiting list data covers England only. The 2007 baseline is the first month of RTT data collection (August 2007), which is not necessarily a "normal" pre-crisis level.
 - A&E four-hour performance data covers England only. The nearest full-year baseline is 2011, not 2007. Monthly values before June 2015 are estimated from weekly data. May 2019 to May 2023 performance data excludes clinical standards field-test trusts.
 - Public sector employment is UK-wide, headcount and seasonally adjusted. Reclassifications affect the headline total public sector series, so the report also checks public sector employment as a share of total employment and the excluding-major-reclassifications series.
-- ONS and NHS England statistics can be revised. The values in this report reflect the latest available source files as of July 2026.
+- International GDP per capita uses World Bank constant 2015 US dollars. It is used only for peer comparison. It does not replace the ONS chained-volume UK GDP per head series used for the domestic analysis.
+- ONS, NHS England and World Bank statistics can be revised. The values in this report reflect the latest available source files as of July 2026.
 
 ---
 
@@ -471,4 +510,4 @@ The full project structure, Makefile commands, and documentation index are in `R
 ---
 
 UK Economic Change — Britain Since 2007: Evidence Framework.  
-Office for National Statistics and NHS England data, sourced July 2026. All values subject to revision.
+Office for National Statistics, NHS England and World Bank data, sourced July 2026. All values subject to revision.

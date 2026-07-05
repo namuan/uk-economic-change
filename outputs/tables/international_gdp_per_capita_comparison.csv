@@ -1,0 +1,7 @@
+indicator_id,country,country_code,baseline_year,baseline_value,latest_year,latest_value,absolute_change,percentage_change,cagr_pct,unit,source
+international_gdp_per_capita,United States,USA,2007,54153.0,2025,67946.0,13793.0,25.5,1.27,constant 2015 US dollars per person,World Bank NY.GDP.PCAP.KD
+international_gdp_per_capita,Germany,DEU,2007,38593.0,2025,44147.0,5554.0,14.4,0.75,constant 2015 US dollars per person,World Bank NY.GDP.PCAP.KD
+international_gdp_per_capita,France,FRA,2007,36322.0,2025,39919.0,3597.0,9.9,0.53,constant 2015 US dollars per person,World Bank NY.GDP.PCAP.KD
+international_gdp_per_capita,Canada,CAN,2007,42107.0,2025,45418.0,3311.0,7.9,0.42,constant 2015 US dollars per person,World Bank NY.GDP.PCAP.KD
+international_gdp_per_capita,United Kingdom,GBR,2007,44882.0,2025,48422.0,3540.0,7.9,0.42,constant 2015 US dollars per person,World Bank NY.GDP.PCAP.KD
+international_gdp_per_capita,Italy,ITA,2007,34160.0,2025,34716.0,556.0,1.6,0.09,constant 2015 US dollars per person,World Bank NY.GDP.PCAP.KD

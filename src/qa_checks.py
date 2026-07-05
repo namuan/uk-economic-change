@@ -235,6 +235,7 @@ def test_output_tables() -> None:
         "claims_evidence_matrix.csv",
         "growth_rate_comparison.csv",
         "public_service_extension.csv",
+        "international_gdp_per_capita_comparison.csv",
     ]
 
     for table in expected_tables:
@@ -292,6 +293,13 @@ def test_output_tables() -> None:
     check("A&E four-hour performance extension is present",
           "ae_four_hour_performance" in set(public_service["indicator_id"]))
 
+    international = pd.read_csv(OUTPUT_TABLES / "international_gdp_per_capita_comparison.csv")
+    check("International comparison has 6 peer countries",
+          len(international) == 6,
+          f"Got {len(international)}")
+    check("International comparison includes UK",
+          "United Kingdom" in set(international["country"]))
+
 
 # ---------------------------------------------------------------------------
 # 4. Chart generation
@@ -310,6 +318,7 @@ def test_charts() -> None:
         "nhs_waiting_list_timeline.png",
         "ae_four_hour_performance_timeline.png",
         "growth_rate_comparison.png",
+        "international_gdp_per_capita_comparison.png",
     ]
 
     for chart in expected_charts:
@@ -393,6 +402,7 @@ def test_raw_data() -> None:
         "d7bt_cpi.csv": "CPI index",
         "housing_affordability.xlsx": "Housing affordability",
         "pse.csv": "Public sector employment",
+        "world_bank_gdp_per_capita.zip": "World Bank GDP per capita",
         "nhs_waiting_list.csv": "NHS waiting list",
         "ae_monthly_timeseries.xls": "A&E monthly time series",
     }

@@ -49,11 +49,11 @@ make clean-all  # remove everything including cached raw downloads
 
 | Stage | Command | What it does |
 |-------|---------|--------------|
-| Fetch | `make fetch` | Downloads 4 ONS source files to `data/raw/` |
+| Fetch | `make fetch` | Downloads source files to `data/raw/` |
 | Process | `make process` | Extracts 2007 & latest values, writes to `data/processed/` |
 | Build | `make build` | Computes changes, generates CSV tables and PNG charts |
 
-### Indicators (6 core indicators + regional productivity)
+### Indicators (7 core indicators + extensions + regional productivity)
 
 | Indicator | 2007 | Latest | Change |
 |-----------|------|--------|--------|
@@ -64,6 +64,8 @@ make clean-all  # remove everything including cached raw downloads
 | House price / earnings ratio | 7.17× | 7.55× (2025) | +5.3% |
 | NHS waiting list | 4.19M | 7.01M (2026) | +67.5% |
 | A&E attendances within 4 hours | 96.8% (2011) | 74.7% (2025) | −22.1pp |
+| Public sector employment | 6.03M | 6.18M (2025) | +2.5% |
+| International GDP per capita | $44,882 | $48,422 (2025) | +7.9% |
 | Regional output per hour | — | — | 12 regions |
 
 ### Outputs
@@ -76,7 +78,8 @@ outputs/
 │   ├── combined_comparison.csv
 │   ├── claims_evidence_matrix.csv
 │   ├── growth_rate_comparison.csv
-│   └── public_service_extension.csv
+│   ├── public_service_extension.csv
+│   └── international_gdp_per_capita_comparison.csv
 └── charts/
     ├── national_indicators_change.png
     ├── gdp_per_head_timeline.png
@@ -85,6 +88,7 @@ outputs/
     ├── housing_affordability_timeline.png
     ├── nhs_waiting_list_timeline.png
     ├── ae_four_hour_performance_timeline.png
+    ├── international_gdp_per_capita_comparison.png
     ├── regional_productivity_change.png
     ├── regional_productivity_small_multiples.png
     └── regional_ranking.png
