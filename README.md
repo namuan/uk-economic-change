@@ -114,6 +114,7 @@ The canonical public report is `docs/index.md`. The workflow in `.github/workflo
 | Document | Description |
 |----------|-------------|
 | `docs/index.md` | **Full evidence report and GitHub Pages landing page** |
+| `docs/index-update-prompt.md` | Reusable AI prompt for refreshing the public report from data outputs |
 | `docs/findings-summary.md` | One-page key findings |
 | `docs/methodology-note.md` | Full methodology, data sources, limitations |
 | `docs/poc-summary.md` | Historical proof-of-concept status and structure overview |

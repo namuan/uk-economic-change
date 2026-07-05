@@ -1,352 +1,277 @@
-# Future Plan: From POC to Finished Project
+# Future Plan: Evidence Pack Extensions
 
 **Project:** UK Economic Change Comparison Framework  
 **Working title:** Britain Since 2007: Evidence Framework  
-**Status:** Roadmap from proof of concept to finished project  
+**Status:** Core evidence pack complete; remaining work is phased extension and publication polish  
 **Baseline year:** 2007  
-**Primary source policy:** ONS first
+**Primary source policy:** ONS first; other official sources where ONS does not cover the measure
 
-## 1. Purpose
+## 1. Current Status
 
-This document sets out what is needed to move the current proof of concept into a finished, reusable evidence product.
+The core evidence pack is complete and published through `docs/index.md`, which is the canonical report and GitHub Pages landing page.
 
-The POC is intended to prove the core workflow:
+The project now has:
 
-1. define indicators,
-2. fetch or import official data,
-3. compare 2007 with the latest available period,
-4. calculate change,
-5. produce national and regional outputs,
-6. assess claims against evidence.
-
-The finished project should become a robust analytical package that can support tenders, reports, policy papers, public briefings, dashboards, and further research.
-
-## 2. Target Finished Product
-
-The finished project should deliver a repeatable evidence framework for assessing how Britain has changed since 2007.
-
-The final product should include:
-
-- a validated indicator register,
-- automated or semi-automated data ingestion,
-- cleaned national and regional datasets,
-- reproducible calculations,
+- a validated indicator register (`data/indicator_register.csv`),
+- a claims register (`data/claims_register.csv`),
+- automated data fetching and processing,
+- a long-format analytical dataset,
 - national and regional comparison tables,
-- chart outputs,
-- a claims-evidence matrix,
+- four chart outputs,
+- a completed claims-evidence matrix with 8 rated claims,
 - a methodology note,
-- a limitations and caveats appendix,
-- source documentation,
-- and a final narrative report or tender-ready evidence pack.
+- QA checks (`make test`, currently 99 checks),
+- a GitHub Pages workflow (`.github/workflows/static.yml`),
+- and a public report at `docs/index.md`.
 
-## 3. Workstream 1: Data Source Validation ✅
+The remaining work is no longer about proving the concept. It is about improving publication quality, broadening evidence coverage, adding geographic depth, and preparing optional dashboard or tender-pack outputs.
 
-### Objective
+## 2. Completed Core Scope
 
-Confirm which datasets are suitable, comparable, and defensible for each indicator.
+### Data sources and ingestion ✅
 
-### Completed
+- ONS time-series fetching implemented for GDP per head, NDP per head, earnings, and CPI.
+- ONS file downloads implemented for labour productivity, regional productivity, and housing affordability.
+- NHS England RTT waiting-list data incorporated as an official non-ONS source.
+- Raw downloads cached in `data/raw/`; curated NHS waiting-list CSV tracked in git.
+- Pipeline runs through `make fetch`, `make process`, and `make build`.
 
-- Reviewed every indicator in `data/indicator_register.csv`.
-- Confirmed the correct ONS dataset, series code, edition, geography, and unit for all 5 populated indicators.
-- Verified each series has a valid 2007 observation and latest comparable observation.
-- Recorded release frequency and update schedule.
-- Documented known caveats for each indicator.
-- Remaining: housing affordability (TBD, Workstream 4).
+### Core indicators ✅
 
-### Output
+| Domain | Indicator | Coverage | Latest |
+|---|---|---|---|
+| Output | Real GDP per head | UK | 2025 |
+| Income | Real NDP per head | UK | 2025 |
+| Productivity | Output per hour worked | UK | 2025 |
+| Earnings | CPI-deflated average weekly earnings | UK | 2025 |
+| Housing | House price to earnings ratio | England and Wales | 2025 |
+| Public services | NHS RTT incomplete pathways | England | 2026 |
+| Regional productivity | Output per hour, UK nations and English regions | 12 ITL1 regions | 2023 |
 
-A validated indicator register with fields for:
+### Outputs ✅
 
-- `indicator_id`, `indicator_name`, `domain`, `source_owner`,
-- `source_url`, `dataset_id`, `series_code`,
-- `geography_level`, `unit`,
-- `baseline_year_available`, `latest_year_available`,
-- `update_frequency`, `comparability_status`,
-- `known_caveats`, `priority`.
+- `outputs/tables/national_comparison.csv`
+- `outputs/tables/regional_productivity_comparison.csv`
+- `outputs/tables/combined_comparison.csv`
+- `outputs/tables/claims_evidence_matrix.csv`
+- `outputs/charts/national_indicators_change.png`
+- `outputs/charts/gdp_per_head_timeline.png`
+- `outputs/charts/regional_productivity_change.png`
+- `outputs/charts/regional_ranking.png`
+- `docs/index.md` public report
+- `docs/assets/charts/` GitHub Pages chart assets
 
-## 4. Workstream 2: Data Ingestion ✅
+### Claims matrix ✅
 
-### Objective
+All 8 claims are rated:
 
-Replace placeholder tables with real data pulls from ONS and other approved official sources.
+- 5 Strong
+- 3 Partial
+- 0 TBD
 
-### Completed
+## 3. Outstanding Work by Phase
 
-- ONS time-series fetching implemented for 5 national indicators.
-- Dataset CSV/XLSX fetching for labour productivity, regional productivity, housing affordability.
-- Caching for all raw downloads in `data/raw/`.
-- Error handling for unavailable sources and changed endpoints.
-- All data ingestion runs through `make fetch` and `uv run python src/fetch_ons.py`.
+The phases below are ordered so that each one can be tackled independently. Later phases should not block publication of the current evidence pack.
 
-### Output
+---
 
-A reproducible ingestion layer: `data/raw/` contains 7 source files, all fetchable or verified via Makefile.
+## Phase 1: Publication Readiness
 
-## 5. Workstream 3: Data Cleaning and Normalisation ✅
+**Goal:** Ensure the current evidence pack is externally publishable and easy to maintain.
 
-### Objective
+### Tasks
 
-Convert all raw source data into a shared long-format analytical model.
-
-### Completed
-
-- Standardised date, year, quarter, and annual fields using `^\d{4}$` regex.
-- Standardised geography names and ONS geography codes.
-- Standardised units and measurement types.
-- Created a single canonical processed table: `data/processed/long_format.csv` (362 rows, 13 columns).
-- All data quality flags set to OK.
-
-### Target table shape (implemented)
-
-| Column | Description |
-|---|---|
-| `indicator_id` | Stable project indicator ID |
-| `indicator_name` | Human-readable indicator name |
-| `domain` | Economy, productivity, wages, housing, public services, etc. |
-| `geography_code` | Standard ONS geography code |
-| `geography_name` | UK, East Midlands, Scotland, etc. |
-| `geography_type` | National, region |
-| `period_type` | Annual |
-| `period` | Source period label (e.g. "2007") |
-| `year` | Calendar year (integer) |
-| `value` | Numeric value |
-| `unit` | Unit of measurement |
-| `source_url` | Source link |
-| `quality_flag` | OK, partial, estimated, missing, methodology break |
-| `notes` | (available in indicator register caveats)
-
-## 6. Workstream 4: Indicator Expansion
-
-### Objective
-
-Expand beyond the POC indicator set while keeping the project manageable and evidence-led.
-
-### Recommended expansion order
-
-1. National output and income indicators.
-2. Productivity indicators.
-3. Earnings, wages, and household income.
-4. Housing affordability and housing supply.
-5. Public-service pressure indicators.
-6. Local government finance indicators.
-7. Transport and infrastructure indicators.
-8. Optional international peer comparison.
+1. Confirm GitHub Pages deployment succeeds from `.github/workflows/static.yml`.
+2. Verify the live Pages URL loads `docs/index.md` by default.
+3. Check that all four chart images render on the live page.
+4. Do a final copy-edit of `docs/index.md` for public readability.
+5. Add the live Pages URL to `README.md` once known.
+6. Run `make pages` and `make test` before release.
 
 ### Acceptance criteria
 
-An indicator should only be promoted into the core set if:
+- GitHub Pages is live.
+- The report loads at the repo Pages root.
+- Charts render correctly.
+- `make test` passes.
+- README links to the live report.
 
-- it has a clear definition,
-- it has a valid 2007 or near-2007 baseline,
-- it has a latest comparable figure,
-- it can be explained to a non-specialist audience,
-- and the caveats are manageable.
+---
 
-## 7. Workstream 5: Regional and Geographic Design
+## Phase 2: Documentation and Maintenance Cleanup
 
-### Objective
+**Goal:** Remove stale project-history wording and make maintenance instructions explicit.
 
-Define the project geography consistently before expanding the analysis.
+### Tasks
 
-### Decisions required
+1. Update or archive older phase documents that still refer to the project as a proof of concept.
+2. Decide whether `docs/poc-summary.md` should remain as historical documentation or be moved/renamed.
+3. Update `docs/methodology-note.md` so its status, indicator list, and QA count match the current project.
+4. Add a short “how to refresh the report” note covering:
+   - `make fetch-force` when source data changes,
+   - `make all`,
+   - `make pages`,
+   - `make test`.
+5. Ensure all documentation points to `docs/index.md` as the canonical report.
 
-- Whether the first regional view should use UK nations and English regions.
-- Whether to include London as both a region and a special analytical case.
-- Whether to add local authority, ITL, or city-region breakdowns later.
-- Whether to include Northern Ireland where coverage is incomplete or source ownership differs.
-- How to handle changing geographic boundaries.
+### Acceptance criteria
 
-### Recommended approach
+- No current-facing document describes the live evidence pack as unfinished POC work.
+- Maintenance steps are clear enough for a new contributor.
+- Historical documents are clearly labelled as historical if retained.
 
-Use this order:
+---
 
-1. UK national view.
-2. UK nations plus English regions.
-3. Selected city regions or local authorities as a later extension.
+## Phase 3: Chart and Analytical Output Improvements
 
-This keeps the first finished version coherent while allowing deeper geographic work later.
+**Goal:** Improve the evidence pack's visual and analytical clarity without adding new indicators.
 
-## 8. Workstream 6: Claims-Evidence Matrix ✅
+### Tasks
 
-### Objective
+1. Add a standalone productivity-over-time chart.
+2. Add small-multiple regional productivity charts or sparklines.
+3. Add a housing affordability timeline chart.
+4. Add an NHS waiting-list timeline chart.
+5. Consider adding a table or chart showing pre-2007 versus post-2007 CAGR for GDP per head and productivity.
+6. Update `docs/index.md` to include any new charts where they strengthen the narrative.
 
-Turn broad article or policy claims into testable statements.
+### Acceptance criteria
 
-### Completed
+- New charts are generated reproducibly from processed or raw source data.
+- QA checks verify each new chart exists and has content.
+- The report uses only charts that add interpretive value.
 
-- 8 claims created and linked to indicators.
-- Evidence ratings defined (Strong, Partial, Weak, Not testable).
-- All 8 claims rated with data-driven findings (5 Strong, 3 Partial, 0 TBD).
-- Caveats and recommended wording added for each claim.
+---
 
-### Output
+## Phase 4: Living Standards and Distributional Expansion
 
-A completed `claims_evidence_matrix.csv` with written interpretations.
+**Goal:** Move beyond average earnings and GDP per head to better represent household experience.
 
-## 9. Workstream 7: Charts and Dashboard Outputs
+### Candidate indicators
 
-### Completed
+1. Real household disposable income per head.
+2. Equivalised household disposable income by decile or quintile.
+3. Income inequality measures such as Gini coefficient or percentile ratios.
+4. Poverty or material deprivation measures, if comparable to 2007.
+5. Wealth indicators, if a defensible 2007 baseline and latest figure exist.
 
-- National GDP/NDP timeline chart (2007–2025).
-- National indicators comparison chart (6 indicators, horizontal bar).
-- Regional productivity change chart (12 regions, colour-coded).
-- Regional ranking chart (2007 vs 2023 side-by-side).
+### Tasks
 
-### Remaining
+1. Identify official sources and confirm comparability.
+2. Add validated indicators to `data/indicator_register.csv`.
+3. Extend fetch/process/build scripts.
+4. Add claims only where the indicator can test a clear statement.
+5. Update methodology and report caveats.
 
-- Productivity-over-time standalone chart.
-- Small-multiple charts by region.
-- Optional HTML dashboard.
+### Acceptance criteria
 
-### Output formats
+- At least one distributional living-standards indicator is added or explicitly rejected with documented rationale.
+- Any promoted indicator has a defensible baseline, latest value, source, and caveat.
 
-- PNG charts in `outputs/charts/` (4 charts).
-- CSV tables in `outputs/tables/` (4 tables).
+---
 
-## 10. Workstream 8: Narrative Report
+## Phase 5: Housing and Public-Service Expansion
 
-### Objective
+**Goal:** Broaden domains where the current report has partial geographic or service coverage.
 
-Create a written evidence pack that can be used by non-technical stakeholders.
+### Housing tasks
 
-### Recommended report structure
+1. Investigate Scotland and Northern Ireland housing affordability sources.
+2. Assess whether a UK-wide or four-nation comparable housing affordability measure can be constructed.
+3. Consider housing supply indicators: completions, starts, dwellings per household, or planning approvals.
+4. Add local authority housing affordability only if geography and methodology are manageable.
 
-1. Executive summary.
-2. What changed since 2007.
-3. National output and income.
-4. Productivity.
-5. Wages and living standards.
-6. Housing.
-7. Public services.
-8. Regional differences.
-9. Claims-evidence matrix.
-10. Data limitations.
-11. Methodology.
-12. Source appendix.
+### Public-service tasks
 
-### Writing standard
+1. Evaluate A&E waiting-time indicators.
+2. Evaluate social care indicators.
+3. Evaluate local authority spending power.
+4. Consider courts, schools, or other public-service pressure indicators where official time series exist.
 
-The report should separate:
+### Acceptance criteria
 
-- what the data clearly show,
-- what the data suggest,
-- what remains uncertain,
-- and what cannot be concluded from the available evidence.
+- Housing coverage gaps are either filled or clearly documented as unresolved.
+- At least one broader public-service indicator is added or rejected with documented rationale.
 
-## 11. Workstream 9: Quality Assurance ✅
+---
 
-### Completed
+## Phase 6: Geographic Deepening
 
-- All source URLs validated (`make test` includes URL checks).
-- Baseline and latest values spot-checked against source datasets.
-- Units confirmed before change calculations.
-- Percentage changes verified (spot-checks in QA).
-- Charts reviewed against underlying tables.
-- Core transformation functions tested via QA suite.
-- Known limitations recorded in methodology note.
+**Goal:** Add sub-regional insight while avoiding boundary and comparability traps.
 
-### QA suite
+### Tasks
 
-`src/qa_checks.py` — run with `make test`. Covers indicator register integrity, data completeness, calculation correctness, output table validation, chart generation, claims register cross-references, and long-format dataset validation.
+1. Decide the next geography level: local authority, ITL2/ITL3, or selected city regions.
+2. Document boundary-change handling rules.
+3. Decide whether London should be split or treated as a special analytical case.
+4. Add sub-regional outputs for one domain first, likely productivity or housing.
+5. Add maps only if they improve interpretation and can be generated reproducibly.
 
-## 12. Workstream 10: Packaging and Reproducibility ✅
+### Acceptance criteria
 
-### Completed
+- Geography design is documented before new data is added.
+- The first sub-regional extension is limited, reproducible, and caveated.
 
-- Dependency management in `pyproject.toml` and `uv.lock`.
-- Makefile with 15 targets (`make help`, `make all`, `make test`, etc.).
-- `.gitignore` excludes `.venv/`, caches, and downloadable raw data.
-- GitHub repo created with gh CLI, public, full README.
-- Single command rebuild: `make all`.
+---
 
-### Commands
+## Phase 7: International Context
 
-```bash
-make install    # uv sync
-make all        # fetch → process → build
-make test       # 94+ QA checks
-make clean-all  # remove everything including cached downloads
-```
+**Goal:** Put the UK's post-2007 productivity and GDP performance in peer-country context.
 
-## 13. Proposed Milestones
+### Candidate sources
 
-### Milestone 1: POC Complete ✅
+- OECD
+- World Bank
+- IMF
+- Eurostat, where still appropriate for historical European comparisons
 
-- Skeleton project exists.
-- Indicator register exists.
-- Claims register exists.
-- Placeholder tables are generated.
-- uv project management is configured.
+### Tasks
 
-### Milestone 2: First Real Data Pull ✅
+1. Choose a small peer group, e.g. US, Germany, France, Italy, Canada.
+2. Select comparable measures: GDP per head, GDP per hour worked, productivity index, or real wages.
+3. Confirm 2007 and latest comparability.
+4. Add one concise international comparison section or appendix.
 
-- National GDP per head is fetched and processed.
-- Labour productivity is fetched and processed.
-- At least one regional productivity table is populated.
-- First real charts are generated.
+### Acceptance criteria
 
-### Milestone 3: Validated Core Indicator Set ✅
+- International comparison is clearly caveated and does not dilute the ONS-first domestic evidence base.
+- Data source and methodology are transparent.
 
-- Core indicators are confirmed.
-- Data caveats are documented.
-- National 2007 vs latest table is populated.
-- Regional productivity table is populated.
-- Claims-evidence matrix is partially completed.
-- QA check script added (`src/qa_checks.py`). 94+ checks pass.
+---
 
-### Milestone 4: Expanded Evidence Pack ✅
+## Phase 8: Optional Dashboard or Tender Pack
 
-- ✅ Wages or household income added (real earnings).
-- ✅ Housing indicator added (price/earnings ratio).
-- ✅ Public-service indicator added (NHS waiting list).
-- ✅ Regional comparison expanded.
-- ✅ Narrative report created as the GitHub Pages index (`docs/index.md`).
+**Goal:** Package the evidence for different audiences.
 
-### Milestone 5: Finished Project
+### Options
 
-- Final data refresh completed.
-- All tables and charts generated.
-- Claims-evidence matrix completed.
-- Methodology note completed.
-- Limitations appendix completed.
-- Final report or tender-ready evidence pack completed.
-- QA checklist passed.
+1. Lightweight HTML dashboard.
+2. Downloadable tender-ready evidence pack.
+3. Static PDF export of the report.
+4. Data appendix with source links and machine-readable output tables.
 
-## 14. Key Risks and Mitigations
+### Acceptance criteria
 
-| Risk | Impact | Mitigation |
-|---|---|---|
-| Dataset does not go back to 2007 | Indicator may be unusable | Use nearest defensible baseline or move to supporting appendix |
-| Dataset methodology changed | Trend may be misleading | Add caveat, split series, or downgrade evidence rating |
-| Regional coverage is incomplete | Regional claims may be weak | Use only comparable geographies in core output |
-| ONS endpoint or file format changes | Ingestion may fail | Cache raw data and add manual import fallback |
-| Indicators are too technical for public use | Narrative may be unclear | Separate technical appendix from public-facing summary |
-| Scope expands too quickly | Project becomes unmanageable | Lock a core indicator set before extensions |
+- Chosen output is generated reproducibly.
+- It does not introduce a second unsynchronised copy of the report.
+- README explains how to rebuild or publish it.
 
-## 15. Immediate Next Actions
+## 4. Definition of Done for Future Extensions
 
-1. ✅ Add `.gitignore` to exclude `.venv/`, `__pycache__/`, and temporary files.
-2. ✅ Validate the ONS source links in `data/indicator_register.csv`.
-3. ✅ Implement the first real ONS time-series pull for GDP per head.
-4. ✅ Populate the national comparison table for one indicator end to end.
-5. ✅ Generate one chart from real data.
-6. ✅ Add a simple QA check script (`src/qa_checks.py`, now 72 checks, all pass).
-7. ✅ Add real earnings / household disposable income indicator (Workstream 4).
-8. ✅ Update indicator register with expanded fields per Workstream 1.
-9. ✅ Build the long-format analytical dataset per Workstream 3.
-10. ✅ Add housing affordability indicator (Workstream 4).
+An extension should only be considered complete when:
 
-## 16. Definition of Done for Finished Project
+- source and caveats are documented,
+- 2007 or nearest defensible baseline is available,
+- latest comparable value is available,
+- calculations are reproducible,
+- output tables and charts are generated where needed,
+- claims are updated only where evidence supports them,
+- `make test` passes,
+- `docs/index.md` and `docs/methodology-note.md` are updated,
+- and the live Pages report can be refreshed with `make pages` plus the GitHub Actions workflow.
 
-The project can be considered finished when:
+## 5. Immediate Next Phase Recommendation
 
-- the core indicator register is validated,
-- all core indicators have baseline and latest values or documented exclusions,
-- national and regional tables are populated,
-- charts are generated from processed data,
-- the claims-evidence matrix is complete,
-- every source is documented,
-- caveats are explicit,
-- the project can be rebuilt with `uv`,
-- and the final report or evidence pack is ready for external use.
+Start with **Phase 1: Publication Readiness**.
+
+Reason: the core evidence pack is already analytically complete. The highest-value next step is making sure the public report is live, readable, and reliable before adding new analytical scope.
