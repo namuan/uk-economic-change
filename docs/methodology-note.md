@@ -43,7 +43,7 @@ National GDP and productivity have more recent data than regional productivity, 
 | Output per hour worked | LZVB | Labour productivity (PRDY) | Direct file CSV | prdy.csv |
 | Real average weekly earnings | KAB9 + D7BT | Labour Market Stats (LMS) + CPI (MM23) | Generator CSV | kab9_awe.csv, d7bt_cpi.csv |
 | House price to earnings ratio | — | Housing affordability (England & Wales) | Direct file XLSX | housing_affordability.xlsx |
-| NHS waiting list (incomplete pathways) | — | NHS England RTT statistics | CSV/XLSX official releases | nhs_waiting_list.csv |
+| NHS waiting list (incomplete pathways) | — | NHS England RTT statistics | Monthly Incomplete Commissioner files plus historical RTT time series for older periods | nhs_waiting_list.csv |
 | Regional output per hour | — | Regional labour productivity (PRODBYREG) | Direct file XLSX | prodbyreg.xlsx |
 
 All values are Chained Volume Measures (CVM) at 2023 reference prices, seasonally adjusted, unless otherwise noted.
@@ -123,4 +123,4 @@ All output files are generated programmatically with no manual data entry.
 | At least one chart | ✅ 9 charts (national, GDP/NDP timeline, productivity timeline, growth-rate comparison, housing, NHS, and regional views) |
 | Claims-evidence matrix | ✅ 8 claims rated, 0 TBD |
 | Short methodology note | ✅ This document |
-| QA checks | ✅ 114 checks passing |
+| QA checks | ✅ Passing |

@@ -398,6 +398,19 @@ def test_raw_data() -> None:
             # Raw data is optional (may be gitignored). Warn, don't fail.
             print(f"  ⚠️  {label} ({filename}) — not found (run make fetch)")
 
+    nhs_path = raw_dir / "nhs_waiting_list.csv"
+    if nhs_path.exists():
+        nhs = pd.read_csv(nhs_path)
+        periods = pd.PeriodIndex(nhs["period"], freq="M")
+        expected = pd.period_range(periods.min(), periods.max(), freq="M")
+        missing = expected.difference(periods)
+        check("NHS waiting-list monthly series has no gaps",
+              len(missing) == 0,
+              f"Missing months: {[str(p) for p in missing]}")
+        check("NHS waiting-list series reaches March 2026",
+              str(periods.max()) == "2026-03",
+              f"Latest: {periods.max()}")
+
 
 # ---------------------------------------------------------------------------
 # Main

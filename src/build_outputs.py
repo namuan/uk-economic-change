@@ -427,6 +427,10 @@ def build_nhs_waiting_list_timeline_chart() -> None:
     ax.plot(df["date"], df["value_millions"], color=BLUE, linewidth=2.2)
     ax.axvspan(pd.Timestamp("2020-03-01"), pd.Timestamp("2021-03-01"), color=LIGHT_GREY, alpha=0.35)
     ax.text(pd.Timestamp("2020-04-01"), ax.get_ylim()[1] * 0.95, "COVID-19 shock", fontsize=9, color=GREY, va="top")
+    peak = df.loc[df["value_millions"].idxmax()]
+    ax.scatter([peak["date"]], [peak["value_millions"]], color=RED, zorder=3)
+    ax.text(peak["date"], peak["value_millions"] + 0.15,
+            f"Peak: {peak['value_millions']:.2f}M", color=RED, fontsize=9, ha="center")
     ax.set_xlabel("Year")
     ax.set_ylabel("Incomplete pathways (millions)")
     ax.set_title("NHS England Waiting List Pressure Rose Sharply After 2020")

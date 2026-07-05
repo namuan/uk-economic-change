@@ -237,8 +237,9 @@ def fetch_nhs_waiting_list(*, force: bool = False) -> FetchResult:
     """Verify NHS waiting list CSV is present (data committed to repo).
 
     NHS England RTT data is compiled from two sources:
-    - Historical: Annual RTT time series (April 2007 – March 2020)
-    - Latest: Monthly RTT Commissioner file (March 2026)
+    - NHS monthly Incomplete Commissioner files where available
+    - NHS historical RTT time-series values for older periods not available
+      through the current monthly pages
 
     Both are combined into data/raw/nhs_waiting_list.csv.
     """

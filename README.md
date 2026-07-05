@@ -25,7 +25,7 @@ make process    # normalise raw data into processed tables
 make build      # generate output tables and charts
 make pages      # sync chart assets for GitHub Pages
 make all        # fetch → process → build (full pipeline)
-make test       # run QA checks (114 checks)
+make test       # run QA checks
 make validate   # run data validation checks
 ```
 

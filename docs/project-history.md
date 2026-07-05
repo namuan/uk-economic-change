@@ -104,6 +104,6 @@ The project now has:
 - 8 evidence-rated claims,
 - 9 chart outputs,
 - a reproducible pipeline (`make fetch`, `make process`, `make build`, `make pages`),
-- and a QA suite currently covering 114 checks.
+- and a passing QA suite.
 
 For current methodology, source details, caveats, and limitations, use `docs/methodology-note.md`. For future work, use `docs/future-plan.md`.

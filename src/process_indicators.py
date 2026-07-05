@@ -263,7 +263,7 @@ def build_national_table() -> pd.DataFrame:
         "Index 2023=100, seasonally adjusted, whole economy. Quarterly data available.",
         "Nominal AWE (KAB9) deflated by CPI (D7BT) to 2025 prices. Whole economy, total pay, seasonally adjusted. Monthly data available.",
         "Ratio of median house price to median gross annual workplace-based earnings. England and Wales only (not UK). Peaked at 8.95 in 2021 before declining to 7.55 in 2025. Five-year average is 8.19.",
-        "NHS England total incomplete RTT pathways. August 2007 = first month of RTT data collection. Data compiled from NHS England annual and monthly releases. Post-2020 surge driven by COVID backlog. March 2026 is latest.",
+        "NHS England total incomplete RTT pathways. August 2007 = first month of incomplete-pathway data collection. Monthly commissioner-basis values are used where available, with NHS historical time-series values retained for older periods. The series peaks in August 2023 before falling to the latest point in March 2026.",
     ]
     return df[PROCESSED_COLS]
 

@@ -20,7 +20,7 @@ The project now has:
 - nine chart outputs,
 - a completed claims-evidence matrix with 8 rated claims,
 - a methodology note,
-- QA checks (`make test`, currently 114 checks),
+- QA checks (`make test`),
 - a GitHub Pages workflow (`.github/workflows/static.yml`),
 - and a public report at `docs/index.md`.
 
@@ -110,7 +110,7 @@ The phases below are ordered so that each one can be tackled independently. Late
 - The repo Pages root loads the report generated from `docs/index.md`.
 - The 4 live chart assets returned HTTP 200 responses.
 - `make pages` completed successfully.
-- `make test` passed: 99 checks, 0 failed.
+- `make test` passed.
 
 ---
 
@@ -140,7 +140,7 @@ The phases below are ordered so that each one can be tackled independently. Late
 ### Verification notes
 
 - `docs/project-history.md` is the single historical record for the original implementation phases.
-- `docs/methodology-note.md` reflects the current indicator set and QA status: 8 rated claims and 114 checks.
+- `docs/methodology-note.md` reflects the current indicator set and QA status.
 - `README.md` includes a concise report-refresh sequence using `make fetch-force`, `make all`, `make pages`, and `make test`.
 - Current-facing documentation points to `docs/index.md` as the canonical report.
 - Stale proof-of-concept wording is confined to historical context or maintenance prompts.
@@ -175,7 +175,7 @@ The phases below are ordered so that each one can be tackled independently. Late
 - Updated `docs/index.md` to include the new charts in the relevant narrative sections.
 - Updated QA checks to cover the new table and all 9 charts.
 - `make pages` completed successfully.
-- `make test` passed: 114 checks, 0 failed.
+- `make test` passed.
 
 ---
 
