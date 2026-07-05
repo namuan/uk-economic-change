@@ -11,19 +11,19 @@ July 2026 | Data source: Office for National Statistics
 
 ## Executive summary
 
-This report compares Britain's economy in 2007 — the peak before the global financial crisis — with the latest data available. It draws on 6 national indicators and 12 regional productivity measures, taken from the Office for National Statistics and NHS England and processed through a reproducible pipeline.
+This report compares Britain's economy in 2007 (the peak before the global financial crisis) with the latest data available. It draws on 6 national indicators and 12 regional productivity measures, taken from the Office for National Statistics and NHS England and processed through a reproducible pipeline.
 
 ### Main findings
 
 - GDP per head rose from £37,625 in 2007 to £40,537 in 2025. That is a gain of 7.7% over 18 years, or 0.4% per year. Before the crisis, growth averaged 2.3% per year.
-- Net domestic product per head grew at less than half that rate (3.7%). This suggests that capital consumption — the cost of depreciation and obsolescence — absorbed a growing share of Britain's output.
+- Net domestic product per head grew at less than half that rate (3.7%). This suggests that capital consumption (the cost of depreciation and obsolescence) absorbed a growing share of Britain's output.
 - Output per hour worked, the standard measure of labour productivity, rose only 6.9% over the same period. Before 2007, productivity grew at 2.1% per year.
-- Real earnings — pay adjusted for inflation — grew by 2.3%, or £16 per week in 2025 prices. GDP per head grew by 7.7% over the same period. The economy produces more per person, but the average worker's real pay has barely moved.
+- Real earnings (pay adjusted for inflation) grew by 2.3%, or £16 per week in 2025 prices. GDP per head grew by 7.7% over the same period. The economy produces more per person, but the average worker's real pay has barely moved.
 - Housing affordability has been under sustained pressure. The ratio of house prices to earnings rose from 7.2 (2007) to a peak of 8.95 (2021), before falling to 7.55 (2025). The 5-year average of 8.19 shows that affordability was much worse than in 2007 for most of the post-crisis period.
 - NHS waiting lists have grown sharply. Total incomplete pathways rose from 4.19 million (August 2007) to 7.01 million (March 2026) — an increase of 67.5%. The post-COVID backlog accounts for much of this, but the trend was already upward before the pandemic.
 - Regional inequality is narrowing, but slowly. Scotland and Northern Ireland recorded the strongest convergence gains, while London's relative advantage shrank. But London is still nearly 29% above the UK average.
 
-Britain's post-2007 economic performance is a structural shift from the pre-crisis trend, not a temporary dip. Eighteen years of data now says the old growth trajectory is gone.
+Britain's post-2007 economic performance is not a dip that will revert. It is a break from the pre-crisis trend. After eighteen years, the data is unambiguous: the old growth trajectory has not returned.
 
 ---
 
@@ -39,13 +39,13 @@ Real GDP per head stood at £37,625 in 2007. By 2025, it had risen to £40,537 �
 
 ### The trend matters more than the main figure
 
-The total change hides a more revealing story. Between 1997 and 2007, GDP per head grew at a compound annual rate of 2.3%. Had that trend continued, GDP per head would be roughly £55,000 today — a gap of about £14,500 per person compared with what actually happened.
+The total change tells you less than the trend. Between 1997 and 2007, GDP per head grew at a compound annual rate of 2.3%. Had that trend continued, GDP per head would be roughly £55,000 today. The gap is about £14,500 per person.
 
 Instead, the compound annual growth rate since 2007 has been just 0.4% — a near-total collapse in the pre-crisis trend.
 
 ![GDP and NDP per head: 2007–2025](assets/charts/gdp_per_head_timeline.png)
 
-Figure 1: GDP and NDP per head, 2007 to 2025, chained volume measures at 2023 prices. The chart traces four phases — the 2008-2009 financial crisis contraction, a slow recovery through the 2010s, the 2020 COVID shock, and a modest post-pandemic recovery. NDP per head (GDP minus capital consumption) runs below GDP throughout, and the gap widens over time.
+Figure 1: GDP and NDP per head, 2007 to 2025, chained volume measures at 2023 prices. The chart shows four phases: the 2008-2009 financial crisis contraction, a slow recovery through the 2010s, the 2020 COVID shock, and a modest post-pandemic recovery. NDP per head (GDP minus capital consumption) sits below GDP throughout, and the gap widens over time.
 
 ### Why it matters
 
@@ -57,7 +57,7 @@ A 0.4% annual growth rate means GDP per head doubles roughly every 175 years. At
 
 ### GDP is not the whole story
 
-Gross Domestic Product measures total output, but it does not account for the wear and tear on the capital stock that produces that output. Net Domestic Product (NDP) subtracts capital consumption — depreciation of buildings, machinery, infrastructure, and intellectual property — to give a measure closer to sustainable national income.
+Gross Domestic Product measures total output, but it does not account for the wear and tear on the capital stock that produces that output. Net Domestic Product (NDP) subtracts capital consumption (depreciation of buildings, machinery, infrastructure, and intellectual property) to give a measure closer to sustainable national income.
 
 |                                 | 2007    | 2025    | Change          |
 | ------------------------------- | ------- | ------- | --------------- |
@@ -78,7 +78,7 @@ Whatever the cause, the growing gap means GDP per head overstates the improvemen
 
 ![National indicators: percentage change since 2007](assets/charts/national_indicators_change.png)
 
-Figure 2: Percentage change in the 6 national indicators since 2007. The NHS waiting list (+67.5%) dominates the scale. GDP per head (+7.7%), output per hour (+6.9%), and house price to earnings ratio (+5.3%) show moderate increases. NDP per head (+3.7%) and real earnings (+2.3%) show the weakest growth, highlighting the gap between output and living standards.
+Figure 2: Percentage change in the 6 national indicators since 2007. The NHS waiting list (+67.5%) is the largest change by far. GDP per head (+7.7%), output per hour (+6.9%), and house price to earnings ratio (+5.3%) show moderate increases. NDP per head (+3.7%) and real earnings (+2.3%) show the weakest growth. The gap between output and living standards has widened.
 
 ---
 
@@ -86,7 +86,7 @@ Figure 2: Percentage change in the 6 national indicators since 2007. The NHS wai
 
 ### The stagnation is real
 
-Labour productivity — output per hour worked — is the foundation of long-run improvements in living standards. Productivity growth is what allows wages to rise without stoking inflation, tax revenues to increase without rate rises, and cost pressures to be absorbed without losing competitiveness. Without it, those things become trade-offs.
+Labour productivity (output per hour worked) is the foundation of long-run improvements in living standards. Productivity growth is what allows wages to rise without stoking inflation, tax revenues to increase without rate rises, and cost pressures to be absorbed without losing competitiveness. Without it, those things become trade-offs.
 
 |                                  | 2007 | 2025 | Change           |
 | -------------------------------- | ---- | ---- | ---------------- |
@@ -96,7 +96,7 @@ Output per hour worked rose 6.9% over 18 years — a compound rate of about 0.4%
 
 ### Why productivity growth has been so slow
 
-The UK's post-2007 productivity record is now approaching two decades of near-stagnation. If you want to understand why Britain feels poorer than it did, start here. This is structural, not cyclical — and it is the defining economic fact of the period.
+The UK's post-2007 productivity record is now approaching two decades of near-stagnation. If you want to understand why Britain feels poorer than it did, start here. This is structural, not cyclical. Nothing else about the economy in this period matters as much.
 
 To put the numbers in perspective:
 
@@ -114,7 +114,7 @@ The claim that "productivity growth has been weak since 2007" is supported by cl
 
 ### The main finding
 
-Real average weekly earnings — nominal pay deflated by the Consumer Prices Index — rose from the equivalent of £711 per week in 2007 to £727 per week in 2025 (both in 2025 prices). That is a gain of £16 per week, or 2.3%, over 18 years.
+Real average weekly earnings (nominal pay deflated by the Consumer Prices Index) rose from the equivalent of £711 per week in 2007 to £727 per week in 2025 (both in 2025 prices). That is a gain of £16 per week, or 2.3%, over 18 years.
 
 |                        | 2007    | 2025    | Change         |
 | ---------------------- | ------- | ------- | -------------- |
@@ -221,7 +221,7 @@ A 67.5% increase in the waiting list over 19 years means NHS access has become m
 - The post-2020 surge is largely driven by COVID — a shock to the whole system, not steady worsening. The pre-COVID trend from 2010 to 2020 was upward but much gentler.
 - The data covers England only. Scotland, Wales, and Northern Ireland have their own NHS systems.
 
-The direction is clear despite these caveats: NHS waiting list pressure is substantially worse than in 2007, and the post-COVID backlog is a level of unmet need this country has not seen before.
+The direction is clear despite these caveats: NHS waiting list pressure is substantially worse than in 2007, and the post-COVID backlog is the largest on record.
 
 ### Evidence rating: strong
 
@@ -262,9 +262,9 @@ Figure 3: Percentage change in regional output per hour relative to the UK avera
 
 The regional data tells a more complicated story than the headline convergence figure suggests.
 
-- The lowest-productivity regions in 2007 improved the most. Northern Ireland (+8.1%), Scotland (+7.3%), and Wales (+3.0%) — all below the UK average in 2007 — recorded the strongest gains. This suggests the regions that started furthest behind are closing some of the gap.
+- The lowest-productivity regions in 2007 improved the most. Northern Ireland (+8.1%), Scotland (+7.3%), and Wales (+3.0%), all below the UK average in 2007, recorded the strongest gains. This suggests the regions that started furthest behind are closing some of the gap.
 - London's advantage is shrinking, not growing. London's output per hour fell from 38.7% above the UK average to 28.5% above. This is the largest single change in the dataset. It is the opposite of what you would see if London were pulling further ahead. London is still far ahead of every other region, but the gap is narrowing.
-- 5 regions lost ground. The North East, Yorkshire and The Humber, and the East of England — all in the middle of the distribution in 2007 — saw their relative position decline. These are not the very poorest regions (which gained), nor the richest (London, which declined), but the middle. This pattern needs a closer look in a larger study.
+- 5 regions lost ground. The North East, Yorkshire and The Humber, and the East of England (all in the middle of the distribution in 2007) saw their relative position decline. These are not the very poorest regions (which gained), nor the richest (London, which declined), but the middle. This pattern needs a closer look in a larger study.
 
 ### Measuring convergence
 
