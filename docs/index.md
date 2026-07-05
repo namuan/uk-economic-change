@@ -2,8 +2,6 @@
 title: Britain Since 2007 Evidence Report
 ---
 
-<!-- This file is the GitHub Pages landing page. Keep in sync with docs/full-report.md. -->
-
 # Britain Since 2007: Evidence Report
 
 **UK Economic Change Comparison Framework — Evidence Pack**  
