@@ -2,7 +2,7 @@
 
 **Project:** UK Economic Change Comparison Framework  
 **Working title:** Britain Since 2007: Evidence Framework  
-**Status:** Core evidence pack complete; remaining work is phased extension and publication polish  
+**Status:** Core evidence pack complete; publication readiness and documentation cleanup complete; remaining work is phased extension  
 **Baseline year:** 2007  
 **Primary source policy:** ONS first; other official sources where ONS does not cover the measure
 
@@ -75,49 +75,70 @@ The phases below are ordered so that each one can be tackled independently. Late
 
 ---
 
-## Phase 1: Publication Readiness
+## Phase 1: Publication Readiness ✅ Complete
 
 **Goal:** Ensure the current evidence pack is externally publishable and easy to maintain.
 
+**Completed:** 2026-07-05  
+**Live report:** <https://namuan.github.io/uk-economic-change/>
+
 ### Tasks
 
-1. Confirm GitHub Pages deployment succeeds from `.github/workflows/static.yml`.
-2. Verify the live Pages URL loads `docs/index.md` by default.
-3. Check that all four chart images render on the live page.
-4. Do a final copy-edit of `docs/index.md` for public readability.
-5. Add the live Pages URL to `README.md` once known.
-6. Run `make pages` and `make test` before release.
+1. ✅ Confirm GitHub Pages deployment succeeds from `.github/workflows/static.yml`.
+2. ✅ Verify the live Pages URL loads `docs/index.md` by default.
+3. ✅ Check that all four chart images render on the live page.
+4. ✅ Do a final copy-edit of `docs/index.md` for public readability.
+5. ✅ Add the live Pages URL to `README.md` once known.
+6. ✅ Run `make pages` and `make test` before release.
 
 ### Acceptance criteria
 
-- GitHub Pages is live.
-- The report loads at the repo Pages root.
-- Charts render correctly.
-- `make test` passes.
-- README links to the live report.
+- ✅ GitHub Pages is live.
+- ✅ The report loads at the repo Pages root.
+- ✅ Charts render correctly.
+- ✅ `make test` passes.
+- ✅ README links to the live report.
+
+### Verification notes
+
+- Latest checked Pages workflow run succeeded on `main`.
+- The repo Pages root loads the report generated from `docs/index.md`.
+- The 4 live chart assets returned HTTP 200 responses.
+- `make pages` completed successfully.
+- `make test` passed: 99 checks, 0 failed.
 
 ---
 
-## Phase 2: Documentation and Maintenance Cleanup
+## Phase 2: Documentation and Maintenance Cleanup ✅ Complete
 
 **Goal:** Remove stale project-history wording and make maintenance instructions explicit.
 
+**Completed:** 2026-07-05
+
 ### Tasks
 
-1. Keep `docs/project-history.md` as the single consolidated historical record.
-2. Update `docs/methodology-note.md` so its status, indicator list, and QA count match the current project.
-3. Add a short “how to refresh the report” note covering:
+1. ✅ Keep `docs/project-history.md` as the single consolidated historical record.
+2. ✅ Update `docs/methodology-note.md` so its status, indicator list, and QA count match the current project.
+3. ✅ Add a short “how to refresh the report” note covering:
    - `make fetch-force` when source data changes,
    - `make all`,
    - `make pages`,
    - `make test`.
-4. Ensure all documentation points to `docs/index.md` as the canonical report.
+4. ✅ Ensure all documentation points to `docs/index.md` as the canonical report.
 
 ### Acceptance criteria
 
-- No current-facing document describes the live evidence pack as unfinished POC work.
-- Maintenance steps are clear enough for a new contributor.
-- Historical context is consolidated in `docs/project-history.md` rather than spread across stale phase documents.
+- ✅ No current-facing document describes the live evidence pack as unfinished POC work.
+- ✅ Maintenance steps are clear enough for a new contributor.
+- ✅ Historical context is consolidated in `docs/project-history.md` rather than spread across stale phase documents.
+
+### Verification notes
+
+- `docs/project-history.md` is the single historical record for the original implementation phases.
+- `docs/methodology-note.md` reflects the current indicator set and QA status: 8 rated claims and 99 checks.
+- `README.md` includes a concise report-refresh sequence using `make fetch-force`, `make all`, `make pages`, and `make test`.
+- Current-facing documentation points to `docs/index.md` as the canonical report.
+- Stale proof-of-concept wording is confined to historical context or maintenance prompts.
 
 ---
 
@@ -271,6 +292,6 @@ An extension should only be considered complete when:
 
 ## 5. Immediate Next Phase Recommendation
 
-Start with **Phase 1: Publication Readiness**.
+Start with **Phase 3: Chart and Analytical Output Improvements**.
 
-Reason: the core evidence pack is already analytically complete. The highest-value next step is making sure the public report is live, readable, and reliable before adding new analytical scope.
+Reason: Phases 1 and 2 are complete. The public report is live, readable, reliable, and documented for maintenance. The highest-value next step is now to improve visual and analytical clarity without adding new indicators.

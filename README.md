@@ -107,7 +107,18 @@ See `docs/index.md` for the full public evidence report.
 
 ## GitHub Pages
 
-The canonical public report is `docs/index.md`. The workflow in `.github/workflows/static.yml` builds the `docs/` folder with Jekyll and deploys the generated site to GitHub Pages. In repository settings, configure Pages to use **GitHub Actions** as the source. Chart assets used by the page are copied to `docs/assets/charts/`. Run `make pages` after regenerating charts.
+The canonical public report is `docs/index.md` and is live at <https://namuan.github.io/uk-economic-change/>. The workflow in `.github/workflows/static.yml` builds the `docs/` folder with Jekyll and deploys the generated site to GitHub Pages. In repository settings, configure Pages to use **GitHub Actions** as the source. Chart assets used by the page are copied to `docs/assets/charts/`. Run `make pages` after regenerating charts.
+
+### Refreshing the report
+
+Use this sequence when source data changes or before a publication refresh:
+
+```bash
+make fetch-force  # optional: re-download source files when upstream data changes
+make all          # rebuild processed data, tables and charts
+make pages        # copy chart assets into docs/assets/charts/
+make test         # run QA checks before publishing
+```
 
 ## Documentation
 
