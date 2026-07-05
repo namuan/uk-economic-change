@@ -23,7 +23,7 @@ This report compares Britain's economy in 2007 — the peak before the global fi
 - NHS waiting lists have grown sharply. Total incomplete pathways rose from 4.19 million (August 2007) to 7.01 million (March 2026) — an increase of 67.5%. The post-COVID backlog accounts for much of this, but the trend was already upward before the pandemic.
 - Regional inequality is narrowing, but slowly. Scotland and Northern Ireland recorded the strongest convergence gains, while London's relative advantage shrank. But London is still nearly 29% above the UK average.
 
-The evidence shows that Britain's post-2007 economic performance marks a permanent change from the pre-crisis trend — not a temporary dip.
+Britain's post-2007 economic performance is a structural shift from the pre-crisis trend, not a temporary dip. Eighteen years of data now says the old growth trajectory is gone.
 
 ---
 
@@ -45,11 +45,11 @@ Instead, the compound annual growth rate since 2007 has been just 0.4% — a nea
 
 ![GDP and NDP per head: 2007–2025](assets/charts/gdp_per_head_timeline.png)
 
-Figure 1: GDP and NDP per head, 2007 to 2025, chained volume measures at 2023 prices. The chart shows 3 distinct phases: the 2008 to 2009 financial crisis contraction, a slow recovery through the 2010s, the 2020 COVID shock, and a modest post-pandemic recovery. NDP per head (GDP minus capital consumption) tracks below GDP throughout, and the gap widens over time.
+Figure 1: GDP and NDP per head, 2007 to 2025, chained volume measures at 2023 prices. The chart traces four phases — the 2008-2009 financial crisis contraction, a slow recovery through the 2010s, the 2020 COVID shock, and a modest post-pandemic recovery. NDP per head (GDP minus capital consumption) runs below GDP throughout, and the gap widens over time.
 
 ### Why it matters
 
-A 0.4% annual growth rate implies that GDP per head doubles roughly every 175 years. At the pre-2007 rate of 2.3%, it would double every 30 years. This is not a rounding error — it is a permanent change in the economy's path, with effects on living standards, public finances, and fiscal sustainability.
+A 0.4% annual growth rate means GDP per head doubles roughly every 175 years. At the pre-2007 rate of 2.3%, it would double every 30 years. The gap between 0.4% and 2.3% is the difference between stagnation and growth. It directly affects living standards, public finances, and fiscal sustainability.
 
 ---
 
@@ -86,7 +86,7 @@ Figure 2: Percentage change in the 6 national indicators since 2007. The NHS wai
 
 ### The stagnation is real
 
-Labour productivity — output per hour worked — is the foundation of long-run improvements in living standards. When productivity grows, wages can rise without inflation, tax revenues increase without rate rises, and the economy can absorb cost pressures without losing competitiveness.
+Labour productivity — output per hour worked — is the foundation of long-run improvements in living standards. Productivity growth is what allows wages to rise without stoking inflation, tax revenues to increase without rate rises, and cost pressures to be absorbed without losing competitiveness. Without it, those things become trade-offs.
 
 |                                  | 2007 | 2025 | Change           |
 | -------------------------------- | ---- | ---- | ---------------- |
@@ -96,7 +96,7 @@ Output per hour worked rose 6.9% over 18 years — a compound rate of about 0.4%
 
 ### Why productivity growth has been so slow
 
-The UK's post-2007 productivity is now approaching 2 decades of near-stagnation. This is not a short-term phenomenon, a measurement error, or a cyclical dip. It is the defining economic fact of the period.
+The UK's post-2007 productivity record is now approaching two decades of near-stagnation. If you want to understand why Britain feels poorer than it did, start here. This is structural, not cyclical — and it is the defining economic fact of the period.
 
 To put the numbers in perspective:
 
@@ -215,13 +215,13 @@ The waiting list fell sharply after the 18-week referral-to-treatment target was
 
 ### Interpretation
 
-A 67.5% increase in the waiting list over 19 years means NHS access has become much worse. But you need to keep 3 things in mind when interpreting this:
+A 67.5% increase in the waiting list over 19 years means NHS access has become much worse, though the picture has some wrinkles.
 
-- The 2007 baseline is the first month of RTT data, not a "normal" pre-crisis level. The waiting list was already considered high in 2007, which is why the 18-week target was introduced.
-- The post-2020 surge is largely caused by COVID, reflecting a shock to the whole system rather than steady worsening. The pre-COVID trend (2.4 million in 2010 to 4.2 million in 2020) was upward but much more gradual.
-- The data covers England only — not Scotland, Wales, or Northern Ireland, which have separate NHS systems.
+- The 2007 baseline is the first month of RTT data, not a stable pre-crisis level. The list was already considered high, which is why the 18-week target was introduced.
+- The post-2020 surge is largely driven by COVID — a shock to the whole system, not steady worsening. The pre-COVID trend from 2010 to 2020 was upward but much gentler.
+- The data covers England only. Scotland, Wales, and Northern Ireland have their own NHS systems.
 
-Despite these limits, the direction is clear: NHS waiting list pressure has increased substantially since 2007. The post-COVID backlog represents a level of unmet need not seen before.
+The direction is clear despite these caveats: NHS waiting list pressure is substantially worse than in 2007, and the post-COVID backlog is a level of unmet need this country has not seen before.
 
 ### Evidence rating: strong
 
@@ -260,7 +260,7 @@ Figure 3: Percentage change in regional output per hour relative to the UK avera
 
 ### Convergence is happening, but slowly
 
-There are 3 findings that stand out from the regional data:
+The regional data tells a more complicated story than the headline convergence figure suggests.
 
 - The lowest-productivity regions in 2007 improved the most. Northern Ireland (+8.1%), Scotland (+7.3%), and Wales (+3.0%) — all below the UK average in 2007 — recorded the strongest gains. This suggests the regions that started furthest behind are closing some of the gap.
 - London's advantage is shrinking, not growing. London's output per hour fell from 38.7% above the UK average to 28.5% above. This is the largest single change in the dataset. It is the opposite of what you would see if London were pulling further ahead. London is still far ahead of every other region, but the gap is narrowing.
@@ -299,7 +299,7 @@ The claims-evidence matrix links broad policy and media claims to specific indic
 
 ## 9. What is still left
 
-The framework now includes real earnings, housing affordability, and NHS waiting-list pressure as well as output, income, productivity, and regional productivity. The gaps that remain are narrower and mainly concern coverage, detail, and explaining why things changed:
+The framework now covers real earnings, housing affordability, and NHS waiting-list pressure alongside output, income, productivity, and regional productivity. The remaining gaps are narrower — mostly about coverage, detail, and the question of why things changed.
 
 - Distributional living standards. We now measure real earnings through CPI-deflated Average Weekly Earnings (+2.3% since 2007), but GDP per head and AWE are averages. Household disposable income, income inequality, poverty, and wealth measures would show how gains and losses were distributed.
 - Full UK housing coverage. We now measure housing affordability through the house price to earnings ratio, but the ONS series covers England and Wales only. Scotland and Northern Ireland remain outside the housing indicator. Local-authority breakdowns would add detail.
@@ -368,13 +368,13 @@ All source code is in `src/`. Raw data is cached in `data/raw/`. Methodology is 
 
 We built this evidence pack in 5 phases:
 
-| Phase | Description                                                                | Document                    |
-| ----- | -------------------------------------------------------------------------- | --------------------------- |
+| Phase | Description                                                                | Document                  |
+| ----- | -------------------------------------------------------------------------- | ------------------------- |
 | 1     | Data source discovery — confirmed working ONS endpoints for all indicators | `docs/project-history.md` |
 | 2     | Fetch layer — download module that caches data                             | `docs/project-history.md` |
 | 3     | Data processing — standardising raw data into consistent formats           | `docs/project-history.md` |
 | 4     | Charts, claims matrix and validation                                       | `docs/project-history.md` |
-| 5     | Documentation and final polish                                             | This report                 |
+| 5     | Documentation and final polish                                             | This report               |
 
 The full project structure, Makefile commands, and documentation index are in `README.md`.
 
