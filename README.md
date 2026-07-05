@@ -103,7 +103,7 @@ uv lock                      # update lockfile after changes
 - **Real earnings barely moved.** Real AWE rose only 2.3% (+£16/wk) while GDP per head rose 7.7%. The output-pay gap is the defining living-standards story.
 - **Housing affordability deteriorated then partially recovered.** The house price to earnings ratio rose from 7.2× (2007) to a peak of 8.95× (2021) before declining to 7.55× (2025). The 5-year average of 8.19 confirms sustained pressure above 2007 levels for most of the post-crisis period.
 
-See `docs/findings-summary.md` for the full one-page evidence summary.
+See `docs/index.md` for the full public evidence report.
 
 ## GitHub Pages
 
@@ -115,11 +115,9 @@ The canonical public report is `docs/index.md`. The workflow in `.github/workflo
 |----------|-------------|
 | `docs/index.md` | **Full evidence report and GitHub Pages landing page** |
 | `docs/index-update-prompt.md` | Reusable AI prompt for refreshing the public report from data outputs |
-| `docs/findings-summary.md` | One-page key findings |
 | `docs/methodology-note.md` | Full methodology, data sources, limitations |
-| `docs/poc-summary.md` | Historical proof-of-concept status and structure overview |
 | `docs/future-plan.md` | Roadmap and extension plan |
-| `docs/phase-*-summary.md` | Phase-by-phase implementation records |
+| `docs/project-history.md` | Consolidated implementation history from the original planning and phase docs |
 
 ## Core evidence-pack status
 

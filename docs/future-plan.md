@@ -104,21 +104,20 @@ The phases below are ordered so that each one can be tackled independently. Late
 
 ### Tasks
 
-1. Update or archive older phase documents that still refer to the project as a proof of concept.
-2. Decide whether `docs/poc-summary.md` should remain as historical documentation or be moved/renamed.
-3. Update `docs/methodology-note.md` so its status, indicator list, and QA count match the current project.
-4. Add a short “how to refresh the report” note covering:
+1. Keep `docs/project-history.md` as the single consolidated historical record.
+2. Update `docs/methodology-note.md` so its status, indicator list, and QA count match the current project.
+3. Add a short “how to refresh the report” note covering:
    - `make fetch-force` when source data changes,
    - `make all`,
    - `make pages`,
    - `make test`.
-5. Ensure all documentation points to `docs/index.md` as the canonical report.
+4. Ensure all documentation points to `docs/index.md` as the canonical report.
 
 ### Acceptance criteria
 
 - No current-facing document describes the live evidence pack as unfinished POC work.
 - Maintenance steps are clear enough for a new contributor.
-- Historical documents are clearly labelled as historical if retained.
+- Historical context is consolidated in `docs/project-history.md` rather than spread across stale phase documents.
 
 ---
 

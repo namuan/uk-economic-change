@@ -370,10 +370,10 @@ We built this evidence pack in 5 phases:
 
 | Phase | Description                                                                | Document                    |
 | ----- | -------------------------------------------------------------------------- | --------------------------- |
-| 1     | Data source discovery — confirmed working ONS endpoints for all indicators | `docs/phase-1-2-summary.md` |
-| 2     | Fetch layer — download module that caches data                             | `docs/phase-1-2-summary.md` |
-| 3     | Data processing — standardising raw data into consistent formats           | `docs/phase-3-summary.md`   |
-| 4     | Charts, claims matrix and validation                                       | `docs/phase-4-summary.md`   |
+| 1     | Data source discovery — confirmed working ONS endpoints for all indicators | `docs/project-history.md` |
+| 2     | Fetch layer — download module that caches data                             | `docs/project-history.md` |
+| 3     | Data processing — standardising raw data into consistent formats           | `docs/project-history.md` |
+| 4     | Charts, claims matrix and validation                                       | `docs/project-history.md` |
 | 5     | Documentation and final polish                                             | This report                 |
 
 The full project structure, Makefile commands, and documentation index are in `README.md`.
