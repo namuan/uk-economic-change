@@ -107,7 +107,7 @@ See `docs/findings-summary.md` for the full one-page evidence summary.
 
 ## GitHub Pages
 
-The public report entry point is `docs/index.md`, so GitHub Pages can serve the evidence report by default when Pages is configured to publish from the `docs/` folder. Chart assets used by the page are copied to `docs/assets/charts/`. Run `make pages` after changing `docs/full-report.md` or regenerating charts.
+The public report entry point is `docs/index.md`. The workflow in `.github/workflows/static.yml` builds the `docs/` folder with Jekyll and deploys the generated site to GitHub Pages. In repository settings, configure Pages to use **GitHub Actions** as the source. Chart assets used by the page are copied to `docs/assets/charts/`. Run `make pages` after changing `docs/full-report.md` or regenerating charts.
 
 ## Documentation
 
