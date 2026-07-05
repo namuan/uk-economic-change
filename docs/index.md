@@ -11,7 +11,7 @@ July 2026 | Data sources: Office for National Statistics and NHS England
 
 ## Executive summary
 
-This report compares Britain's economy in 2007, the peak before the global financial crisis, with the latest data available. It draws on 6 national indicators, one A&E extension and 12 regional productivity measures, taken from the Office for National Statistics and NHS England and processed through a reproducible pipeline.
+This report compares Britain's economy in 2007, the peak before the global financial crisis, with the latest data available. It draws on 7 national indicators, one A&E extension and 12 regional productivity measures, taken from the Office for National Statistics and NHS England and processed through a reproducible pipeline.
 
 ### Main findings
 
@@ -22,6 +22,7 @@ This report compares Britain's economy in 2007, the peak before the global finan
 - Housing affordability has been under sustained pressure. The ratio of house prices to earnings rose from 7.2 (2007) to a peak of 8.95 (2021), before falling to 7.55 (2025). The 5-year average of 8.19 shows that affordability was much worse than in 2007 for most of the post-crisis period.
 - NHS waiting lists have grown sharply. Total incomplete pathways rose from 4.19 million (August 2007) to 7.01 million (March 2026) — an increase of 67.5%. The list peaked at 7.75 million in August 2023 before falling, but it remains far above its pre-COVID level.
 - A&E performance has worsened. The share of attendances completed within 4 hours fell from 96.8% in 2011 to 74.7% in 2025. There is no 2007 baseline in the current monthly A&E series, so this evidence is partial.
+- Public sector employment has grown slightly in headcount terms. Total UK public sector employment rose from 6.03 million in 2007 to 6.18 million in 2025, an increase of 149,000 or 2.5%. But public sector employment fell as a share of all employment, from 20.5% to 18.0%.
 - Regional inequality is narrowing, but slowly. Scotland and Northern Ireland recorded the strongest convergence gains, while London's relative advantage shrank. But London is still nearly 29% above the UK average.
 
 Britain's post-2007 economic performance is not a dip that will revert. It is a break from the pre-crisis trend. After 18 years, the data is unambiguous: the old growth trajectory has not returned.
@@ -83,7 +84,7 @@ Whatever the cause, the growing gap means GDP per head overstates the improvemen
 
 ![National indicators: percentage change since 2007](assets/charts/national_indicators_change.png)
 
-Figure 3: Percentage change in the 6 national indicators since 2007. The NHS waiting list (+67.5%) is the largest change by far. GDP per head (+7.7%), output per hour (+6.9%), and house price to earnings ratio (+5.3%) show moderate increases. NDP per head (+3.7%) and real earnings (+2.3%) show the weakest growth. The gap between output and living standards has widened.
+Figure 3: Percentage change in the 7 national indicators since 2007. The NHS waiting list (+67.5%) is the largest change by far. GDP per head (+7.7%), output per hour (+6.9%), house price to earnings ratio (+5.3%), NDP per head (+3.7%), public sector employment (+2.5%) and real earnings (+2.3%) show much smaller changes. The gap between output and living standards has widened.
 
 ---
 
@@ -281,7 +282,37 @@ We use NHS England A&E Attendances and Emergency Admissions data. The measure co
 
 ---
 
-## 8. Regional productivity
+## 8. Public sector employment
+
+### The main finding
+
+Total UK public sector employment rose from 6.03 million in 2007 to 6.18 million in 2025. That is an increase of 149,000 people, or 2.5%.
+
+| Measure | 2007 | 2025 | Change |
+| --- | --- | --- | --- |
+| Public sector employment | 6.03M | 6.18M | +149,000 (+2.5%) |
+| Public sector share of total employment | 20.5% | 18.0% | −2.5 percentage points |
+| Public sector employment excluding major reclassifications | 5.58M | 5.93M | +350,000 (+6.3%) |
+
+### Interpretation
+
+The claim that the public sector has grown is true in headcount terms, but only modestly for the headline total public sector series.
+
+The qualification matters. Public sector employment fell as a share of total employment, from 20.5% in 2007 to 18.0% in 2025. That means the public sector employs more people than in 2007, but it is smaller relative to the whole labour market.
+
+The composition also changed. Central government employment rose from 2.71 million to 4.05 million. Local government employment fell from 2.95 million to 1.97 million. Some of this reflects changes in classification and responsibility rather than a simple shift in service capacity.
+
+### Evidence rating: partial
+
+The evidence is partial because the answer depends on the denominator and classification. The headcount rose. The employment share fell. Reclassifications affect the headline public sector series, so we also check the series excluding major reclassifications.
+
+### Data note
+
+We use the ONS Public sector employment time series, dataset PSE. The headline measure is total public sector employment, UK, headcount, seasonally adjusted. The source is official and gives a clean 2007 baseline.
+
+---
+
+## 9. Regional productivity
 
 ### The picture across Britain
 
@@ -332,7 +363,7 @@ The claim that "regional productivity inequality persists" is rated partial. The
 
 ---
 
-## 9. Claims-evidence matrix
+## 10. Claims-evidence matrix
 
 The claims-evidence matrix links broad policy and media claims to specific indicators and assesses whether the data supports them.
 
@@ -347,16 +378,18 @@ The claims-evidence matrix links broad policy and media claims to specific indic
 | C007: Housing pressure has worsened since 2007                                          | Partial         | Median house price to earnings ratio rose from 7.2× (2007) to 7.55× (2025), but peaked at 8.95× in 2021 before declining. The 5-year average of 8.19× shows sustained pressure above 2007 levels, though the endpoint comparison alone hides how bad affordability became during 2015 to 2023.              |
 | C008: Public service pressure (NHS waiting list) has increased substantially since 2007 | Strong          | NHS England waiting list rose from 4.19M (Aug 2007) to 7.01M (Mar 2026), a 67.5% increase. Post-COVID backlog accounts for much of the increase, but the pre-COVID trend was already upward (2.4M in 2010 to 4.2M in 2020). Data covers England only.                                                       |
 | C009: A&E performance has worsened since the early 2010s                                | Partial         | A&E attendances completed within 4 hours fell from an annual average of 96.8% in 2011 to 74.7% in 2025, a fall of 22.1 percentage points. Evidence is partial because there is no 2007 baseline and comparability caveats apply before June 2015 and during the 2019 to 2023 clinical standards field test. |
+| C010: Public sector employment has grown since 2007                                     | Partial         | Public sector employment rose from 6.03M in 2007 to 6.18M in 2025, an increase of 149,000 or 2.5%. But public sector employment fell as a share of total employment, from 20.5% to 18.0%. Reclassifications affect the headline series.                                         |
 
 ---
 
-## 10. What is still left
+## 11. What is still left
 
-The framework now covers real earnings, housing affordability, NHS waiting-list pressure and A&E performance alongside output, income, productivity and regional productivity. The remaining gaps are narrower — mostly about coverage, detail and the question of why things changed.
+The framework now covers real earnings, housing affordability, NHS waiting-list pressure, A&E performance and public sector employment alongside output, income, productivity and regional productivity. The remaining gaps are narrower — mostly about coverage, detail and the question of why things changed.
 
 - Distributional living standards. We now measure real earnings through CPI-deflated Average Weekly Earnings (+2.3% since 2007), but GDP per head and AWE are averages. Household disposable income, income inequality, poverty, and wealth measures would show how gains and losses were distributed.
 - Full UK housing coverage. We now measure housing affordability through the house price to earnings ratio, but the ONS series covers England and Wales only. Scotland and Northern Ireland remain outside the housing indicator. Phase 5 reviewed official sources and did not find a directly comparable four-nation price-to-earnings ratio.
 - Broader public-service pressure. We now measure NHS waiting times and A&E four-hour performance for England. Phase 5 reviewed social care, local authority spending power, courts and schools, but did not add them because the available official series do not support a clean 2007-to-latest comparison for this pack.
+- Public sector scale. We now measure public sector employment. Public spending, public service output and public service productivity remain outside the current scope.
 - International comparisons. The domestic productivity trend is clear, but placing it in an international context would strengthen the analysis.
 - Sub-regional variation. City-region and local authority breakdowns would reveal variation hidden by ITL1 regional averages.
 - Policy attribution. This framework measures what happened, not why. To explain changes with reference to specific policies, external shocks, or structural shifts would need a different analytical approach.
@@ -365,7 +398,7 @@ We document these gaps in `docs/future-plan.md`. Most of the original roadmap is
 
 ---
 
-## 11. Methodology
+## 12. Methodology
 
 ### Data sources
 
@@ -380,6 +413,7 @@ We took data from the Office for National Statistics and NHS England. Most sourc
 | House price to earnings ratio          | —           | Housing affordability (England and Wales)   | 2025   |
 | NHS waiting list (incomplete pathways) | —           | NHS England RTT data                        | 2026   |
 | A&E attendances within 4 hours         | —           | NHS England A&E data                        | 2025   |
+| Public sector employment               | G7AU        | Public sector employment (PSE)              | 2025   |
 | Regional output per hour               | —           | Regional labour productivity (PRODBYREG)    | 2023   |
 
 All national values are Chained Volume Measures (CVM) at 2023 reference prices, seasonally adjusted. Regional values are expressed as an index relative to the UK average (UK = 100).
@@ -415,6 +449,7 @@ All source code is in `src/`. Raw data is cached in `data/raw/`. Methodology is 
 - Housing affordability data covers England and Wales only, not Scotland or Northern Ireland.
 - NHS waiting list data covers England only. The 2007 baseline is the first month of RTT data collection (August 2007), which is not necessarily a "normal" pre-crisis level.
 - A&E four-hour performance data covers England only. The nearest full-year baseline is 2011, not 2007. Monthly values before June 2015 are estimated from weekly data. May 2019 to May 2023 performance data excludes clinical standards field-test trusts.
+- Public sector employment is UK-wide, headcount and seasonally adjusted. Reclassifications affect the headline total public sector series, so the report also checks public sector employment as a share of total employment and the excluding-major-reclassifications series.
 - ONS and NHS England statistics can be revised. The values in this report reflect the latest available source files as of July 2026.
 
 ---

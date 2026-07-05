@@ -85,6 +85,10 @@ def build_claims_matrix(national: pd.DataFrame, regional: pd.DataFrame) -> pd.Da
     nhs_change = nhs_raw["percentage_change"].iloc[0] if not nhs_raw.empty else 0
     nhs_2007 = nhs_raw["baseline_value"].iloc[0] if not nhs_raw.empty else 0
     nhs_latest = nhs_raw["latest_value"].iloc[0] if not nhs_raw.empty else 0
+    pse_raw = national[national["indicator_id"] == "public_sector_employment"]
+    pse_change = pse_raw["percentage_change"].iloc[0] if not pse_raw.empty else 0
+    pse_2007 = pse_raw["baseline_value"].iloc[0] if not pse_raw.empty else 0
+    pse_latest = pse_raw["latest_value"].iloc[0] if not pse_raw.empty else 0
     london_now = regional[regional["geography"] == "London"]["latest_value"].iloc[0]
     london_2007 = regional[regional["geography"] == "London"]["baseline_value"].iloc[0]
     scotland_change = regional[regional["geography"] == "Scotland"]["percentage_change"].iloc[0]
@@ -98,6 +102,7 @@ def build_claims_matrix(national: pd.DataFrame, regional: pd.DataFrame) -> pd.Da
         "C006": ("Strong", f"Real earnings (CPI-deflated AWE) rose only {earnings_change:.1f}% since 2007, compared with GDP per head growth of {gdp_change:.1f}%. Living standards, as measured by real pay, have barely improved."),
         "C007": ("Partial", f"Median house price to earnings ratio rose from {housing_2007:.1f} (2007) to {housing_2025:.1f} (2025), but peaked at 8.95 in 2021 before declining. The 5-year average of 8.19 confirms sustained pressure above 2007 levels, though the endpoint comparison alone understates the deterioration experienced during 2015–2023."),
         "C008": ("Strong", f"NHS England waiting list rose from {nhs_2007/1e6:.2f}M (Aug 2007) to {nhs_latest/1e6:.2f}M (Mar 2026), an increase of {nhs_change:.0f}%. The post-2020 COVID backlog accounts for much of the increase, but the pre-COVID trend was already upward (2.4M in 2010 to 4.2M in 2020)."),
+        "C010": ("Partial", f"Public sector employment rose from {pse_2007/1000:.2f}M in 2007 to {pse_latest/1000:.2f}M in 2025, an increase of {pse_latest - pse_2007:.0f} thousand ({pse_change:.1f}%). The public sector share of total employment fell from 20.5% to 18.0%, so headcount grew but the sector shrank as a share of employment."),
     }
 
     for claim_id, (strength, caveat) in findings.items():
@@ -234,6 +239,7 @@ def build_national_indicators_chart(national: pd.DataFrame) -> None:
         "real_earnings": "Real earnings (AWE)",
         "housing_affordability": "House price / earnings",
         "nhs_waiting_list": "NHS waiting list",
+        "public_sector_employment": "Public sector employment",
     }
     df["label"] = df["indicator_id"].map(label_map)
     df = df.sort_values("percentage_change")

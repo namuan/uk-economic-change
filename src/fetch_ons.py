@@ -233,6 +233,19 @@ def fetch_housing_affordability(*, force: bool = False) -> FetchResult:
     )
 
 
+def fetch_public_sector_employment(*, force: bool = False) -> FetchResult:
+    """Download ONS public sector employment time-series dataset.
+
+    Used to test whether public sector employment has grown since 2007.
+    """
+    return _fetch(
+        indicator_id="public_sector_employment",
+        url=f"{ONS_FILE_BASE}?uri=/employmentandlabourmarket/peopleinwork/publicsectorpersonnel/datasets/publicsectoremploymenttimeseriesdataset/current/pse.csv",
+        filename="pse.csv",
+        force=force,
+    )
+
+
 def fetch_nhs_waiting_list(*, force: bool = False) -> FetchResult:
     """Verify NHS waiting list CSV is present (data committed to repo).
 
@@ -294,6 +307,7 @@ def fetch_all(*, force: bool = False) -> FetchReport:
         fetch_awe_nominal,
         fetch_cpi,
         fetch_housing_affordability,
+        fetch_public_sector_employment,
         fetch_nhs_waiting_list,
         fetch_ae_monthly_timeseries,
     ]

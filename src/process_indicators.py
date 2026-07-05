@@ -241,6 +241,33 @@ def process_nhs_waiting_list() -> dict:
     }
 
 
+def _read_pse_csv() -> pd.DataFrame:
+    """Read ONS public sector employment dataset with CDID columns."""
+    raw = pd.read_csv(RAW_DIR / "pse.csv", header=None)
+    columns = raw.iloc[1].tolist()
+    df = raw.iloc[7:].copy()
+    df.columns = columns
+    df = df.rename(columns={"CDID": "period"})
+    df["period"] = df["period"].astype(str).str.strip()
+    return df
+
+
+def process_public_sector_employment() -> dict:
+    """Extract total public sector employment, headcount, UK, seasonally adjusted."""
+    df = _read_pse_csv()
+    df["value"] = pd.to_numeric(df["G7AU"], errors="coerce")
+    baseline = df.loc[df["period"] == "2007", "value"].iloc[0]
+    latest = df.loc[df["period"] == "2025", "value"].iloc[0]
+    return {
+        "indicator_id": "public_sector_employment",
+        "geography": "UK",
+        "baseline_year": 2007,
+        "baseline_value": float(baseline),
+        "latest_year": 2025,
+        "latest_value": float(latest),
+    }
+
+
 def build_national_table() -> pd.DataFrame:
     """Build the populated national comparison table."""
     rows = [
@@ -250,6 +277,7 @@ def build_national_table() -> pd.DataFrame:
         process_real_earnings(),
         process_housing_affordability(),
         process_nhs_waiting_list(),
+        process_public_sector_employment(),
     ]
     df = pd.DataFrame(rows)
     # Add remaining columns with empty placeholders
@@ -264,6 +292,7 @@ def build_national_table() -> pd.DataFrame:
         "Nominal AWE (KAB9) deflated by CPI (D7BT) to 2025 prices. Whole economy, total pay, seasonally adjusted. Monthly data available.",
         "Ratio of median house price to median gross annual workplace-based earnings. England and Wales only (not UK). Peaked at 8.95 in 2021 before declining to 7.55 in 2025. Five-year average is 8.19.",
         "NHS England total incomplete RTT pathways. August 2007 = first month of incomplete-pathway data collection. Monthly commissioner-basis values are used where available, with NHS historical time-series values retained for older periods. The series peaks in August 2023 before falling to the latest point in March 2026.",
+        "ONS public sector employment, total public sector, UK, headcount, seasonally adjusted. Reclassifications affect the total public sector series, so the employment share and excluding-major-reclassifications series should also be checked when interpreting growth.",
     ]
     return df[PROCESSED_COLS]
 
@@ -524,6 +553,34 @@ def _real_earnings_long_rows() -> list[dict]:
     return rows
 
 
+def _public_sector_employment_long_rows() -> list[dict]:
+    """Extract total public sector employment for all years 2007–2025."""
+    df = _read_pse_csv()
+    df["value"] = pd.to_numeric(df["G7AU"], errors="coerce")
+    annual = df[df["period"].str.match(r"^\d{4}$", na=False) & df["value"].notna()].copy()
+    annual["year"] = annual["period"].astype(int)
+    annual = annual[(annual["year"] >= 2007) & (annual["year"] <= 2025)]
+
+    rows = []
+    for _, row in annual.iterrows():
+        rows.append({
+            "indicator_id": "public_sector_employment",
+            "indicator_name": "Public sector employment",
+            "domain": "Public Services",
+            "geography_code": GEOGRAPHY_CODES["UK"],
+            "geography_name": "UK",
+            "geography_type": "national",
+            "period_type": "annual",
+            "period": row["period"],
+            "year": int(row["year"]),
+            "value": round(float(row["value"]), 0),
+            "unit": "thousand people, headcount SA",
+            "source_url": "https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/publicsectorpersonnel/datasets/publicsectoremploymenttimeseriesdataset/current/pse.csv",
+            "quality_flag": "OK",
+        })
+    return rows
+
+
 LONG_FORMAT_COLS = [
     "indicator_id", "indicator_name", "domain",
     "geography_code", "geography_name", "geography_type",
@@ -562,6 +619,9 @@ def build_long_format() -> pd.DataFrame:
     # Real earnings (computed from two series)
     all_rows.extend(_real_earnings_long_rows())
 
+    # Public sector employment (PSE has special format)
+    all_rows.extend(_public_sector_employment_long_rows())
+
     # Regional productivity
     all_rows.extend(_regional_long_rows())
 
@@ -595,7 +655,7 @@ def write_processed() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
 def main() -> None:
     national, regional, long_format = write_processed()
 
-    print("National comparison table (6 indicators):")
+    print(f"National comparison table ({len(national)} indicators):")
     print(national[["indicator_id", "baseline_value", "latest_value"]].to_string(index=False))
 
     print(f"\nRegional productivity table ({len(regional)} regions):")
