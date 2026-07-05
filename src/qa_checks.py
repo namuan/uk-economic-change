@@ -66,9 +66,10 @@ def test_indicator_register() -> None:
     check("No missing baseline_year_available values",
           df["baseline_year_available"].notna().all())
 
-    check("All available baseline years are 2007",
-          (df["baseline_year_available"].astype(str).str.strip() == "2007").all(),
-          f"Non-2007: {df[df['baseline_year_available'].astype(str).str.strip() != '2007']['indicator_id'].tolist()}")
+    non_2007 = df[df["baseline_year_available"].astype(str).str.strip() != "2007"]
+    check("Non-2007 baselines are caveated",
+          non_2007["known_caveats"].notna().all(),
+          f"Missing caveat: {non_2007[non_2007['known_caveats'].isna()]['indicator_id'].tolist()}")
 
     check("Priority indicators are 1, 2, or 3",
           df["priority"].dropna().astype(str).isin(["1", "2", "3"]).all(),
@@ -233,6 +234,7 @@ def test_output_tables() -> None:
         "combined_comparison.csv",
         "claims_evidence_matrix.csv",
         "growth_rate_comparison.csv",
+        "public_service_extension.csv",
     ]
 
     for table in expected_tables:
@@ -284,6 +286,12 @@ def test_output_tables() -> None:
     check("Growth-rate comparison shows post-2007 slowdown",
           (growth["slowdown_pct_points"] < 0).all())
 
+    public_service = pd.read_csv(OUTPUT_TABLES / "public_service_extension.csv")
+    check("Public-service extension has at least one indicator",
+          len(public_service) >= 1)
+    check("A&E four-hour performance extension is present",
+          "ae_four_hour_performance" in set(public_service["indicator_id"]))
+
 
 # ---------------------------------------------------------------------------
 # 4. Chart generation
@@ -300,6 +308,7 @@ def test_charts() -> None:
         "regional_productivity_small_multiples.png",
         "housing_affordability_timeline.png",
         "nhs_waiting_list_timeline.png",
+        "ae_four_hour_performance_timeline.png",
         "growth_rate_comparison.png",
     ]
 
@@ -384,6 +393,7 @@ def test_raw_data() -> None:
         "d7bt_cpi.csv": "CPI index",
         "housing_affordability.xlsx": "Housing affordability",
         "nhs_waiting_list.csv": "NHS waiting list",
+        "ae_monthly_timeseries.xls": "A&E monthly time series",
     }
 
     for filename, label in raw_files.items():

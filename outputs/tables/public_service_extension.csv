@@ -1,0 +1,2 @@
+indicator_id,indicator,geography,baseline_period,baseline_value,latest_period,latest_value,absolute_change,unit,evidence_strength,caveat
+ae_four_hour_performance,A&E attendances within 4 hours,England,2011,96.8,2025,74.7,-22.1,percentage points,Partial,Nearest defensible annual baseline is 2011. Pre-June 2015 monthly values are estimated from weekly data. Four-hour performance from May 2019 to May 2023 excludes clinical standards field-test trusts.

@@ -17,8 +17,8 @@ The project now has:
 - automated data fetching and processing,
 - a long-format analytical dataset,
 - national and regional comparison tables,
-- nine chart outputs,
-- a completed claims-evidence matrix with 8 rated claims,
+- ten chart outputs,
+- a completed claims-evidence matrix with 9 rated claims,
 - a methodology note,
 - QA checks (`make test`),
 - a GitHub Pages workflow (`.github/workflows/static.yml`),
@@ -46,6 +46,7 @@ The remaining work is no longer about proving the concept. It is about improving
 | Earnings | CPI-deflated average weekly earnings | UK | 2025 |
 | Housing | House price to earnings ratio | England and Wales | 2025 |
 | Public services | NHS RTT incomplete pathways | England | 2026 |
+| Public services | A&E attendances completed within 4 hours | England | 2025 |
 | Regional productivity | Output per hour, UK nations and English regions | 12 ITL1 regions | 2023 |
 
 ### Outputs ✅
@@ -54,6 +55,8 @@ The remaining work is no longer about proving the concept. It is about improving
 - `outputs/tables/regional_productivity_comparison.csv`
 - `outputs/tables/combined_comparison.csv`
 - `outputs/tables/claims_evidence_matrix.csv`
+- `outputs/tables/growth_rate_comparison.csv`
+- `outputs/tables/public_service_extension.csv`
 - `outputs/charts/national_indicators_change.png`
 - `outputs/charts/gdp_per_head_timeline.png`
 - `outputs/charts/regional_productivity_change.png`
@@ -62,16 +65,17 @@ The remaining work is no longer about proving the concept. It is about improving
 - `outputs/charts/regional_productivity_small_multiples.png`
 - `outputs/charts/housing_affordability_timeline.png`
 - `outputs/charts/nhs_waiting_list_timeline.png`
+- `outputs/charts/ae_four_hour_performance_timeline.png`
 - `outputs/charts/growth_rate_comparison.png`
 - `docs/index.md` public report
 - `docs/assets/charts/` GitHub Pages chart assets
 
 ### Claims matrix ✅
 
-All 8 claims are rated:
+All 9 claims are rated:
 
 - 5 Strong
-- 3 Partial
+- 4 Partial
 - 0 TBD
 
 ## 3. Outstanding Work by Phase
@@ -206,28 +210,40 @@ The phases below are ordered so that each one can be tackled independently. Late
 
 ---
 
-## Phase 5: Housing and Public-Service Expansion
+## Phase 5: Housing and Public-Service Expansion ✅ Complete
 
 **Goal:** Broaden domains where the current report has partial geographic or service coverage.
 
+**Completed:** 2026-07-05
+
 ### Housing tasks
 
-1. Investigate Scotland and Northern Ireland housing affordability sources.
-2. Assess whether a UK-wide or four-nation comparable housing affordability measure can be constructed.
-3. Consider housing supply indicators: completions, starts, dwellings per household, or planning approvals.
-4. Add local authority housing affordability only if geography and methodology are manageable.
+1. ✅ Investigate Scotland and Northern Ireland housing affordability sources.
+2. ✅ Assess whether a UK-wide or four-nation comparable housing affordability measure can be constructed.
+3. ✅ Consider housing supply indicators: completions, starts, dwellings per household, or planning approvals.
+4. ✅ Add local authority housing affordability only if geography and methodology are manageable.
 
 ### Public-service tasks
 
-1. Evaluate A&E waiting-time indicators.
-2. Evaluate social care indicators.
-3. Evaluate local authority spending power.
-4. Consider courts, schools, or other public-service pressure indicators where official time series exist.
+1. ✅ Evaluate A&E waiting-time indicators.
+2. ✅ Evaluate social care indicators.
+3. ✅ Evaluate local authority spending power.
+4. ✅ Consider courts, schools, or other public-service pressure indicators where official time series exist.
 
 ### Acceptance criteria
 
-- Housing coverage gaps are either filled or clearly documented as unresolved.
-- At least one broader public-service indicator is added or rejected with documented rationale.
+- ✅ Housing coverage gaps are either filled or clearly documented as unresolved.
+- ✅ At least one broader public-service indicator is added or rejected with documented rationale.
+
+### Verification notes
+
+- Added A&E four-hour performance as an England-only public-service pressure indicator.
+- Added `outputs/tables/public_service_extension.csv` and `outputs/charts/ae_four_hour_performance_timeline.png`.
+- Documented the housing affordability and public-service source assessments in `docs/phase5-housing-public-service-assessment.md`.
+- Reviewed social care, local authority spending power, courts and schools. These were not added in Phase 5 because the available official series do not support a clean 2007-to-latest comparison without method breaks, responsibility changes, or a post-2007 baseline.
+- Updated the public report, methodology caveats, README output listing, claims register, and QA checks.
+- `make pages` completed successfully.
+- `make test` passed.
 
 ---
 

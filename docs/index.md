@@ -5,13 +5,13 @@ title: Britain Since 2007 Evidence Report
 # Britain Since 2007: Evidence Report
 
 UK Economic Change Comparison Framework — Evidence Pack  
-July 2026 | Data source: Office for National Statistics
+July 2026 | Data sources: Office for National Statistics and NHS England
 
 ---
 
 ## Executive summary
 
-This report compares Britain's economy in 2007 (the peak before the global financial crisis) with the latest data available. It draws on 6 national indicators and 12 regional productivity measures, taken from the Office for National Statistics and NHS England and processed through a reproducible pipeline.
+This report compares Britain's economy in 2007, the peak before the global financial crisis, with the latest data available. It draws on 6 national indicators, one A&E extension and 12 regional productivity measures, taken from the Office for National Statistics and NHS England and processed through a reproducible pipeline.
 
 ### Main findings
 
@@ -21,9 +21,10 @@ This report compares Britain's economy in 2007 (the peak before the global finan
 - Real earnings (pay adjusted for inflation) grew by 2.3%, or £16 per week in 2025 prices. GDP per head grew by 7.7% over the same period. The economy produces more per person, but the average worker's real pay has barely moved.
 - Housing affordability has been under sustained pressure. The ratio of house prices to earnings rose from 7.2 (2007) to a peak of 8.95 (2021), before falling to 7.55 (2025). The 5-year average of 8.19 shows that affordability was much worse than in 2007 for most of the post-crisis period.
 - NHS waiting lists have grown sharply. Total incomplete pathways rose from 4.19 million (August 2007) to 7.01 million (March 2026) — an increase of 67.5%. The list peaked at 7.75 million in August 2023 before falling, but it remains far above its pre-COVID level.
+- A&E performance has worsened. The share of attendances completed within 4 hours fell from 96.8% in 2011 to 74.7% in 2025. There is no 2007 baseline in the current monthly A&E series, so this evidence is partial.
 - Regional inequality is narrowing, but slowly. Scotland and Northern Ireland recorded the strongest convergence gains, while London's relative advantage shrank. But London is still nearly 29% above the UK average.
 
-Britain's post-2007 economic performance is not a dip that will revert. It is a break from the pre-crisis trend. After eighteen years, the data is unambiguous: the old growth trajectory has not returned.
+Britain's post-2007 economic performance is not a dip that will revert. It is a break from the pre-crisis trend. After 18 years, the data is unambiguous: the old growth trajectory has not returned.
 
 ---
 
@@ -250,7 +251,37 @@ We compiled this data from NHS England RTT monthly incomplete-pathway releases w
 
 ---
 
-## 7. Regional productivity
+## 7. A&E waiting times
+
+### The main finding
+
+The share of A&E attendances completed within 4 hours in England fell from an annual average of 96.8% in 2011 to 74.7% in 2025. That is a fall of 22.1 percentage points.
+
+| Measure                        | 2011  | 2025  | Change                  |
+| ------------------------------ | ----- | ----- | ----------------------- |
+| A&E attendances within 4 hours | 96.8% | 74.7% | −22.1 percentage points |
+
+![A&E four-hour performance timeline: 2010–2026](assets/charts/ae_four_hour_performance_timeline.png)
+
+Figure 7: Percentage of A&E attendances in England discharged, admitted or transferred within 4 hours, November 2010 to May 2026. The 2011 and 2025 figures in the table use annual averages so the comparison is not distorted by month-to-month volatility.
+
+### Interpretation
+
+A&E performance has weakened substantially since the early 2010s. The decline is not a COVID-only story. Performance was already below the 95% operational standard before 2020, then fell further after the pandemic.
+
+The indicator broadens the public-service evidence base. NHS waiting lists measure elective care pressure. A&E four-hour performance measures urgent and emergency care pressure.
+
+### Evidence rating: partial
+
+The evidence is partial because there is no 2007 baseline in the current monthly A&E time series. The nearest defensible full-year baseline is 2011. NHS England also warns that monthly values before June 2015 are estimated from weekly data, and that May 2019 to May 2023 four-hour performance excludes clinical standards field-test trusts.
+
+### Data note
+
+We use NHS England A&E Attendances and Emergency Admissions data. The measure covers England only and includes all A&E types. The source reports the number of attendances discharged, admitted or transferred within 4 hours of arrival.
+
+---
+
+## 8. Regional productivity
 
 ### The picture across Britain
 
@@ -273,7 +304,7 @@ Regional productivity — measured as output per hour relative to the UK average
 
 ![Regional productivity change: 2007 to 2023](assets/charts/regional_productivity_change.png)
 
-Figure 7: Percentage change in regional output per hour relative to the UK average (UK = 100), 2007 to 2023.
+Figure 8: Percentage change in regional output per hour relative to the UK average (UK = 100), 2007 to 2023.
 
 ### Convergence is happening, but slowly
 
@@ -289,11 +320,11 @@ The standard deviation of regional output per hour fell from 15.1 in 2007 to 12.
 
 ![Regional productivity small multiples: 2007–2023](assets/charts/regional_productivity_small_multiples.png)
 
-Figure 8: Regional output per hour paths, 2007 to 2023, UK = 100. The small multiples show how convergence happened: some lower-productivity regions gained ground, while London remained far ahead but moved closer to the UK average.
+Figure 9: Regional output per hour paths, 2007 to 2023, UK = 100. The small multiples show how convergence happened: some lower-productivity regions gained ground, while London remained far ahead but moved closer to the UK average.
 
 ![Regional productivity ranking: 2007 vs 2023](assets/charts/regional_ranking.png)
 
-Figure 9: Regional output per hour relative to the UK average (UK = 100), comparing 2007 and 2023 positions. Regions sorted by 2023 value. The pattern shows convergence at both ends — the lowest-ranked regions in 2007 gained ground, while London's advantage narrowed.
+Figure 10: Regional output per hour relative to the UK average (UK = 100), comparing 2007 and 2023 positions. Regions sorted by 2023 value. The pattern shows convergence at both ends — the lowest-ranked regions in 2007 gained ground, while London's advantage narrowed.
 
 ### Evidence rating: partial
 
@@ -301,30 +332,31 @@ The claim that "regional productivity inequality persists" is rated partial. The
 
 ---
 
-## 8. Claims-evidence matrix
+## 9. Claims-evidence matrix
 
 The claims-evidence matrix links broad policy and media claims to specific indicators and assesses whether the data supports them.
 
-| Claim                                                                                   | Evidence rating | What the data shows                                                                                                                                                                                                                                                                            |
-| --------------------------------------------------------------------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| C001: Britain's output per person has changed materially since 2007                     | Strong          | GDP per head rose 7.7% (£37,625 → £40,537). It has changed materially, but the direction and size of the change represent a collapse from pre-crisis trends.                                                                                                                                   |
-| C002: National income per head has changed materially since 2007                        | Strong          | NDP per head rose 3.7% — less than half the GDP gain. The growing gap suggests capital consumption is absorbing more output.                                                                                                                                                                   |
-| C003: Productivity growth has been weak since 2007                                      | Strong          | Output per hour rose 6.9% over 18 years (~0.4% pa), compared with ~2% pa before the crisis. The weakness is structural, not cyclical.                                                                                                                                                          |
-| C004: Regional productivity inequality persists                                         | Partial         | 7 regions improved their relative position; 5 declined. The overall spread narrowed (std dev 15.1 → 12.2), but London remains far ahead of every other region and middle-ranked regions show signs of relative decline.                                                                        |
-| C005: London is far more productive than other regions                                  | Strong          | London output per hour is 28.5% above the UK average, down from 38.7% in 2007. The gap is narrowing but London is still by far the most productive region.                                                                                                                                     |
-| C006: Living standards changed differently from GDP per head                            | Strong          | Real earnings (CPI-deflated AWE) rose only 2.3% since 2007, compared with GDP per head growth of 7.7%. The average worker's real pay has barely improved while output per person has grown.                                                                                                    |
-| C007: Housing pressure has worsened since 2007                                          | Partial         | Median house price to earnings ratio rose from 7.2× (2007) to 7.55× (2025), but peaked at 8.95× in 2021 before declining. The 5-year average of 8.19× shows sustained pressure above 2007 levels, though the endpoint comparison alone hides how bad affordability became during 2015 to 2023. |
-| C008: Public service pressure (NHS waiting list) has increased substantially since 2007 | Strong          | NHS England waiting list rose from 4.19M (Aug 2007) to 7.01M (Mar 2026), a 67.5% increase. Post-COVID backlog accounts for much of the increase, but the pre-COVID trend was already upward (2.4M in 2010 to 4.2M in 2020). Data covers England only.                                          |
+| Claim                                                                                   | Evidence rating | What the data shows                                                                                                                                                                                                                                                                                         |
+| --------------------------------------------------------------------------------------- | --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| C001: Britain's output per person has changed materially since 2007                     | Strong          | GDP per head rose 7.7% (£37,625 → £40,537). It has changed materially, but the direction and size of the change represent a collapse from pre-crisis trends.                                                                                                                                                |
+| C002: National income per head has changed materially since 2007                        | Strong          | NDP per head rose 3.7% — less than half the GDP gain. The growing gap suggests capital consumption is absorbing more output.                                                                                                                                                                                |
+| C003: Productivity growth has been weak since 2007                                      | Strong          | Output per hour rose 6.9% over 18 years (~0.4% pa), compared with ~2% pa before the crisis. The weakness is structural, not cyclical.                                                                                                                                                                       |
+| C004: Regional productivity inequality persists                                         | Partial         | 7 regions improved their relative position; 5 declined. The overall spread narrowed (std dev 15.1 → 12.2), but London remains far ahead of every other region and middle-ranked regions show signs of relative decline.                                                                                     |
+| C005: London is far more productive than other regions                                  | Strong          | London output per hour is 28.5% above the UK average, down from 38.7% in 2007. The gap is narrowing but London is still by far the most productive region.                                                                                                                                                  |
+| C006: Living standards changed differently from GDP per head                            | Strong          | Real earnings (CPI-deflated AWE) rose only 2.3% since 2007, compared with GDP per head growth of 7.7%. The average worker's real pay has barely improved while output per person has grown.                                                                                                                 |
+| C007: Housing pressure has worsened since 2007                                          | Partial         | Median house price to earnings ratio rose from 7.2× (2007) to 7.55× (2025), but peaked at 8.95× in 2021 before declining. The 5-year average of 8.19× shows sustained pressure above 2007 levels, though the endpoint comparison alone hides how bad affordability became during 2015 to 2023.              |
+| C008: Public service pressure (NHS waiting list) has increased substantially since 2007 | Strong          | NHS England waiting list rose from 4.19M (Aug 2007) to 7.01M (Mar 2026), a 67.5% increase. Post-COVID backlog accounts for much of the increase, but the pre-COVID trend was already upward (2.4M in 2010 to 4.2M in 2020). Data covers England only.                                                       |
+| C009: A&E performance has worsened since the early 2010s                                | Partial         | A&E attendances completed within 4 hours fell from an annual average of 96.8% in 2011 to 74.7% in 2025, a fall of 22.1 percentage points. Evidence is partial because there is no 2007 baseline and comparability caveats apply before June 2015 and during the 2019 to 2023 clinical standards field test. |
 
 ---
 
-## 9. What is still left
+## 10. What is still left
 
-The framework now covers real earnings, housing affordability, and NHS waiting-list pressure alongside output, income, productivity, and regional productivity. The remaining gaps are narrower — mostly about coverage, detail, and the question of why things changed.
+The framework now covers real earnings, housing affordability, NHS waiting-list pressure and A&E performance alongside output, income, productivity and regional productivity. The remaining gaps are narrower — mostly about coverage, detail and the question of why things changed.
 
 - Distributional living standards. We now measure real earnings through CPI-deflated Average Weekly Earnings (+2.3% since 2007), but GDP per head and AWE are averages. Household disposable income, income inequality, poverty, and wealth measures would show how gains and losses were distributed.
-- Full UK housing coverage. We now measure housing affordability through the house price to earnings ratio, but the ONS series covers England and Wales only. Scotland and Northern Ireland remain outside the housing indicator. Local-authority breakdowns would add detail.
-- Broader public-service pressure. We now measure NHS waiting times through RTT incomplete pathways for England only. A&E waiting times, local authority spending power, social care, courts, schools, and other services remain outside the current scope.
+- Full UK housing coverage. We now measure housing affordability through the house price to earnings ratio, but the ONS series covers England and Wales only. Scotland and Northern Ireland remain outside the housing indicator. Phase 5 reviewed official sources and did not find a directly comparable four-nation price-to-earnings ratio.
+- Broader public-service pressure. We now measure NHS waiting times and A&E four-hour performance for England. Phase 5 reviewed social care, local authority spending power, courts and schools, but did not add them because the available official series do not support a clean 2007-to-latest comparison for this pack.
 - International comparisons. The domestic productivity trend is clear, but placing it in an international context would strengthen the analysis.
 - Sub-regional variation. City-region and local authority breakdowns would reveal variation hidden by ITL1 regional averages.
 - Policy attribution. This framework measures what happened, not why. To explain changes with reference to specific policies, external shocks, or structural shifts would need a different analytical approach.
@@ -333,11 +365,11 @@ We document these gaps in `docs/future-plan.md`. Most of the original roadmap is
 
 ---
 
-## 10. Methodology
+## 11. Methodology
 
 ### Data sources
 
-We took all data from the Office for National Statistics and NHS England through automated download. We used no manual data entry.
+We took data from the Office for National Statistics and NHS England. Most source files are downloaded automatically. The NHS waiting-list CSV is tracked in the repository because it combines current monthly releases with older historical time-series values.
 
 | Indicator                              | ONS code    | Dataset                                     | Latest |
 | -------------------------------------- | ----------- | ------------------------------------------- | ------ |
@@ -347,6 +379,7 @@ We took all data from the Office for National Statistics and NHS England through
 | Real average weekly earnings           | KAB9 + D7BT | Labour Market Statistics (LMS) + CPI (MM23) | 2025   |
 | House price to earnings ratio          | —           | Housing affordability (England and Wales)   | 2025   |
 | NHS waiting list (incomplete pathways) | —           | NHS England RTT data                        | 2026   |
+| A&E attendances within 4 hours         | —           | NHS England A&E data                        | 2025   |
 | Regional output per hour               | —           | Regional labour productivity (PRODBYREG)    | 2023   |
 
 All national values are Chained Volume Measures (CVM) at 2023 reference prices, seasonally adjusted. Regional values are expressed as an index relative to the UK average (UK = 100).
@@ -381,7 +414,8 @@ All source code is in `src/`. Raw data is cached in `data/raw/`. Methodology is 
 - NDP per head data (MWB6) starts from 1998. Earlier comparisons are not possible.
 - Housing affordability data covers England and Wales only, not Scotland or Northern Ireland.
 - NHS waiting list data covers England only. The 2007 baseline is the first month of RTT data collection (August 2007), which is not necessarily a "normal" pre-crisis level.
-- All 6 national indicators are published with revisions. The values in this report reflect the latest available vintage as of July 2026.
+- A&E four-hour performance data covers England only. The nearest full-year baseline is 2011, not 2007. Monthly values before June 2015 are estimated from weekly data. May 2019 to May 2023 performance data excludes clinical standards field-test trusts.
+- ONS and NHS England statistics can be revised. The values in this report reflect the latest available source files as of July 2026.
 
 ---
 
@@ -402,4 +436,4 @@ The full project structure, Makefile commands, and documentation index are in `R
 ---
 
 UK Economic Change — Britain Since 2007: Evidence Framework.  
-Office for National Statistics data, sourced July 2026. All values subject to revision.
+Office for National Statistics and NHS England data, sourced July 2026. All values subject to revision.

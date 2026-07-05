@@ -261,6 +261,19 @@ def fetch_nhs_waiting_list(*, force: bool = False) -> FetchResult:
     )
 
 
+def fetch_ae_monthly_timeseries(*, force: bool = False) -> FetchResult:
+    """Download NHS England A&E monthly time-series workbook.
+
+    Used for the A&E four-hour performance extension indicator.
+    """
+    return _fetch(
+        indicator_id="ae_four_hour_performance",
+        url="https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2026/06/Monthly-AE-Time-Series-May-2026-wlgnE2.xls",
+        filename="ae_monthly_timeseries.xls",
+        force=force,
+    )
+
+
 # ---------------------------------------------------------------------------
 # Bulk fetch
 # ---------------------------------------------------------------------------
@@ -282,6 +295,7 @@ def fetch_all(*, force: bool = False) -> FetchReport:
         fetch_cpi,
         fetch_housing_affordability,
         fetch_nhs_waiting_list,
+        fetch_ae_monthly_timeseries,
     ]
 
     for fn in fetchers:

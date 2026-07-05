@@ -51,7 +51,7 @@ make clean-all  # remove everything including cached raw downloads
 |-------|---------|--------------|
 | Fetch | `make fetch` | Downloads 4 ONS source files to `data/raw/` |
 | Process | `make process` | Extracts 2007 & latest values, writes to `data/processed/` |
-| Build | `make build` | Computes changes, generates 5 CSVs + 9 PNG charts |
+| Build | `make build` | Computes changes, generates CSV tables and PNG charts |
 
 ### Indicators (6 core indicators + regional productivity)
 
@@ -63,6 +63,7 @@ make clean-all  # remove everything including cached raw downloads
 | Real earnings (AWE) | £711/wk | £727/wk (2025) | +2.3% |
 | House price / earnings ratio | 7.17× | 7.55× (2025) | +5.3% |
 | NHS waiting list | 4.19M | 7.01M (2026) | +67.5% |
+| A&E attendances within 4 hours | 96.8% (2011) | 74.7% (2025) | −22.1pp |
 | Regional output per hour | — | — | 12 regions |
 
 ### Outputs
@@ -74,7 +75,8 @@ outputs/
 │   ├── regional_productivity_comparison.csv
 │   ├── combined_comparison.csv
 │   ├── claims_evidence_matrix.csv
-│   └── growth_rate_comparison.csv
+│   ├── growth_rate_comparison.csv
+│   └── public_service_extension.csv
 └── charts/
     ├── national_indicators_change.png
     ├── gdp_per_head_timeline.png
@@ -82,6 +84,7 @@ outputs/
     ├── growth_rate_comparison.png
     ├── housing_affordability_timeline.png
     ├── nhs_waiting_list_timeline.png
+    ├── ae_four_hour_performance_timeline.png
     ├── regional_productivity_change.png
     ├── regional_productivity_small_multiples.png
     └── regional_ranking.png

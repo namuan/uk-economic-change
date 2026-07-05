@@ -176,6 +176,48 @@ def build_growth_rate_table() -> pd.DataFrame:
     return df
 
 
+def read_ae_four_hour_performance() -> pd.DataFrame:
+    """Read NHS England monthly A&E four-hour performance time series."""
+    path = RAW_DIR / "ae_monthly_timeseries.xls"
+    df = pd.read_excel(path, sheet_name="Performance", header=13)
+    df = df[pd.to_datetime(df["Period"], errors="coerce").notna()].copy()
+    df["date"] = pd.to_datetime(df["Period"])
+    df["year"] = df["date"].dt.year
+    df["percentage_within_4h"] = pd.to_numeric(
+        df["Percentage in 4 hours or less (all)"], errors="coerce"
+    ) * 100
+    df = df.dropna(subset=["percentage_within_4h"])
+    return df[["date", "year", "percentage_within_4h"]].sort_values("date")
+
+
+def build_public_service_extension_table() -> pd.DataFrame:
+    """Build Phase 5 public-service extension table."""
+    OUTPUT_TABLES.mkdir(parents=True, exist_ok=True)
+    ae = read_ae_four_hour_performance()
+    annual = ae.groupby("year", as_index=False)["percentage_within_4h"].mean()
+    baseline_year = 2011
+    latest_year = 2025
+    baseline = float(annual.loc[annual["year"] == baseline_year, "percentage_within_4h"].iloc[0])
+    latest = float(annual.loc[annual["year"] == latest_year, "percentage_within_4h"].iloc[0])
+
+    rows = [{
+        "indicator_id": "ae_four_hour_performance",
+        "indicator": "A&E attendances within 4 hours",
+        "geography": "England",
+        "baseline_period": baseline_year,
+        "baseline_value": round(baseline, 1),
+        "latest_period": latest_year,
+        "latest_value": round(latest, 1),
+        "absolute_change": round(latest - baseline, 1),
+        "unit": "percentage points",
+        "evidence_strength": "Partial",
+        "caveat": "Nearest defensible annual baseline is 2011. Pre-June 2015 monthly values are estimated from weekly data. Four-hour performance from May 2019 to May 2023 excludes clinical standards field-test trusts.",
+    }]
+    df = pd.DataFrame(rows)
+    df.to_csv(OUTPUT_TABLES / "public_service_extension.csv", index=False)
+    return df
+
+
 def build_national_indicators_chart(national: pd.DataFrame) -> None:
     """Horizontal bar chart: percentage change in national indicators since 2007."""
     OUTPUT_CHARTS.mkdir(parents=True, exist_ok=True)
@@ -441,6 +483,34 @@ def build_nhs_waiting_list_timeline_chart() -> None:
     plt.close(fig)
 
 
+def build_ae_four_hour_performance_chart() -> None:
+    """Line chart: A&E attendances within four hours, England."""
+    OUTPUT_CHARTS.mkdir(parents=True, exist_ok=True)
+    path = RAW_DIR / "ae_monthly_timeseries.xls"
+    if not path.exists():
+        return
+
+    df = read_ae_four_hour_performance()
+    if df.empty:
+        return
+
+    fig, ax = plt.subplots(figsize=(11, 5.5))
+    ax.plot(df["date"], df["percentage_within_4h"], color=BLUE, linewidth=2.0)
+    ax.axhline(95, color=GREY, linestyle="--", linewidth=1, label="95% operational standard")
+    ax.axvspan(pd.Timestamp("2019-05-01"), pd.Timestamp("2023-05-01"), color=LIGHT_GREY, alpha=0.25)
+    ax.text(pd.Timestamp("2019-07-01"), 98, "Clinical standards\nfield test", fontsize=8, color=GREY, va="top")
+    ax.set_xlabel("Year")
+    ax.set_ylabel("Attendances within 4 hours")
+    ax.set_title("A&E Four-Hour Performance Has Fallen Since the Early 2010s")
+    ax.yaxis.set_major_formatter(mticker.FormatStrFormatter("%.0f%%"))
+    ax.set_ylim(50, 100)
+    ax.legend(loc="lower left", fontsize=9)
+
+    fig.tight_layout()
+    fig.savefig(OUTPUT_CHARTS / "ae_four_hour_performance_timeline.png")
+    plt.close(fig)
+
+
 def build_growth_rate_comparison_chart(growth_rates: pd.DataFrame) -> None:
     """Grouped bar chart comparing pre- and post-2007 CAGRs."""
     OUTPUT_CHARTS.mkdir(parents=True, exist_ok=True)
@@ -516,6 +586,7 @@ def build_all_charts(national: pd.DataFrame, regional: pd.DataFrame, growth_rate
     build_regional_productivity_small_multiples()
     build_housing_affordability_timeline_chart()
     build_nhs_waiting_list_timeline_chart()
+    build_ae_four_hour_performance_chart()
     build_growth_rate_comparison_chart(growth_rates)
 
 
@@ -523,6 +594,7 @@ def main() -> None:
     national, regional, combined = build_comparison_tables()
     claims = build_claims_matrix(national, regional)
     growth_rates = build_growth_rate_table()
+    public_service = build_public_service_extension_table()
     build_all_charts(national, regional, growth_rates)
 
     print("Built evidence-pack outputs:")
@@ -531,6 +603,7 @@ def main() -> None:
     print(f"- {OUTPUT_TABLES / 'combined_comparison.csv'}")
     print(f"- {OUTPUT_TABLES / 'claims_evidence_matrix.csv'}")
     print(f"- {OUTPUT_TABLES / 'growth_rate_comparison.csv'}")
+    print(f"- {OUTPUT_TABLES / 'public_service_extension.csv'}")
     print(f"- {OUTPUT_CHARTS / 'national_indicators_change.png'}")
     print(f"- {OUTPUT_CHARTS / 'regional_productivity_change.png'}")
     print(f"- {OUTPUT_CHARTS / 'gdp_per_head_timeline.png'}")
@@ -539,6 +612,7 @@ def main() -> None:
     print(f"- {OUTPUT_CHARTS / 'regional_productivity_small_multiples.png'}")
     print(f"- {OUTPUT_CHARTS / 'housing_affordability_timeline.png'}")
     print(f"- {OUTPUT_CHARTS / 'nhs_waiting_list_timeline.png'}")
+    print(f"- {OUTPUT_CHARTS / 'ae_four_hour_performance_timeline.png'}")
     print(f"- {OUTPUT_CHARTS / 'growth_rate_comparison.png'}")
 
 
