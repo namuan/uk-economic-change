@@ -82,6 +82,19 @@ Added outputs:
 - `.github/workflows/static.yml` to build and deploy the `docs/` site through GitHub Actions.
 - `docs/index-update-prompt.md` as a reusable AI prompt for refreshing the public report from generated outputs.
 
+## Publication and chart improvements
+
+The publication-ready report was then expanded with additional analytical outputs that did not add new indicators but made existing evidence easier to interpret.
+
+Added outputs:
+
+- `outputs/tables/growth_rate_comparison.csv` for pre-2007 versus post-2007 CAGR comparisons.
+- Standalone productivity timeline chart.
+- Regional productivity small-multiple chart.
+- Housing affordability timeline chart.
+- NHS waiting-list timeline chart.
+- Growth-rate comparison chart.
+
 ## Current project state
 
 The project now has:
@@ -89,8 +102,8 @@ The project now has:
 - 6 core national/current indicators,
 - 12 regional productivity measures,
 - 8 evidence-rated claims,
-- 4 chart outputs,
+- 9 chart outputs,
 - a reproducible pipeline (`make fetch`, `make process`, `make build`, `make pages`),
-- and a QA suite currently covering 99 checks.
+- and a QA suite currently covering 114 checks.
 
 For current methodology, source details, caveats, and limitations, use `docs/methodology-note.md`. For future work, use `docs/future-plan.md`.

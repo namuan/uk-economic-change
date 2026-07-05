@@ -25,7 +25,7 @@ make process    # normalise raw data into processed tables
 make build      # generate output tables and charts
 make pages      # sync chart assets for GitHub Pages
 make all        # fetch → process → build (full pipeline)
-make test       # run QA checks (99 checks)
+make test       # run QA checks (114 checks)
 make validate   # run data validation checks
 ```
 
@@ -51,7 +51,7 @@ make clean-all  # remove everything including cached raw downloads
 |-------|---------|--------------|
 | Fetch | `make fetch` | Downloads 4 ONS source files to `data/raw/` |
 | Process | `make process` | Extracts 2007 & latest values, writes to `data/processed/` |
-| Build | `make build` | Computes changes, generates 4 CSVs + 4 PNG charts |
+| Build | `make build` | Computes changes, generates 5 CSVs + 9 PNG charts |
 
 ### Indicators (6 core indicators + regional productivity)
 
@@ -73,12 +73,18 @@ outputs/
 │   ├── national_comparison.csv
 │   ├── regional_productivity_comparison.csv
 │   ├── combined_comparison.csv
-│   └── claims_evidence_matrix.csv
+│   ├── claims_evidence_matrix.csv
+│   └── growth_rate_comparison.csv
 └── charts/
     ├── national_indicators_change.png
+    ├── gdp_per_head_timeline.png
+    ├── productivity_timeline.png
+    ├── growth_rate_comparison.png
+    ├── housing_affordability_timeline.png
+    ├── nhs_waiting_list_timeline.png
     ├── regional_productivity_change.png
-    ├── regional_ranking.png
-    └── gdp_per_head_timeline.png
+    ├── regional_productivity_small_multiples.png
+    └── regional_ranking.png
 ```
 
 ## Project management
@@ -135,7 +141,7 @@ make test         # run QA checks before publishing
 - ✅ Six core indicators comparing 2007 with latest
 - ✅ One regional indicator comparing 2007 with latest (12 regions)
 - ✅ Reproducible absolute and percentage change calculations
-- ✅ At least one chart (4 generated)
+- ✅ At least one chart (9 generated)
 - ✅ Claims-evidence matrix (8 rated, all non-TBD)
 - ✅ Methodology note
 

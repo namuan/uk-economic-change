@@ -47,6 +47,10 @@ Instead, the compound annual growth rate since 2007 has been just 0.4% — a nea
 
 Figure 1: GDP and NDP per head, 2007 to 2025, chained volume measures at 2023 prices. The chart shows four phases: the 2008-2009 financial crisis contraction, a slow recovery through the 2010s, the 2020 COVID shock, and a modest post-pandemic recovery. NDP per head (GDP minus capital consumption) sits below GDP throughout, and the gap widens over time.
 
+![Pre- and post-2007 growth rates](assets/charts/growth_rate_comparison.png)
+
+Figure 2: Compound annual growth rates before and after 2007 for GDP per head and output per hour. GDP per head growth fell from 2.3% a year in 1997 to 2007 to 0.4% a year in 2007 to 2025. Output per hour growth fell from 2.1% to 0.4% a year. This is the clearest single summary of the post-2007 slowdown.
+
 ### Why it matters
 
 A 0.4% annual growth rate means GDP per head doubles roughly every 175 years. At the pre-2007 rate of 2.3%, it would double every 30 years. The gap between 0.4% and 2.3% is the difference between stagnation and growth. It directly affects living standards, public finances, and fiscal sustainability.
@@ -78,7 +82,7 @@ Whatever the cause, the growing gap means GDP per head overstates the improvemen
 
 ![National indicators: percentage change since 2007](assets/charts/national_indicators_change.png)
 
-Figure 2: Percentage change in the 6 national indicators since 2007. The NHS waiting list (+67.5%) is the largest change by far. GDP per head (+7.7%), output per hour (+6.9%), and house price to earnings ratio (+5.3%) show moderate increases. NDP per head (+3.7%) and real earnings (+2.3%) show the weakest growth. The gap between output and living standards has widened.
+Figure 3: Percentage change in the 6 national indicators since 2007. The NHS waiting list (+67.5%) is the largest change by far. GDP per head (+7.7%), output per hour (+6.9%), and house price to earnings ratio (+5.3%) show moderate increases. NDP per head (+3.7%) and real earnings (+2.3%) show the weakest growth. The gap between output and living standards has widened.
 
 ---
 
@@ -93,6 +97,10 @@ Labour productivity (output per hour worked) is the foundation of long-run impro
 | Output per hour (Index 2023=100) | 93.0 | 99.4 | +6.4 pts (+6.9%) |
 
 Output per hour worked rose 6.9% over 18 years — a compound rate of about 0.4% per year. Before the crisis (1997 to 2007), productivity grew at 2.1% per year.
+
+![UK productivity timeline: 1997–2025](assets/charts/productivity_timeline.png)
+
+Figure 4: Output per hour worked, 1997 to 2025, index 2023 = 100. The chart shows strong pre-crisis growth followed by a long period of weak growth, interrupted by the 2020 COVID shock and recovery.
 
 ### Why productivity growth has been so slow
 
@@ -173,6 +181,10 @@ The simple 2007 to 2025 comparison hides a much more painful path:
 
 Housing affordability worsened steadily from 2014 onwards. It peaked in 2021 at a ratio nearly 25% worse than 2007. The fall to 7.55 by 2025 reflects both cooling house prices and earnings growth. But the 5-year average of 8.19 shows that for most of the recent period, affordability was much worse than in 2007.
 
+![Housing affordability timeline: 2007–2025](assets/charts/housing_affordability_timeline.png)
+
+Figure 5: Median house price to median workplace-based earnings ratio, England and Wales, 2007 to 2025. The endpoint comparison understates the deterioration because affordability worsened most between 2015 and 2021 before partially recovering.
+
 ### Interpretation
 
 A ratio of 7.55 means the median house costs 7.55 times the median annual salary — far above traditional lending multiples and historic norms. At the 2021 peak of 8.95, a median earner would need to spend nearly 9 years of gross salary to buy a median-priced home, before any other living costs.
@@ -212,6 +224,10 @@ The waiting list followed a distinct pattern over the period:
 | Mar 2026 | 7.01M        | Post-COVID backlog peak                     |
 
 The waiting list fell sharply after the 18-week referral-to-treatment target was introduced in 2008. It reached a low of 2.36 million in 2009. It then rose gradually through the 2010s, returning to roughly 2007 levels by 2019. The COVID-19 pandemic caused a surge that was the largest on record — from 4.24 million in March 2020 to over 7 million by 2026 — as elective procedures were cancelled and new referrals accumulated.
+
+![NHS England waiting list timeline: 2007–2026](assets/charts/nhs_waiting_list_timeline.png)
+
+Figure 6: NHS England RTT incomplete pathways, August 2007 to March 2026. The waiting list fell after the 18-week target was introduced, rose gradually through the 2010s, and then increased sharply after the COVID-19 shock.
 
 ### Interpretation
 
@@ -256,7 +272,7 @@ Regional productivity — measured as output per hour relative to the UK average
 
 ![Regional productivity change: 2007 to 2023](assets/charts/regional_productivity_change.png)
 
-Figure 3: Percentage change in regional output per hour relative to the UK average (UK = 100), 2007 to 2023.
+Figure 7: Percentage change in regional output per hour relative to the UK average (UK = 100), 2007 to 2023.
 
 ### Convergence is happening, but slowly
 
@@ -270,9 +286,13 @@ The regional data tells a more complicated story than the headline convergence f
 
 The standard deviation of regional output per hour fell from 15.1 in 2007 to 12.2 in 2023 — a reduction of about 19%. This shows that the spread of productivity outcomes across regions has narrowed, even as the absolute level of productivity growth has been weak nationally.
 
+![Regional productivity small multiples: 2007–2023](assets/charts/regional_productivity_small_multiples.png)
+
+Figure 8: Regional output per hour paths, 2007 to 2023, UK = 100. The small multiples show how convergence happened: some lower-productivity regions gained ground, while London remained far ahead but moved closer to the UK average.
+
 ![Regional productivity ranking: 2007 vs 2023](assets/charts/regional_ranking.png)
 
-Figure 4: Regional output per hour relative to the UK average (UK = 100), comparing 2007 and 2023 positions. Regions sorted by 2023 value. The pattern shows convergence at both ends — the lowest-ranked regions in 2007 gained ground, while London's advantage narrowed.
+Figure 9: Regional output per hour relative to the UK average (UK = 100), comparing 2007 and 2023 positions. Regions sorted by 2023 value. The pattern shows convergence at both ends — the lowest-ranked regions in 2007 gained ground, while London's advantage narrowed.
 
 ### Evidence rating: partial
 

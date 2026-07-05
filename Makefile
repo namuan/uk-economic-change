@@ -35,6 +35,8 @@ tables: process ## Regenerate output tables only (skips fetch if processed data 
 from src.build_outputs import build_comparison_tables, build_claims_matrix; \
 n, r, c = build_comparison_tables(); \
 build_claims_matrix(n, r); \
+from src.build_outputs import build_growth_rate_table; \
+build_growth_rate_table(); \
 print('Tables regenerated.')"
 
 charts: process ## Regenerate charts only (skips fetch if processed data exists)

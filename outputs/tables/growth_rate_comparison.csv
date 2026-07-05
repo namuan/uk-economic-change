@@ -1,0 +1,3 @@
+indicator_id,indicator,pre_period,post_period,pre_2007_cagr_pct,post_2007_cagr_pct,slowdown_pct_points
+gdp_per_head,GDP per head,1997-2007,2007-2025,2.31,0.42,-1.89
+labour_productivity_output_per_hour,Output per hour,1997-2007,2007-2025,2.13,0.37,-1.76

@@ -232,6 +232,7 @@ def test_output_tables() -> None:
         "regional_productivity_comparison.csv",
         "combined_comparison.csv",
         "claims_evidence_matrix.csv",
+        "growth_rate_comparison.csv",
     ]
 
     for table in expected_tables:
@@ -274,6 +275,15 @@ def test_output_tables() -> None:
           len(rated) >= 8,
           f"Only {len(rated)} rated, {len(tbd_claims)} TBD")
 
+    growth = pd.read_csv(OUTPUT_TABLES / "growth_rate_comparison.csv")
+    check("Growth-rate comparison has 2 rows",
+          len(growth) == 2,
+          f"Got {len(growth)}")
+    check("Growth-rate comparison has pre/post CAGR columns",
+          {"pre_2007_cagr_pct", "post_2007_cagr_pct", "slowdown_pct_points"}.issubset(growth.columns))
+    check("Growth-rate comparison shows post-2007 slowdown",
+          (growth["slowdown_pct_points"] < 0).all())
+
 
 # ---------------------------------------------------------------------------
 # 4. Chart generation
@@ -286,6 +296,11 @@ def test_charts() -> None:
         "regional_productivity_change.png",
         "regional_ranking.png",
         "gdp_per_head_timeline.png",
+        "productivity_timeline.png",
+        "regional_productivity_small_multiples.png",
+        "housing_affordability_timeline.png",
+        "nhs_waiting_list_timeline.png",
+        "growth_rate_comparison.png",
     ]
 
     for chart in expected_charts:

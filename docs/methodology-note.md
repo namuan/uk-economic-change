@@ -120,6 +120,7 @@ All output files are generated programmatically with no manual data entry.
 | National/core indicators comparing 2007 with latest | ✅ GDP per head, NDP per head, output per hour, real earnings, housing affordability, NHS waiting list |
 | One regional indicator comparing 2007 with latest | ✅ Output per hour, 12 regions |
 | Reproducible absolute and percentage change calculations | ✅ `calculate_change()` in clean_indicators.py |
-| At least one chart | ✅ 4 charts (national, regional change, regional ranking, GDP/NDP timeline) |
+| At least one chart | ✅ 9 charts (national, GDP/NDP timeline, productivity timeline, growth-rate comparison, housing, NHS, and regional views) |
 | Claims-evidence matrix | ✅ 8 claims rated, 0 TBD |
 | Short methodology note | ✅ This document |
+| QA checks | ✅ 114 checks passing |

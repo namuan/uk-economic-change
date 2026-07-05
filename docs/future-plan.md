@@ -17,10 +17,10 @@ The project now has:
 - automated data fetching and processing,
 - a long-format analytical dataset,
 - national and regional comparison tables,
-- four chart outputs,
+- nine chart outputs,
 - a completed claims-evidence matrix with 8 rated claims,
 - a methodology note,
-- QA checks (`make test`, currently 99 checks),
+- QA checks (`make test`, currently 114 checks),
 - a GitHub Pages workflow (`.github/workflows/static.yml`),
 - and a public report at `docs/index.md`.
 
@@ -58,6 +58,11 @@ The remaining work is no longer about proving the concept. It is about improving
 - `outputs/charts/gdp_per_head_timeline.png`
 - `outputs/charts/regional_productivity_change.png`
 - `outputs/charts/regional_ranking.png`
+- `outputs/charts/productivity_timeline.png`
+- `outputs/charts/regional_productivity_small_multiples.png`
+- `outputs/charts/housing_affordability_timeline.png`
+- `outputs/charts/nhs_waiting_list_timeline.png`
+- `outputs/charts/growth_rate_comparison.png`
 - `docs/index.md` public report
 - `docs/assets/charts/` GitHub Pages chart assets
 
@@ -135,31 +140,42 @@ The phases below are ordered so that each one can be tackled independently. Late
 ### Verification notes
 
 - `docs/project-history.md` is the single historical record for the original implementation phases.
-- `docs/methodology-note.md` reflects the current indicator set and QA status: 8 rated claims and 99 checks.
+- `docs/methodology-note.md` reflects the current indicator set and QA status: 8 rated claims and 114 checks.
 - `README.md` includes a concise report-refresh sequence using `make fetch-force`, `make all`, `make pages`, and `make test`.
 - Current-facing documentation points to `docs/index.md` as the canonical report.
 - Stale proof-of-concept wording is confined to historical context or maintenance prompts.
 
 ---
 
-## Phase 3: Chart and Analytical Output Improvements
+## Phase 3: Chart and Analytical Output Improvements ✅ Complete
 
 **Goal:** Improve the evidence pack's visual and analytical clarity without adding new indicators.
 
+**Completed:** 2026-07-05
+
 ### Tasks
 
-1. Add a standalone productivity-over-time chart.
-2. Add small-multiple regional productivity charts or sparklines.
-3. Add a housing affordability timeline chart.
-4. Add an NHS waiting-list timeline chart.
-5. Consider adding a table or chart showing pre-2007 versus post-2007 CAGR for GDP per head and productivity.
-6. Update `docs/index.md` to include any new charts where they strengthen the narrative.
+1. ✅ Add a standalone productivity-over-time chart.
+2. ✅ Add small-multiple regional productivity charts or sparklines.
+3. ✅ Add a housing affordability timeline chart.
+4. ✅ Add an NHS waiting-list timeline chart.
+5. ✅ Consider adding a table or chart showing pre-2007 versus post-2007 CAGR for GDP per head and productivity.
+6. ✅ Update `docs/index.md` to include any new charts where they strengthen the narrative.
 
 ### Acceptance criteria
 
-- New charts are generated reproducibly from processed or raw source data.
-- QA checks verify each new chart exists and has content.
-- The report uses only charts that add interpretive value.
+- ✅ New charts are generated reproducibly from processed or raw source data.
+- ✅ QA checks verify each new chart exists and has content.
+- ✅ The report uses only charts that add interpretive value.
+
+### Verification notes
+
+- Added 5 new chart outputs: productivity timeline, regional productivity small multiples, housing affordability timeline, NHS waiting-list timeline, and growth-rate comparison.
+- Added `outputs/tables/growth_rate_comparison.csv` for pre-2007 versus post-2007 CAGR comparisons.
+- Updated `docs/index.md` to include the new charts in the relevant narrative sections.
+- Updated QA checks to cover the new table and all 9 charts.
+- `make pages` completed successfully.
+- `make test` passed: 114 checks, 0 failed.
 
 ---
 
@@ -292,6 +308,6 @@ An extension should only be considered complete when:
 
 ## 5. Immediate Next Phase Recommendation
 
-Start with **Phase 3: Chart and Analytical Output Improvements**.
+Start with **Phase 4: Living Standards and Distributional Expansion**.
 
-Reason: Phases 1 and 2 are complete. The public report is live, readable, reliable, and documented for maintenance. The highest-value next step is now to improve visual and analytical clarity without adding new indicators.
+Reason: Phases 1 to 3 are complete. The current report is published, documented, and visually strengthened. The highest-value next step is now to broaden the living-standards evidence beyond averages.

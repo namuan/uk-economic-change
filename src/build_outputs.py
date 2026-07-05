@@ -109,6 +109,73 @@ def build_claims_matrix(national: pd.DataFrame, regional: pd.DataFrame) -> pd.Da
     return claims
 
 
+def _read_prdy_output_per_hour() -> pd.DataFrame:
+    """Read annual UK output per hour from the ONS PRDY file."""
+    df = pd.read_csv(
+        RAW_DIR / "prdy.csv",
+        header=0,
+        skiprows=lambda x: x in [1, 2, 3, 4, 5, 6],
+    )
+    cols = list(df.columns)
+    cols[0] = "period"
+    df.columns = cols
+
+    target = "UK Whole Economy: Output per hour worked SA: Index 2023 = 100"
+    series = pd.DataFrame({
+        "period": df["period"].astype(str).str.strip(),
+        "value": pd.to_numeric(df[target], errors="coerce"),
+    })
+    annual = series[series["period"].str.match(r"^\d{4}$", na=False) & series["value"].notna()].copy()
+    annual["year"] = annual["period"].astype(int)
+    return annual[["year", "value"]].sort_values("year")
+
+
+def _read_ons_annual(path: Path) -> pd.DataFrame:
+    """Read annual rows from an ONS generator CSV."""
+    df = pd.read_csv(path, skiprows=7)
+    df.columns = ["period", "value"]
+    df["value"] = pd.to_numeric(df["value"], errors="coerce")
+    df["period"] = df["period"].astype(str).str.strip()
+    annual = df[df["period"].str.match(r"^\d{4}$", na=False) & df["value"].notna()].copy()
+    annual["year"] = annual["period"].astype(int)
+    return annual[["year", "value"]].sort_values("year")
+
+
+def _calculate_cagr(series: pd.DataFrame, start_year: int, end_year: int) -> float:
+    start = float(series.loc[series["year"] == start_year, "value"].iloc[0])
+    end = float(series.loc[series["year"] == end_year, "value"].iloc[0])
+    years = end_year - start_year
+    return ((end / start) ** (1 / years) - 1) * 100
+
+
+def build_growth_rate_table() -> pd.DataFrame:
+    """Compare pre- and post-2007 annual growth rates for key indicators."""
+    OUTPUT_TABLES.mkdir(parents=True, exist_ok=True)
+
+    specs = [
+        ("gdp_per_head", "GDP per head", _read_ons_annual(RAW_DIR / "ihxw.csv"), 1997, 2007, 2025),
+        ("labour_productivity_output_per_hour", "Output per hour", _read_prdy_output_per_hour(), 1997, 2007, 2025),
+    ]
+
+    rows = []
+    for indicator_id, label, series, pre_start, baseline, latest in specs:
+        rows.append({
+            "indicator_id": indicator_id,
+            "indicator": label,
+            "pre_period": f"{pre_start}-{baseline}",
+            "post_period": f"{baseline}-{latest}",
+            "pre_2007_cagr_pct": round(_calculate_cagr(series, pre_start, baseline), 2),
+            "post_2007_cagr_pct": round(_calculate_cagr(series, baseline, latest), 2),
+            "slowdown_pct_points": round(
+                _calculate_cagr(series, baseline, latest) - _calculate_cagr(series, pre_start, baseline), 2
+            ),
+        })
+
+    df = pd.DataFrame(rows)
+    df.to_csv(OUTPUT_TABLES / "growth_rate_comparison.csv", index=False)
+    return df
+
+
 def build_national_indicators_chart(national: pd.DataFrame) -> None:
     """Horizontal bar chart: percentage change in national indicators since 2007."""
     OUTPUT_CHARTS.mkdir(parents=True, exist_ok=True)
@@ -243,6 +310,159 @@ def build_gdp_timeline_chart() -> None:
     plt.close(fig)
 
 
+def build_productivity_timeline_chart() -> None:
+    """Standalone line chart: UK output per hour, 1997–2025."""
+    OUTPUT_CHARTS.mkdir(parents=True, exist_ok=True)
+    if not (RAW_DIR / "prdy.csv").exists():
+        return
+
+    df = _read_prdy_output_per_hour()
+    df = df[(df["year"] >= 1997) & (df["year"] <= 2025)].copy()
+    if df.empty:
+        return
+
+    fig, ax = plt.subplots(figsize=(11, 5.5))
+    ax.plot(df["year"], df["value"], color=BLUE, linewidth=2.4, marker="o", markersize=4)
+    ax.axvline(2007, color=GREY, linestyle="--", linewidth=1)
+    ax.text(2007.2, ax.get_ylim()[1] * 0.98, "2007 baseline", fontsize=9, color=GREY, va="top")
+    ax.axvspan(2020, 2020.75, color=LIGHT_GREY, alpha=0.3)
+    ax.text(2020.1, ax.get_ylim()[1] * 0.98, "COVID-19", fontsize=9, color=GREY, va="top")
+    ax.set_xlabel("Year")
+    ax.set_ylabel("Output per hour (Index 2023 = 100)")
+    ax.set_title("UK Productivity Has Barely Grown Since 2007")
+    ax.set_xlim(1996.5, 2025.5)
+
+    fig.tight_layout()
+    fig.savefig(OUTPUT_CHARTS / "productivity_timeline.png")
+    plt.close(fig)
+
+
+def build_regional_productivity_small_multiples() -> None:
+    """Small-multiple line chart: regional productivity paths, 2007–2023."""
+    OUTPUT_CHARTS.mkdir(parents=True, exist_ok=True)
+    long_path = PROCESSED_DIR / "long_format.csv"
+    if not long_path.exists():
+        return
+
+    df = pd.read_csv(long_path)
+    df = df[
+        (df["indicator_id"] == "regional_productivity_output_per_hour")
+        & (df["year"] >= 2007)
+        & (df["year"] <= 2023)
+    ].copy()
+    if df.empty:
+        return
+
+    latest_order = (
+        df[df["year"] == 2023]
+        .sort_values("value", ascending=False)["geography_name"]
+        .tolist()
+    )
+    fig, axes = plt.subplots(4, 3, figsize=(12, 10), sharex=True, sharey=True)
+    axes = axes.flatten()
+
+    for ax, region in zip(axes, latest_order):
+        sub = df[df["geography_name"] == region].sort_values("year")
+        latest = float(sub[sub["year"] == 2023]["value"].iloc[0])
+        baseline = float(sub[sub["year"] == 2007]["value"].iloc[0])
+        color = GREEN if latest >= baseline else RED
+        ax.plot(sub["year"], sub["value"], color=color, linewidth=2)
+        ax.axhline(100, color=LIGHT_GREY, linewidth=0.8)
+        ax.set_title(region, fontsize=10, loc="left")
+        ax.text(0.98, 0.08, f"{baseline:.0f} → {latest:.0f}", transform=ax.transAxes,
+                ha="right", va="bottom", fontsize=8, color=color)
+        ax.tick_params(labelsize=8)
+
+    for ax in axes[len(latest_order):]:
+        ax.axis("off")
+
+    fig.suptitle("Regional Productivity Paths: 2007–2023\nOutput per hour, UK = 100", fontsize=14, y=0.995)
+    fig.tight_layout()
+    fig.savefig(OUTPUT_CHARTS / "regional_productivity_small_multiples.png")
+    plt.close(fig)
+
+
+def build_housing_affordability_timeline_chart() -> None:
+    """Line chart: house price to earnings ratio, England and Wales."""
+    OUTPUT_CHARTS.mkdir(parents=True, exist_ok=True)
+    path = RAW_DIR / "housing_affordability.xlsx"
+    if not path.exists():
+        return
+
+    df = pd.read_excel(path, sheet_name="1c", header=1)
+    row = df[df["Name"] == "England and Wales"].iloc[0]
+    years = list(range(2007, 2026))
+    values = [float(row[str(year)]) for year in years]
+
+    fig, ax = plt.subplots(figsize=(11, 5.5))
+    ax.plot(years, values, color=BLUE, linewidth=2.4, marker="o", markersize=4)
+    ax.axhline(values[0], color=GREY, linestyle="--", linewidth=1, label="2007 level")
+    peak_idx = int(np.argmax(values))
+    ax.scatter([years[peak_idx]], [values[peak_idx]], color=RED, zorder=3)
+    ax.text(years[peak_idx] + 0.2, values[peak_idx], f"Peak: {values[peak_idx]:.2f}×", color=RED, fontsize=9)
+    ax.set_xlabel("Year")
+    ax.set_ylabel("House price to earnings ratio")
+    ax.set_title("Housing Affordability Worsened Sharply Before a Partial Recovery")
+    ax.set_xlim(2006.5, 2025.5)
+    ax.legend(loc="upper left", fontsize=9)
+
+    fig.tight_layout()
+    fig.savefig(OUTPUT_CHARTS / "housing_affordability_timeline.png")
+    plt.close(fig)
+
+
+def build_nhs_waiting_list_timeline_chart() -> None:
+    """Line chart: NHS England RTT incomplete pathways, 2007–2026."""
+    OUTPUT_CHARTS.mkdir(parents=True, exist_ok=True)
+    path = RAW_DIR / "nhs_waiting_list.csv"
+    if not path.exists():
+        return
+
+    df = pd.read_csv(path)
+    df["date"] = pd.to_datetime(df["period"] + "-01")
+    df["value_millions"] = pd.to_numeric(df["value"], errors="coerce") / 1_000_000
+    df = df.dropna(subset=["value_millions"])
+
+    fig, ax = plt.subplots(figsize=(11, 5.5))
+    ax.plot(df["date"], df["value_millions"], color=BLUE, linewidth=2.2)
+    ax.axvspan(pd.Timestamp("2020-03-01"), pd.Timestamp("2021-03-01"), color=LIGHT_GREY, alpha=0.35)
+    ax.text(pd.Timestamp("2020-04-01"), ax.get_ylim()[1] * 0.95, "COVID-19 shock", fontsize=9, color=GREY, va="top")
+    ax.set_xlabel("Year")
+    ax.set_ylabel("Incomplete pathways (millions)")
+    ax.set_title("NHS England Waiting List Pressure Rose Sharply After 2020")
+    ax.yaxis.set_major_formatter(mticker.FormatStrFormatter("%.1fM"))
+
+    fig.tight_layout()
+    fig.savefig(OUTPUT_CHARTS / "nhs_waiting_list_timeline.png")
+    plt.close(fig)
+
+
+def build_growth_rate_comparison_chart(growth_rates: pd.DataFrame) -> None:
+    """Grouped bar chart comparing pre- and post-2007 CAGRs."""
+    OUTPUT_CHARTS.mkdir(parents=True, exist_ok=True)
+    if growth_rates.empty:
+        return
+
+    x = np.arange(len(growth_rates))
+    width = 0.35
+    fig, ax = plt.subplots(figsize=(9, 5))
+    ax.bar(x - width / 2, growth_rates["pre_2007_cagr_pct"], width, color=LIGHT_GREY, label="1997–2007")
+    ax.bar(x + width / 2, growth_rates["post_2007_cagr_pct"], width, color=BLUE, label="2007–2025")
+    ax.set_xticks(x)
+    ax.set_xticklabels(growth_rates["indicator"])
+    ax.set_ylabel("Compound annual growth rate")
+    ax.set_title("Growth Rates Collapsed After 2007")
+    ax.yaxis.set_major_formatter(mticker.FormatStrFormatter("%.1f%%"))
+    ax.legend(fontsize=10)
+    for i, row in growth_rates.iterrows():
+        ax.text(i - width / 2, row["pre_2007_cagr_pct"] + 0.05, f"{row['pre_2007_cagr_pct']:.1f}%", ha="center", fontsize=9)
+        ax.text(i + width / 2, row["post_2007_cagr_pct"] + 0.05, f"{row['post_2007_cagr_pct']:.1f}%", ha="center", fontsize=9)
+
+    fig.tight_layout()
+    fig.savefig(OUTPUT_CHARTS / "growth_rate_comparison.png")
+    plt.close(fig)
+
+
 def build_regional_ranking_chart(regional: pd.DataFrame) -> None:
     """Side-by-side bar chart: regional productivity ranking, 2007 vs 2023."""
     OUTPUT_CHARTS.mkdir(parents=True, exist_ok=True)
@@ -273,9 +493,11 @@ def build_regional_ranking_chart(regional: pd.DataFrame) -> None:
     plt.close(fig)
 
 
-def build_all_charts(national: pd.DataFrame, regional: pd.DataFrame) -> None:
+def build_all_charts(national: pd.DataFrame, regional: pd.DataFrame, growth_rates: pd.DataFrame | None = None) -> None:
     """Generate all evidence-pack charts."""
     OUTPUT_CHARTS.mkdir(parents=True, exist_ok=True)
+    if growth_rates is None:
+        growth_rates = build_growth_rate_table()
 
     # Remove old placeholder if it exists
     readme = OUTPUT_CHARTS / "README.txt"
@@ -286,22 +508,34 @@ def build_all_charts(national: pd.DataFrame, regional: pd.DataFrame) -> None:
     build_regional_productivity_chart(regional)
     build_gdp_timeline_chart()
     build_regional_ranking_chart(regional)
+    build_productivity_timeline_chart()
+    build_regional_productivity_small_multiples()
+    build_housing_affordability_timeline_chart()
+    build_nhs_waiting_list_timeline_chart()
+    build_growth_rate_comparison_chart(growth_rates)
 
 
 def main() -> None:
     national, regional, combined = build_comparison_tables()
     claims = build_claims_matrix(national, regional)
-    build_all_charts(national, regional)
+    growth_rates = build_growth_rate_table()
+    build_all_charts(national, regional, growth_rates)
 
     print("Built evidence-pack outputs:")
     print(f"- {OUTPUT_TABLES / 'national_comparison.csv'}")
     print(f"- {OUTPUT_TABLES / 'regional_productivity_comparison.csv'}")
     print(f"- {OUTPUT_TABLES / 'combined_comparison.csv'}")
     print(f"- {OUTPUT_TABLES / 'claims_evidence_matrix.csv'}")
+    print(f"- {OUTPUT_TABLES / 'growth_rate_comparison.csv'}")
     print(f"- {OUTPUT_CHARTS / 'national_indicators_change.png'}")
     print(f"- {OUTPUT_CHARTS / 'regional_productivity_change.png'}")
     print(f"- {OUTPUT_CHARTS / 'gdp_per_head_timeline.png'}")
     print(f"- {OUTPUT_CHARTS / 'regional_ranking.png'}")
+    print(f"- {OUTPUT_CHARTS / 'productivity_timeline.png'}")
+    print(f"- {OUTPUT_CHARTS / 'regional_productivity_small_multiples.png'}")
+    print(f"- {OUTPUT_CHARTS / 'housing_affordability_timeline.png'}")
+    print(f"- {OUTPUT_CHARTS / 'nhs_waiting_list_timeline.png'}")
+    print(f"- {OUTPUT_CHARTS / 'growth_rate_comparison.png'}")
 
 
 if __name__ == "__main__":
