@@ -301,7 +301,7 @@ make clean-all  # remove everything including cached downloads
 - ✅ Housing indicator added (price/earnings ratio).
 - ✅ Public-service indicator added (NHS waiting list).
 - ✅ Regional comparison expanded.
-- ✅ Narrative report created (`docs/full-report.md`).
+- ✅ Narrative report created (`docs/full-report.md`) and published as the GitHub Pages index (`docs/index.md`).
 
 ### Milestone 5: Finished Project
 

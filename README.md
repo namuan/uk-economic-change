@@ -23,8 +23,9 @@ make fetch      # download ONS source files (cached — skips if already present
 make fetch-force  # force re-download all ONS source files
 make process    # normalise raw data into processed tables
 make build      # generate output tables and charts
+make pages      # sync docs/index.md and chart assets for GitHub Pages
 make all        # fetch → process → build (full pipeline)
-make test       # run QA checks (68 checks)
+make test       # run QA checks (99 checks)
 make validate   # run data validation checks
 ```
 
@@ -104,11 +105,16 @@ uv lock                      # update lockfile after changes
 
 See `docs/findings-summary.md` for the full one-page evidence summary.
 
+## GitHub Pages
+
+The public report entry point is `docs/index.md`, so GitHub Pages can serve the evidence report by default when Pages is configured to publish from the `docs/` folder. Chart assets used by the page are copied to `docs/assets/charts/`. Run `make pages` after changing `docs/full-report.md` or regenerating charts.
+
 ## Documentation
 
 | Document | Description |
 |----------|-------------|
-| `docs/full-report.md` | **Full narrative report** — evidence, charts, claims matrix |
+| `docs/index.md` | **GitHub Pages landing page** — full evidence report |
+| `docs/full-report.md` | Full narrative report source copy |
 | `docs/findings-summary.md` | One-page key findings |
 | `docs/methodology-note.md` | Full methodology, data sources, limitations |
 | `docs/poc-summary.md` | Historical proof-of-concept status and structure overview |

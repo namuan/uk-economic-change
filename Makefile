@@ -1,4 +1,4 @@
-.PHONY: help install fetch process build all clean clean-all clean-outputs charts tables
+.PHONY: help install fetch process build pages all clean clean-all clean-outputs charts tables
 
 # Default target
 .DEFAULT_GOAL := help
@@ -21,6 +21,11 @@ process: ## Normalise raw data into processed comparison tables
 
 build: ## Generate all output tables and charts
 	uv run python src/build_outputs.py
+
+pages: build ## Sync the GitHub Pages report and chart assets into docs/
+	mkdir -p docs/assets/charts
+	cp outputs/charts/*.png docs/assets/charts/
+	uv run python -c "from pathlib import Path; text = Path('docs/full-report.md').read_text().replace('../outputs/charts/', 'assets/charts/'); Path('docs/index.md').write_text('---\ntitle: Britain Since 2007 Evidence Report\n---\n\n<!-- This file is the GitHub Pages landing page. Keep in sync with docs/full-report.md. -->\n\n' + text)"
 
 all: fetch process build ## Run the full pipeline (fetch → process → build)
 

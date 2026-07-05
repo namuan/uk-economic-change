@@ -284,6 +284,7 @@ def test_charts() -> None:
     expected_charts = [
         "national_indicators_change.png",
         "regional_productivity_change.png",
+        "regional_ranking.png",
         "gdp_per_head_timeline.png",
     ]
 

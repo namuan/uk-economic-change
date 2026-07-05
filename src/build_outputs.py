@@ -274,7 +274,7 @@ def build_regional_ranking_chart(regional: pd.DataFrame) -> None:
 
 
 def build_all_charts(national: pd.DataFrame, regional: pd.DataFrame) -> None:
-    """Generate all POC charts."""
+    """Generate all evidence-pack charts."""
     OUTPUT_CHARTS.mkdir(parents=True, exist_ok=True)
 
     # Remove old placeholder if it exists
@@ -293,7 +293,7 @@ def main() -> None:
     claims = build_claims_matrix(national, regional)
     build_all_charts(national, regional)
 
-    print("Built POC outputs:")
+    print("Built evidence-pack outputs:")
     print(f"- {OUTPUT_TABLES / 'national_comparison.csv'}")
     print(f"- {OUTPUT_TABLES / 'regional_productivity_comparison.csv'}")
     print(f"- {OUTPUT_TABLES / 'combined_comparison.csv'}")
