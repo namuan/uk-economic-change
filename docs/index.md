@@ -15,16 +15,16 @@ This report compares Britain's economy in 2007, the peak before the global finan
 
 ### Main findings
 
-- GDP per head rose from £37,625 in 2007 to £40,537 in 2025. That is a gain of 7.7% over 18 years, or 0.4% per year. Before the crisis, growth averaged 2.3% per year.
-- Net domestic product per head grew at less than half that rate (3.7%). This suggests that capital consumption (the cost of depreciation and obsolescence) absorbed a growing share of Britain's output.
-- Output per hour worked, the standard measure of labour productivity, rose only 6.9% over the same period. Before 2007, productivity grew at 2.1% per year.
-- Real earnings (pay adjusted for inflation) grew by 2.3%, or £16 per week in 2025 prices. GDP per head grew by 7.7% over the same period. The economy produces more per person, but the average worker's real pay has barely moved.
-- Housing affordability has been under sustained pressure. The ratio of house prices to earnings rose from 7.2 (2007) to a peak of 8.95 (2021), before falling to 7.55 (2025). The 5-year average of 8.19 shows that affordability was much worse than in 2007 for most of the post-crisis period.
-- NHS waiting lists have grown sharply. Total incomplete pathways rose from 4.19 million (August 2007) to 7.01 million (March 2026) — an increase of 67.5%. The list peaked at 7.75 million in August 2023 before falling, but it remains far above its pre-COVID level.
-- A&E performance has worsened. The share of attendances completed within 4 hours fell from 96.8% in 2011 to 74.7% in 2025. There is no 2007 baseline in the current monthly A&E series, so this evidence is partial.
-- Public sector employment has grown slightly in headcount terms. Total UK public sector employment rose from 6.03 million in 2007 to 6.18 million in 2025, an increase of 149,000 or 2.5%. But public sector employment fell as a share of all employment, from 20.5% to 18.0%.
-- International context confirms that the UK has lagged the US. World Bank GDP per capita rose 7.9% in the UK from 2007 to 2025, compared with 25.5% in the US. UK growth was similar to Canada, below Germany and France, and above Italy.
-- Regional inequality is narrowing, but slowly. Scotland and Northern Ireland recorded the strongest convergence gains, while London's relative advantage shrank. But London is still nearly 29% above the UK average.
+- GDP per head rose from £37,625 in 2007 to £40,537 in 2025. That is a gain of **7.7%** over 18 years, or **0.4% per year**. Before the crisis, growth averaged **2.3% per year**.
+- Net domestic product per head grew at less than half that rate (**3.7%**). This suggests that capital consumption (the cost of depreciation and obsolescence) absorbed a growing share of Britain's output.
+- Output per hour worked, the standard measure of labour productivity, rose only **6.9%** over the same period. Before 2007, productivity grew at **2.1% per year**.
+- Real earnings (pay adjusted for inflation) grew by **2.3%**, or **£16 per week** in 2025 prices. GDP per head grew by **7.7%** over the same period. The economy produces more per person, but the average worker's real pay has barely moved.
+- Housing affordability has been under sustained pressure. The ratio of house prices to earnings rose from **7.2** (2007) to a peak of **8.95** (2021), before falling to **7.55** (2025). The **5-year average of 8.19** shows that affordability was much worse than in 2007 for most of the post-crisis period.
+- NHS waiting lists have grown sharply. Total incomplete pathways rose from **4.19 million** (August 2007) to **7.01 million** (March 2026) — an increase of **67.5%**. The list peaked at **7.75 million** in August 2023 before falling, but it remains far above its pre-COVID level.
+- A&E performance has worsened. The share of attendances completed within 4 hours fell from **96.8%** in 2011 to **74.7%** in 2025. There is no 2007 baseline in the current monthly A&E series, so this evidence is partial.
+- Public sector employment has grown slightly in headcount terms. Total UK public sector employment rose from **6.03 million** in 2007 to **6.18 million** in 2025, an increase of **149,000** or **2.5%**. But public sector employment fell as a share of all employment, from **20.5% to 18.0%**.
+- International context confirms that the UK has lagged the US. World Bank GDP per capita rose **7.9%** in the UK from 2007 to 2025, compared with **25.5%** in the US. UK growth was similar to Canada, below Germany and France, and above Italy.
+- Regional inequality is narrowing, but slowly. Scotland and Northern Ireland recorded the strongest convergence gains, while London's relative advantage shrank. But London is still nearly **29%** above the UK average.
 
 Britain's post-2007 economic performance is not a dip that will revert. It is a break from the pre-crisis trend. After 18 years, the data is unambiguous: the old growth trajectory has not returned.
 
