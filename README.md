@@ -1,7 +1,7 @@
 # UK Economic Change
 
-**Working title:** Britain Since 2007: Proof of Concept Evidence Framework  
-**Status:** POC complete ✅
+**Working title:** Britain Since 2007: Evidence Framework  
+**Status:** Core evidence pack complete ✅
 
 An ONS-first evidence framework comparing Britain in 2007 with the latest available data. Pulls real ONS time-series data, computes national and regional comparisons, and generates publication-ready tables and charts.
 
@@ -50,9 +50,9 @@ make clean-all  # remove everything including cached raw downloads
 |-------|---------|--------------|
 | Fetch | `make fetch` | Downloads 4 ONS source files to `data/raw/` |
 | Process | `make process` | Extracts 2007 & latest values, writes to `data/processed/` |
-| Build | `make build` | Computes changes, generates 4 CSVs + 3 PNG charts |
+| Build | `make build` | Computes changes, generates 4 CSVs + 4 PNG charts |
 
-### Indicators (4 populated)
+### Indicators (6 core indicators + regional productivity)
 
 | Indicator | 2007 | Latest | Change |
 |-----------|------|--------|--------|
@@ -61,6 +61,7 @@ make clean-all  # remove everything including cached raw downloads
 | Output per hour worked | 93.0 | 99.4 (2025) | +6.9% |
 | Real earnings (AWE) | £711/wk | £727/wk (2025) | +2.3% |
 | House price / earnings ratio | 7.17× | 7.55× (2025) | +5.3% |
+| NHS waiting list | 4.19M | 7.01M (2026) | +67.5% |
 | Regional output per hour | — | — | 12 regions |
 
 ### Outputs
@@ -75,6 +76,7 @@ outputs/
 └── charts/
     ├── national_indicators_change.png
     ├── regional_productivity_change.png
+    ├── regional_ranking.png
     └── gdp_per_head_timeline.png
 ```
 
@@ -109,17 +111,17 @@ See `docs/findings-summary.md` for the full one-page evidence summary.
 | `docs/full-report.md` | **Full narrative report** — evidence, charts, claims matrix |
 | `docs/findings-summary.md` | One-page key findings |
 | `docs/methodology-note.md` | Full methodology, data sources, limitations |
-| `docs/poc-summary.md` | POC status and structure overview |
-| `docs/future-plan.md` | Roadmap from POC to finished evidence product |
+| `docs/poc-summary.md` | Historical proof-of-concept status and structure overview |
+| `docs/future-plan.md` | Roadmap and extension plan |
 | `docs/phase-*-summary.md` | Phase-by-phase implementation records |
 
-## POC definition of done
+## Core evidence-pack status
 
-- ✅ Five national indicators comparing 2007 with latest
+- ✅ Six core indicators comparing 2007 with latest
 - ✅ One regional indicator comparing 2007 with latest (12 regions)
 - ✅ Reproducible absolute and percentage change calculations
-- ✅ At least one chart (3 generated)
-- ✅ Claims-evidence matrix (7 rated, all non-TBD)
+- ✅ At least one chart (4 generated)
+- ✅ Claims-evidence matrix (8 rated, all non-TBD)
 - ✅ Methodology note
 
 ## Data principle
